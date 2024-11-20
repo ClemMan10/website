@@ -1,15 +1,23 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+        rel="stylesheet">
+
     <style>
         body {
             padding: 0;
+            font-family: "Open Sans", sans-serif; 
             margin: 0;
         }
+
         .navbar {
             padding: 0rem 1rem;
             display: flex;
@@ -22,21 +30,27 @@
         .author-name {
             font-size: 2rem;
         }
-        
+
         .reset-link-style {
             color: unset;
-            text-decoration: none; 
+            text-decoration: none;
         }
-        
+
         .contact {
             font-size: 1.2rem;
         }
 
         .content {
-            padding: 0rem 1rem;
+            padding: 0rem 10rem;
+        }
+
+        .project-container {
+            display: flex;
+            flex-flow: row wrap;
         }
     </style>
 </head>
+
 <body>
     <nav class="navbar">
         <div class="author-name">
@@ -55,9 +69,14 @@
     <div class="content">
         <h1></h1>
         <section></section>
-        
+
         <h2>Projets</h2>
-        <section></section>
+        <div class="project-container">
+            <iframe width="300" height="180" src="https://www.youtube.com/embed/smIJhHNgHh8?si=_GL80cOkUKlovhf0"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
 
         <h2>Contact</h2>
         <section>
@@ -67,10 +86,11 @@
                 <li>linkedin</li>
                 <li>
                     <a href="mailto:clementmaniette.sound@gmail.com">clementmaniette.sound@gmail.com</a>
-                </li> 
+                </li>
             </ul>
         </section>
     </div>
-        
+
 </body>
+
 </html>
