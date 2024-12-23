@@ -1,0 +1,41 @@
+---
+import Contact from '../components/Contact.astro';
+import Hero from '../components/Hero.astro';
+import Video from '../components/Video.astro';
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+
+const video = await getCollection('videos');
+console.debug(video)
+---
+
+<style>
+  body {
+    font-family: 'Open Sans', sans-serif;
+  }
+  .videos {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 1rem;
+  }
+</style>
+
+<Layout>
+  <div class="full-width">
+    <Hero text="Clément Maniette"/>
+  </div>
+  <div class="content">
+    <h1>Projects</h1> 
+    <div class="videos">
+    {video.map((v) => 
+    <Video url={v.data.url} />
+      )}
+    </div>
+  </div>
+
+  <div class="full-width">
+      <Contact />
+  </div>
+</Layout>
+
