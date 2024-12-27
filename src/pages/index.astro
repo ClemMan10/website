@@ -1,13 +1,11 @@
 ---
 import Contact from '../components/Contact.astro';
-import Hero from '../components/Hero.astro';
 import Video from '../components/Video.astro';
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
 
 const video = await getCollection('videos');
-console.debug(video)
 ---
 
 <style>
@@ -21,27 +19,76 @@ console.debug(video)
     gap: 1rem;
   }
 
-  .content {
-    height: 100%;
+  .pattern {
+    font-size: 1.5rem;
+    background-image: url('/website/pattern.svg');
+    background-position: center;
+    background-attachment: fixed;
+    color: black;
+    grid-column: full-width;
+  }
+
+  .filled {
+    background-color: rgb(8, 15, 37);
+    color: white;
+    grid-column: full-width;
+  }
+
+  h1 {
+    text-transform: uppercase;
+    &, .filled {
+      text-align:center;
+      vertical-align: middle;
+    }
+  }
+
+  section {
+    display: grid;
+    grid-template-columns: minmax(1rem, 10rem) 1fr minmax(1rem, 10rem);
+    & > * {
+      grid-column: 2;
+    }
   }
 
 </style>
+  <Layout>
+  <section class="pattern">
+    <p>
+    Situés dans le 17ème arrondissement de Paris, le studio In the Pouchett vous accueille pour accompagner vos projets musicaux.
+    Studio orienté autour des Live Sessions, nous proposons cependant des services plus classiques tels que l’enregistrement, le mixage et le mastering de vos titres. 
+    </p>
+    <p>
+    Nous pouvons également apporter notre expertise musicale pour vous aider dans vos compositions et vous proposer des musiciens de session d’exception. 
+    </p>
+  </section>
 
-<Layout>
-  <div class="full-width">
-    <Hero text="Clément Maniette"/>
-  </div>
-  <div class="content">
+  <section class="filled">
+    <h1> References</h1>
+    <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi.
+    </p>
+  </section>
+
+ 
+    <h1 class="pattern">Le studio</h1>
+    <section class="filled">
+      <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi.
+
+      </p>
+    </section>
+
+  <section>
     <h1>Projects</h1> 
     <div class="videos">
-    {video.map((v) => 
-    <Video url={v.data.url} />
-      )}
+      {video.map((v) => 
+      <Video url={v.data.url} />
+        )}
     </div>
-  </div>
+  </section>
 
   <div class="full-width">
-      <Contact />
+    <Contact />
   </div>
-</Layout>
+  </Layout>
 

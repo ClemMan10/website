@@ -1,7 +1,65 @@
 ---
+import { Image } from "astro:assets";
+import logo from "../assets/logo.webp";
 ---
 
+<div class="cover-image">
+  <nav class="navbar">
+    <div>
+      <Image width="100" src={logo} alt="Logo the in the pouchette"></Image>
+    </div>
+
+    <div class="author-name">
+      <a href="" class="reset-link-style"> IN THE POUCHETTE </a>
+    </div>
+
+    <div>
+      <a href="" class="reset-link-style">Live Session</a>
+    </div>
+
+    <div>
+      <a href="" class="reset-link-style">Studio</a>
+    </div>
+
+
+    <div class="contact">
+      <a
+        class="reset-link-style"
+        href="mailto:clementmaniette.sound@gmail.com"
+        >
+        <i class="fa-solid fa-envelope"></i>
+        Contact
+      </a>
+    </div>
+  </nav>
+  <div>
+    <p>
+    IN THE POUCHETT
+    </p>
+    <p>
+    Enregistrements, Mixages, Live Sessions
+    </p>
+  </div>
+</div>
 <style>
+  .cover-image {
+    height: 40dvh;
+    background:
+      linear-gradient(0deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 1) 100%),
+    url("/website/cover.jpg")
+    center/cover;
+    color: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    font-weight: 700;
+    justify-content: space-between;
+
+    div:last-child {
+      font-size: 2rem;
+    }
+  }
+
 
   .author-name {
     font-size: 2rem;
@@ -9,14 +67,13 @@
   }
 
   .navbar {
-    position: sticky;
-    top: 0;
+    text-transform: uppercase;
     padding: 0rem 1rem;
     display: flex;
-    background-color: var(--navbar-color);
     height: 5rem;
     align-items: center;
     justify-content: space-between;
+    border-bottom: 1px solid white;
   }
 
   .contact {
@@ -30,20 +87,5 @@
     text-decoration: none;
   }
 
+
 </style>
-
-<nav class="navbar">
-  <div class="author-name">
-    <a href="" class="reset-link-style"> CM </a>
-  </div>
-
-  <div class="contact">
-    <a
-      class="reset-link-style"
-      href="mailto:clementmaniette.sound@gmail.com"
-    >
-      <i class="fa-solid fa-envelope"></i>
-      Contact
-    </a>
-  </div>
-</nav>
