@@ -43,7 +43,6 @@ import logo from "../assets/logo.webp";
 </div>
 <style>
   .cover-image {
-    height: 40dvh;
     background:
       linear-gradient(0deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 1) 100%),
     url("/website/cover.jpg")
@@ -53,8 +52,6 @@ import logo from "../assets/logo.webp";
     display: flex;
     flex-direction: column;
     font-weight: 700;
-    justify-content: space-between;
-
     div:last-child {
       font-size: 2rem;
     }
@@ -70,6 +67,7 @@ import logo from "../assets/logo.webp";
     text-transform: uppercase;
     padding: 0rem 1rem;
     display: flex;
+    flex-flow: row wrap;
     height: 5rem;
     align-items: center;
     justify-content: space-between;
