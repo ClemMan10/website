@@ -1,11 +1,5 @@
 ---
-import Contact from '../components/Contact.astro';
-import Video from '../components/Video.astro';
 import Layout from '../layouts/Layout.astro';
-import { getCollection } from 'astro:content';
-
-
-const video = await getCollection('videos');
 ---
 
 <style>
@@ -26,6 +20,8 @@ const video = await getCollection('videos');
     background-attachment: fixed;
     color: black;
     grid-column: full-width;
+    margin: unset;
+    padding: 2rem;
   }
 
   .filled {
@@ -78,17 +74,11 @@ const video = await getCollection('videos');
       </p>
     </section>
 
-  <section>
-    <h1>Projects</h1> 
-    <div class="videos">
-      {video.map((v) => 
-      <Video url={v.data.url} />
-        )}
-    </div>
-  </section>
-
-  <div class="full-width">
-    <Contact />
-  </div>
-  </Layout>
+    <h1 class="pattern">Le matériel</h1>
+    <section class="filled">
+      <p>
+Microphones (dynamique, à condensateur, à ruban) - Préamplificateurs - Interfaces audio - Moniteurs de studio - Casques de studio - Claviers MIDI - Instruments (guitares, claviers, percussions, etc.) - Enregistreurs multipistes - Logiciels de production musicale (DAW) - Plugins audio (effets, instruments virtuels) - Câbles audio (XLR, jack, MIDI) - Panneaux acoustiques - Supports de microphone - Table de mixage - DI boxes (boîtes de direct) - Enceintes de monitoring - Systèmes de traitement du son - Accessoires divers (pieds de micro, filtres anti-pop, etc.)
+      </p>
+    </section>
+</Layout>
 

@@ -2,6 +2,46 @@
 import { Image } from "astro:assets";
 import logo from "../assets/logo.webp";
 ---
+<style>
+  .cover-image {
+    background:
+      linear-gradient(0deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 1) 100%),
+    url("/website/cover.jpg")
+    center/cover;
+    color: white;
+    text-align: center;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-gap: 1rem;
+    font-weight: 700;
+    & > *:last-child {
+      font-size: 1.5rem;
+    }
+  }
+
+  .navbar {
+    grid-row: 1;
+    text-transform: uppercase;
+    padding: 0rem 1rem;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid white;
+    height: fit-content;
+  }
+
+  .contact {
+    color: white;
+    text-decoration: underline;
+  }
+
+  .reset-link-style {
+    color: unset;
+    text-decoration: none;
+  }
+
+</style>
 
 <div class="cover-image">
   <nav class="navbar">
@@ -9,7 +49,7 @@ import logo from "../assets/logo.webp";
       <Image width="100" src={logo} alt="Logo the in the pouchette"></Image>
     </div>
 
-    <div class="author-name">
+    <div>
       <a href="" class="reset-link-style"> IN THE POUCHETTE </a>
     </div>
 
@@ -22,7 +62,7 @@ import logo from "../assets/logo.webp";
     </div>
 
 
-    <div class="contact">
+    <div>
       <a
         class="reset-link-style"
         href="mailto:clementmaniette.sound@gmail.com"
@@ -41,49 +81,3 @@ import logo from "../assets/logo.webp";
     </p>
   </div>
 </div>
-<style>
-  .cover-image {
-    background:
-      linear-gradient(0deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 1) 100%),
-    url("/website/cover.jpg")
-    center/cover;
-    color: white;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    font-weight: 700;
-    div:last-child {
-      font-size: 2rem;
-    }
-  }
-
-
-  .author-name {
-    font-size: 2rem;
-    color: white;
-  }
-
-  .navbar {
-    text-transform: uppercase;
-    padding: 0rem 1rem;
-    display: flex;
-    flex-flow: row wrap;
-    height: 5rem;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid white;
-  }
-
-  .contact {
-    font-size: 1.2rem;
-    color: white;
-    text-decoration: underline;
-  }
-
-  .reset-link-style {
-    color: unset;
-    text-decoration: none;
-  }
-
-
-</style>

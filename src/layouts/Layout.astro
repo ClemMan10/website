@@ -1,4 +1,5 @@
 ---
+import Contact from "../components/Contact.astro";
 import Navbar from "../components/Navbar.astro";
 
 ---
@@ -33,15 +34,15 @@ import Navbar from "../components/Navbar.astro";
     <div>
       <slot />
     </div>
+      <Contact />
   </body>
 </html>
 
-<style is:global>
+<style>
   html,
   body {
     margin: 0;
     width: 100%;
-    height: 100%;
   }
 
   :root {
