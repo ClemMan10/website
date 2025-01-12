@@ -1,12 +1,10 @@
 ---
 import Contact from "../components/Contact.astro";
-import Navbar from "../components/Navbar.astro";
-
 ---
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
+    <meta charset="utf8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -30,18 +28,21 @@ import Navbar from "../components/Navbar.astro";
     <title>In the Pouchette</title>
   </head>
   <body>
-    <Navbar />
+    <slot name="navbar"/>
     <div>
       <slot />
     </div>
+    <footer>
       <Contact />
+    </footer>
   </body>
 </html>
 
-<style>
+<style is:global>
   html,
   body {
     margin: 0;
+    font-family: 'Open Sans';
     width: 100%;
   }
 
@@ -62,4 +63,45 @@ import Navbar from "../components/Navbar.astro";
   .full-width {
     grid-column: full-width;
   }
+
+  .pattern {
+    font-size: 1.5rem;
+    background-image: url('/website/pattern.svg');
+    background-position: center;
+    background-attachment: fixed;
+    color: black;
+    grid-column: full-width;
+    margin: unset;
+    padding: 2rem;
+  }
+
+  .filled {
+    background-color: rgb(8, 15, 37);
+    color: white;
+    grid-column: full-width;
+    padding: 2rem;
+  }
+
+  h1 {
+    text-transform: uppercase;
+    &, .filled {
+      text-align:center;
+      vertical-align: middle;
+    }
+  }
+
+  section {
+    display: grid;
+    grid-template-columns: minmax(1rem, 50rem) minmax(20rem, 1fr) minmax(1rem, 50rem);
+    & > * {
+      font-size: 1.7rem;
+      grid-column: 2;
+    }
+  }
+
+  footer {
+    bottom: 0;
+    width: 100%
+  }
+
 </style>
