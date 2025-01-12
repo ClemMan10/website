@@ -1,6 +1,6 @@
 # Astro Starter Kit: Basics
 
-> [!INFO]
+> [!NOTE]
 > The website is deployed at [https://clemman10.github.io/website/](https://clemman10.github.io/website/)
 
 ## Install dependencies
