@@ -1,107 +1,110 @@
 ---
 import Contact from "../components/Contact.astro";
 ---
+
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf8" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-    href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
-    rel="stylesheet"
-    />
+    <head>
+        <meta charset="utf8" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="generator" content={Astro.generator} />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+            rel="stylesheet"
+        />
 
-    <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
-    />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+        />
 
-    <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
-    />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+        />
 
-
-    <title>In the Pouchett</title>
-  </head>
-  <body>
-    <slot name="navbar"/>
-    <div>
-      <slot />
-    </div>
-    <footer>
-      <Contact />
-    </footer>
-  </body>
+        <title>In the Pouchett</title>
+    </head>
+    <body>
+        <slot name="navbar" />
+        <div>
+            <slot />
+        </div>
+        <footer>
+            <Contact />
+        </footer>
+    </body>
 </html>
 
 <style is:global>
-  html,
-  body {
-    margin: 0;
-    font-family: 'Open Sans';
-    width: 100%;
-  }
-
-  :root {
-    --navbar-color: black;
-  }
-
-  body > div {
-    display: grid;
-    grid-template-columns: [full-width-start] 2rem [content-start] 1fr [content-end] 2rem [full-width-end];
-    height: 100%;
-
-    & > * {
-      grid-column: content;
+    html,
+    body {
+        margin: 0;
+        font-family: "Open Sans";
+        width: 100%;
     }
-  }
 
-  .full-width {
-    grid-column: full-width;
-  }
-
-  .pattern {
-    font-size: 1.5rem;
-    background-image: url('/website/pattern.svg');
-    background-position: center;
-    background-attachment: fixed;
-    color: black;
-    grid-column: full-width;
-    margin: unset;
-    padding: 2rem;
-  }
-
-  .filled {
-    background-color: rgb(8, 15, 37);
-    color: white;
-    grid-column: full-width;
-    padding: 2rem;
-  }
-
-  h1 {
-    text-transform: uppercase;
-    &, .filled {
-      text-align:center;
-      vertical-align: middle;
+    :root {
+        --navbar-color: black;
     }
-  }
 
-  section {
-    display: grid;
-    grid-template-columns: minmax(1rem, 50rem) minmax(20rem, 1fr) minmax(1rem, 50rem);
-    & > * {
-      font-size: 1.7rem;
-      grid-column: 2;
+    body > div {
+        display: grid;
+        grid-template-columns: [full-width-start] 2rem [content-start] 4fr [content-end] 2rem [full-width-end];
+        height: 100%;
+
+        & > * {
+            grid-column: content;
+        }
     }
-  }
 
-  footer {
-    bottom: 0;
-    width: 100%
-  }
+    .full-width {
+        grid-column: full-width;
+    }
 
+    .pattern {
+        font-size: 1.5rem;
+        background-image: url("/website/pattern.svg");
+        background-position: center;
+        background-attachment: fixed;
+        color: black;
+        grid-column: full-width;
+        margin: unset;
+        padding: 2rem;
+    }
+
+    .filled {
+        background-color: rgb(8, 15, 37);
+        color: white;
+        grid-column: full-width;
+        padding: 2rem;
+    }
+
+    h1 {
+        text-transform: uppercase;
+        &,
+        .filled {
+            text-align: center;
+            vertical-align: middle;
+        }
+    }
+
+    section {
+        display: grid;
+        grid-template-columns: minmax(1rem, 2fr) minmax(20rem, 3fr) minmax(
+                1rem,
+                2fr
+            );
+        & > * {
+            font-size: 1.7rem;
+            grid-column: 2;
+        }
+    }
+
+    footer {
+        bottom: 0;
+        width: 100%;
+    }
 </style>

@@ -1,54 +1,89 @@
 ---
-import Layout from '../layouts/Layout.astro'
-import Navbar from '../components/Navbar.astro'
-import { Image, Picture } from 'astro:assets';
-import Clem from "../assets/clem.jpg"
-import Louis from "../assets/louis.jpg"
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import { Image, Picture } from "astro:assets";
+import Clem from "../assets/clem.jpg";
+import Louis from "../assets/louis.jpg";
 ---
+
 <script>
-  export const imgSize = window.innerWidth / 3
+    export const imgSize = window.innerWidth / 3;
 </script>
 
 <style>
-  .people {
-    display: flex;
-    flex-flow: row wrap;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    & > p {
-      flex: 2;
-      min-width: 30rem;
+    .people {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        & > p {
+            flex: 1;
+            //min-width: 30rem;
+        }
     }
-  }
 
-  .pattern > .people > p {
-    background: rgba(255, 255, 255, 0.5) 
-  }
+    .pattern > .people > p {
+        background: rgba(255, 255, 255, 0.5);
+    }
 </style>
 
-  <Layout>
-  <Navbar slot="navbar" />
+<Layout>
+    <Navbar slot="navbar" />
 
-  <section class="filled">
-    <p>
-    In the Pouchett est un projet né de l'amitié de deux passionnés, déterminés à créer un espace de partage et de créativité. Ensemble, ils organisent des ateliers et des événements, rassemblant des artistes et des curieux autour de diverses disciplines. Leur objectif est de promouvoir l'échange d'idées et de talents, tout en cultivant une atmosphère conviviale. Grâce à leur enthousiasme, In the Pouchett devient un véritable lieu de rencontre et d'inspiration pour la communauté.
-    </p>
-  </section>
+    <section class="filled">
+        <p>
+            In the Pouchett est un projet né de l'amitié de deux passionnés,
+            déterminés à créer un espace de partage et de créativité. Ensemble,
+            ils organisent des ateliers et des événements, rassemblant des
+            artistes et des curieux autour de diverses disciplines. Leur
+            objectif est de promouvoir l'échange d'idées et de talents, tout en
+            cultivant une atmosphère conviviale. Grâce à leur enthousiasme, In
+            the Pouchett devient un véritable lieu de rencontre et d'inspiration
+            pour la communauté.
+        </p>
+    </section>
 
-  <section class="pattern">
-    <div class="people">
-      <Picture src={Clem} alt="Clement Maniette" widths={[250, 400]} sizes={"(max-width: 500px) 250px, 400px"} width={300}/>
-        <p> Clément, l'ingénieur du son du studio, est un véritable maestro des ondes. Avec son oreille aiguisée et sa passion pour la musique, il transforme chaque enregistrement en une œuvre d'art. Toujours à l'écoute des artistes, il sait capturer l'essence de leur créativité. Grâce à son expertise technique et son sens du détail, Clément crée des atmosphères sonores uniques qui font vibrer les auditeurs. </p>
-    </div>
-  </section>
+    <section class="pattern">
+        <div class="people">
+            <Picture
+                src={Clem}
+                alt="Clement Maniette"
+                widths={[250, 400]}
+                sizes={"(max-width: 500px) 250px, 400px"}
+                width={300}
+            />
+            <p>
+                Clément, l'ingénieur du son du studio, est un véritable maestro
+                des ondes. Avec son oreille aiguisée et sa passion pour la
+                musique, il transforme chaque enregistrement en une œuvre d'art.
+                Toujours à l'écoute des artistes, il sait capturer l'essence de
+                leur créativité. Grâce à son expertise technique et son sens du
+                détail, Clément crée des atmosphères sonores uniques qui font
+                vibrer les auditeurs.
+            </p>
+        </div>
+    </section>
 
-  <section class="filled">
-    <div class="people">
-      <p>
-      Louis, l'intermittent jongleur, est un artiste aux multiples talents. Avec une agilité impressionnante, il fait danser les objets entre ses mains, captivant son public à chaque performance. Sa passion pour le jonglage se mêle à une créativité débordante, lui permettant d'inventer des numéros uniques. Toujours souriant, Louis partage sa joie et son énergie, transformant chaque spectacle en un moment inoubliable de magie et d'émerveillement.
-      </p>
-      <Picture src={Louis} alt="Louis Jaumaux" widths={[250, 400]} sizes={"(max-width: 500px) 250px, 400px"} width={300}/>
-    </div>
-  </section>
-  </Layout>
+    <section class="filled">
+        <div class="people">
+            <p>
+                Louis, l'intermittent jongleur, est un artiste aux multiples
+                talents. Avec une agilité impressionnante, il fait danser les
+                objets entre ses mains, captivant son public à chaque
+                performance. Sa passion pour le jonglage se mêle à une
+                créativité débordante, lui permettant d'inventer des numéros
+                uniques. Toujours souriant, Louis partage sa joie et son
+                énergie, transformant chaque spectacle en un moment inoubliable
+                de magie et d'émerveillement.
+            </p>
+            <Picture
+                src={Louis}
+                alt="Louis Jaumaux"
+                widths={[250, 400]}
+                sizes={"(max-width: 500px) 250px, 400px"}
+                width={300}
+            />
+        </div>
+    </section>
+</Layout>
