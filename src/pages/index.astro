@@ -1,76 +1,98 @@
 ---
-import Navbar from '../components/Navbar.astro';
-import Layout from '../layouts/Layout.astro';
+import Navbar from "../components/Navbar.astro";
+import Video from "../components/Video.astro";
+import Layout from "../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const data = await getCollection("videos");
 ---
 
 <style>
-  .videos {
-    display: flex;
-    flex-flow: row wrap;
-    gap: 1rem;
-  }
-
-  .cover-image {
-    background:
-      linear-gradient(0deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 1) 100%),
-    url("/website/cover.jpg")
-    center/cover;
-    color: white;
-    text-align: center;
-    display: grid;
-    grid-template-rows: 1fr 1fr 1fr;
-    grid-gap: 1rem;
-    font-weight: 700;
-    & > *:last-child {
-      font-size: 1.5rem;
+    .videos {
+        display: flex;
+        flex-flow: row wrap;
+        gap: 1rem;
     }
-  }
 
+    .cover-image {
+        background:
+            linear-gradient(0deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 1) 100%),
+            url("/website/cover.jpg") center/cover;
+        color: white;
+        text-align: center;
+        display: grid;
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-gap: 1rem;
+        font-weight: 700;
+        & > *:last-child {
+            font-size: 1.5rem;
+        }
+    }
+
+    .videos {
+        display: flex;
+        flex-flow: row wrap;
+    }
 </style>
 
-
-  <Layout>
-  <Navbar slot="navbar"/>
-  <div class="cover-image full-width">
-    <div>
-      <p>
-      IN THE POUCHETT
-      </p>
-      <p>
-      Enregistrements, Mixages, Live Sessions
-      </p>
+<Layout>
+    <Navbar slot="navbar" />
+    <div class="cover-image full-width">
+        <div>
+            <p>IN THE POUCHETT</p>
+            <p>Enregistrements, Mixages, Live Sessions</p>
+        </div>
     </div>
-  </div>
-  <section class="pattern">
-    <p>
-    Situés dans le 17ème arrondissement de Paris, le studio In the Pouchett vous accueille pour accompagner vos projets musicaux.
-    Studio orienté autour des Live Sessions, nous proposons cependant des services plus classiques tels que l’enregistrement, le mixage et le mastering de vos titres. 
-    </p>
-    <p>
-    Nous pouvons également apporter notre expertise musicale pour vous aider dans vos compositions et vous proposer des musiciens de session d’exception. 
-    </p>
-  </section>
+    <section class="pattern">
+        <p>
+            Situés dans le 17ème arrondissement de Paris, le studio In the
+            Pouchett vous accueille pour accompagner vos projets musicaux.
+            Studio orienté autour des Live Sessions, nous proposons cependant
+            des services plus classiques tels que l’enregistrement, le mixage et
+            le mastering de vos titres.
+        </p>
+        <p>
+            Nous pouvons également apporter notre expertise musicale pour vous
+            aider dans vos compositions et vous proposer des musiciens de
+            session d’exception.
+        </p>
+    </section>
 
-  <section class="filled">
-    <h1> References</h1>
-    <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi.
-    </p>
-  </section>
+    <section class="filled">
+        <h1>References</h1>
+        <div class="videos">
+            {data.map((i) => <Video url={i.data.url} />)}
+        </div>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non
+            risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing
+            nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas
+            ligula massa, varius a, semper congue, euismod non, mi.
+        </p>
+    </section>
 
+    <h1 class="pattern">Le studio</h1>
+    <section class="filled">
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non
+            risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing
+            nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas
+            ligula massa, varius a, semper congue, euismod non, mi.
+        </p>
+    </section>
 
-  <h1 class="pattern">Le studio</h1>
-  <section class="filled">
-    <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi.
-
-    </p>
-  </section>
-
-  <h1 class="pattern">Le matériel</h1>
-  <section class="filled">
-    <p>
-    Microphones (dynamique, à condensateur, à ruban) - Préamplificateurs - Interfaces audio - Moniteurs de studio - Casques de studio - Claviers MIDI - Instruments (guitares, claviers, percussions, etc.) - Enregistreurs multipistes - Logiciels de production musicale (DAW) - Plugins audio (effets, instruments virtuels) - Câbles audio (XLR, jack, MIDI) - Panneaux acoustiques - Supports de microphone - Table de mixage - DI boxes (boîtes de direct) - Enceintes de monitoring - Systèmes de traitement du son - Accessoires divers (pieds de micro, filtres anti-pop, etc.)
-    </p>
-  </section>
-  </Layout>
+    <h1 class="pattern">Le matériel</h1>
+    <section class="filled">
+        <p>
+            Microphones (dynamique, à condensateur, à ruban) - Préamplificateurs
+            - Interfaces audio - Moniteurs de studio - Casques de studio -
+            Claviers MIDI - Instruments (guitares, claviers, percussions, etc.)
+            - Enregistreurs multipistes - Logiciels de production musicale (DAW)
+            - Plugins audio (effets, instruments virtuels) - Câbles audio (XLR,
+            jack, MIDI) - Panneaux acoustiques - Supports de microphone - Table
+            de mixage - DI boxes (boîtes de direct) - Enceintes de monitoring -
+            Systèmes de traitement du son - Accessoires divers (pieds de micro,
+            filtres anti-pop, etc.)
+        </p>
+    </section>
+</Layout>
