@@ -53,7 +53,7 @@ const data = await getCollection("videos");
         </p>
     </section>
 
-    <section class="filled">
+    <section id="reference" class="filled">
         <h1>References</h1>
         <div class="videos">
             {data.map((i) => <Video url={i.data.url} />)}
@@ -66,7 +66,7 @@ const data = await getCollection("videos");
         </p>
     </section>
 
-    <h1 class="pattern">Le studio</h1>
+    <h1 class="pattern" id="studio">Le studio</h1>
     <section class="filled">
         <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non
@@ -76,7 +76,7 @@ const data = await getCollection("videos");
         </p>
     </section>
 
-    <h1 class="pattern">Le matériel</h1>
+    <h1 class="pattern" id="materiel">Le matériel</h1>
     <section class="filled">
         <p>
             Microphones (dynamique, à condensateur, à ruban) - Préamplificateurs
