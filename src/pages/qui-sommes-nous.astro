@@ -7,74 +7,78 @@ import Louis from "../assets/louis.jpg";
 ---
 
 <script>
-    export const imgSize = window.innerWidth / 3;
+  export const imgSize = window.innerWidth / 3;
 </script>
 
 <style>
-    .people {
-        display: flex;
-        flex-flow: row wrap;
-        align-items: flex-start;
-        justify-content: center;
-        gap: 2rem;
-        & > p {
-            margin: 0;
-            flex: 1;
-            /* min-width: 30rem; */
-            // Trop étroit saute la ligne constamment
-        }
-    
-
-    .pattern > .people > p {
-        background: rgba(255, 255, 255, 0.5);
+  .people {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 2rem;
+    & > p {
+      margin: 0;
+      flex: 1;
     }
+  }
+
+  .pattern > .people > p {
+    background: rgba(255, 255, 255, 0.5);
+  }
 </style>
 
 <Layout>
-    <Navbar slot="navbar" />
+  <Navbar slot="navbar" />
 
-    <section class="filled">
-        <p>
-            In The Pouchett c'est avant tout deux amis passionnés de musique Live
-            qui décidèrent en 2023 de transformer leur appartement en studio d'enregistrement
-            et de Live Sessions. L'objectif est de mettre l'accent sur l'atmosphère chaleureuse du lieu et de penser l'espace la musique Live et l'image.
-        </p>
-    </section>
+  <section class="filled">
+    <p>
+      In The Pouchett c'est avant tout deux amis passionnés de musique Live qui
+      décidèrent en 2023 de transformer leur appartement en studio
+      d'enregistrement et de Live Sessions. L'objectif est de mettre l'accent
+      sur l'atmosphère chaleureuse du lieu et de penser l'espace la musique Live
+      et l'image.
+    </p>
+  </section>
 
-    <section class="pattern">
-        <h1>Clément Maniette</h1>
-        <div class="people">
-            <Picture
-                src={Clem}
-                alt="Clement Maniette"
-                widths={[250, 400]}
-                sizes={"(max-width: 500px) 250px, 400px"}
-                width={300}
-            />
+  <section class="pattern">
+    <h1>Clément Maniette</h1>
+    <div class="people">
+      <Picture
+        src={Clem}
+        alt="Clement Maniette"
+        widths={[250, 400]}
+        sizes={"(max-width: 500px) 250px, 400px"}
+        width={300}
+      />
 
-            <p>
-                Clément est ingénieur du son, réalisateur artistique et multi-instrumentiste.
-                Avec une formation en acoustique et en traitement du signal, il allie expertise technique et sensibilité artistique.
-                Connaissant son matériel sur le bout des doigts, il s'engage à donner le meilleur de lui-même lors des prestations de prise de son, de mixage et de mastering.
-            </p>
-        </div>
-    </section>
+      <p>
+        Clément est ingénieur du son, réalisateur artistique et
+        multi-instrumentiste. Avec une formation en acoustique et en traitement
+        du signal, il allie expertise technique et sensibilité artistique.
+        Connaissant son matériel sur le bout des doigts, il s'engage à donner le
+        meilleur de lui-même lors des prestations de prise de son, de mixage et
+        de mastering.
+      </p>
+    </div>
+  </section>
 
-    <section class="filled">
-        <h1>Louis Jaumaux</h1>
-        <div class="people">
-            <p>
-                Louis est pianiste de jazz et de hip-hop, diplômé du conservatoire. Sa sensibilité à l'esthétique contribue à l'ambiance du studio.
-                En plus de ses performances musicales, il se spécialise dans la réalisation vidéo des Live Sessions,
-                mettant en avant son talent et sa vision artistique.
-            </p>
-            <Picture
-                src={Louis}
-                alt="Louis Jaumaux"
-                widths={[250, 400]}
-                sizes={"(max-width: 500px) 250px, 400px"}
-                width={300}
-            />
-        </div>
-    </section>
+  <section class="filled">
+    <h1>Louis Jaumaux</h1>
+    <div class="people">
+      <p>
+        Louis est pianiste de jazz et de hip-hop, diplômé du conservatoire. Sa
+        sensibilité à l'esthétique contribue à l'ambiance du studio. En plus de
+        ses performances musicales, il se spécialise dans la réalisation vidéo
+        des Live Sessions, mettant en avant son talent et sa vision artistique.
+      </p>
+      <Picture
+        src={Louis}
+        alt="Louis Jaumaux"
+        widths={[250, 400]}
+        sizes={"(max-width: 500px) 250px, 400px"}
+        width={300}
+      />
+    </div>
+  </section>
 </Layout>
