@@ -14,15 +14,16 @@ import Louis from "../assets/louis.jpg";
     .people {
         display: flex;
         flex-flow: row wrap;
-        align-items: center;
+        align-items: flex-start;
         justify-content: center;
-        gap: 1rem;
+        gap: 2rem;
         & > p {
+            margin: 0;
             flex: 1;
             /* min-width: 30rem; */
             // Trop étroit saute la ligne constamment
         }
-    }
+    
 
     .pattern > .people > p {
         background: rgba(255, 255, 255, 0.5);
@@ -50,10 +51,10 @@ import Louis from "../assets/louis.jpg";
                 sizes={"(max-width: 500px) 250px, 400px"}
                 width={300}
             />
-            
+
             <p>
-                Clément est ingénieur du son, réalisateur artistique et multi-instrumentiste. 
-                Avec une formation en acoustique et en traitement du signal, il allie expertise technique et sensibilité artistique. 
+                Clément est ingénieur du son, réalisateur artistique et multi-instrumentiste.
+                Avec une formation en acoustique et en traitement du signal, il allie expertise technique et sensibilité artistique.
                 Connaissant son matériel sur le bout des doigts, il s'engage à donner le meilleur de lui-même lors des prestations de prise de son, de mixage et de mastering.
             </p>
         </div>
@@ -63,8 +64,8 @@ import Louis from "../assets/louis.jpg";
         <h1>Louis Jaumaux</h1>
         <div class="people">
             <p>
-                Louis est pianiste de jazz et de hip-hop, diplômé du conservatoire. Sa sensibilité à l'esthétique contribue à l'ambiance du studio. 
-                En plus de ses performances musicales, il se spécialise dans la réalisation vidéo des Live Sessions, 
+                Louis est pianiste de jazz et de hip-hop, diplômé du conservatoire. Sa sensibilité à l'esthétique contribue à l'ambiance du studio.
+                En plus de ses performances musicales, il se spécialise dans la réalisation vidéo des Live Sessions,
                 mettant en avant son talent et sa vision artistique.
             </p>
             <Picture
