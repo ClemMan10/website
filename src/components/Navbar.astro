@@ -3,20 +3,28 @@ import { Image } from "astro:assets";
 import logo from "../assets/logo.webp";
 ---
 
+<script>
+  const menu = document.querySelector<HTMLDivElement>(".navbar-menu");
+  const burger = document.querySelector<HTMLDivElement>(".navbar-burger");
+  burger?.addEventListener("click", (element) => {
+    element.target?.classList?.toggle("is-active");
+    menu?.classList.toggle("is-active");
+  });
+</script>
+
 <style lang="scss">
   @use "bulma/sass/components/navbar" with (
-    $navbar-background-color: rgb(8, 15, 37)
+    $navbar-background-color: rgb(8, 15, 37),
+    $navbar-height: 4rem
   );
   @use "bulma/sass/elements/button";
 </style>
 
 <nav class="navbar" role="navigation" aria-label="main-navigation">
   <div class="navbar-brand">
-    <div class="narvbar-item">
-      <a href="/website">
-        <Image width="100" src={logo} alt="Logo de In the Pouchett" />
-      </a>
-    </div>
+    <a class="navbar-item" href="/website">
+      <Image width={40} src={logo} alt="Logo de In the Pouchett" />
+    </a>
     <a class="navbar-item" href="/website">In The Pouchett</a>
 
     <a
@@ -45,10 +53,7 @@ import logo from "../assets/logo.webp";
       </a>
 
       <div class="navbar-item">
-        <a
-          class="button is-primary"
-          href="mailto:inthepouchett.studio@gmail.com"
-        >
+        <a class="button is-info" href="mailto:inthepouchett.studio@gmail.com">
           <i class="fa-solid fa-envelope"></i>
           Contact
         </a>
