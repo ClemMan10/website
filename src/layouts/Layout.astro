@@ -3,7 +3,7 @@ import Contact from "../components/Contact.astro";
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="has-navbar-fixed-top">
   <head>
     <meta charset="utf8" />
     <meta name="viewport" content="width=device-width" />
@@ -32,9 +32,7 @@ import Contact from "../components/Contact.astro";
     <div>
       <slot />
     </div>
-    <footer>
-      <Contact />
-    </footer>
+    <Contact />
   </body>
 </html>
 

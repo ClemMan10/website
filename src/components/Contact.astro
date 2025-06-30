@@ -2,35 +2,35 @@
 
 ---
 
-<style>
-  footer {
-    background-color: rgb(8, 15, 37);
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: center;
-    gap: 1rem;
-    align-items: center;
-    a {
-      text-decoration: none;
-      color: white;
-    }
-  }
+<style lang="scss">
+  @use "bulma/sass/layout/footer" with (
+    $footer-background-color: rgb(8, 15, 37)
+  );
+  @use "bulma/sass/layout/container";
+  @use "bulma/sass/grid/columns";
+  @use "bulma/sass/helpers/typography";
 </style>
 
-<footer>
-  <a
-    class="remove-clicked-color"
-    href="https://www.youtube.com/@InthePouchett"
-    target="_blank"
-  >
-    <i style="font-size: 4rem" class="fa-brands fa-youtube"></i>
-  </a>
+<footer class="footer">
+  <div class="columns is-centered">
+    <div class="column has-text-centered is-narrow">
+      <a
+        class="remove-clicked-color"
+        href="https://www.youtube.com/@InthePouchett"
+        target="_blank"
+      >
+        <i style="font-size: 4rem" class="fa-brands fa-youtube"></i>
+      </a>
+    </div>
 
-  <a
-    class="remove-clicked-color"
-    href="https://www.instagram.com/inthepouchett/"
-    target="_blank"
-  >
-    <i style="font-size: 4rem" class="fa-brands fa-instagram"></i>
-  </a>
+    <div class="column has-text-centered is-narrow">
+      <a
+        class="remove-clicked-color"
+        href="https://www.instagram.com/inthepouchett/"
+        target="_blank"
+      >
+        <i style="font-size: 4rem" class="fa-brands fa-instagram"></i>
+      </a>
+    </div>
+  </div>
 </footer>
