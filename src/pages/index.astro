@@ -8,22 +8,17 @@ const data = await getCollection("videos");
 ---
 
 <style lang="scss">
+  @use "bulma/sass/layout/hero";
+  @use "bulma/sass/elements/title";
   .cover-image {
     background:
       linear-gradient(0deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 1) 100%),
       url("/website/cover.jpg") center/cover;
-    color: white;
     text-align: center;
-    display: grid;
-    grid-template-rows: 1fr 1fr 1fr;
-    grid-gap: 1rem;
     font-weight: 700;
-    & > *:last-child {
-      font-size: 1.5rem;
-    }
-
-    div:nth-child(1) {
-      grid-row: 2;
+    h1,
+    h2 {
+      color: white;
     }
   }
 
@@ -36,10 +31,10 @@ const data = await getCollection("videos");
 
 <Layout>
   <Navbar slot="navbar" />
-  <div class="cover-image full-width">
-    <div>
-      <p>IN THE POUCHETT</p>
-      <p>Enregistrements, Mixages, Live Sessions</p>
+  <div class="hero is-medium cover-image">
+    <div class="container hero-body">
+      <h1 class="title">IN THE POUCHETT</h1>
+      <h2 class="subtitle">Enregistrements, Mixages, Live Sessions</h2>
     </div>
   </div>
   <section class="pattern">
