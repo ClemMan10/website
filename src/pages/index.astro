@@ -9,6 +9,7 @@ const data = await getCollection("videos");
 
 <style lang="scss">
   @use "bulma/sass/layout/hero";
+  @use "bulma/sass/layout/container";
   @use "bulma/sass/elements/title";
   .cover-image {
     background:
@@ -38,54 +39,63 @@ const data = await getCollection("videos");
     </div>
   </div>
   <section class="pattern">
-    <p>
-      Situés dans le 17ème arrondissement de Paris, le studio In the Pouchett
-      vous accueille pour accompagner vos projets musicaux. Studio orienté
-      autour des Live Sessions, nous proposons cependant des services plus
-      classiques tels que l’enregistrement, le mixage et le mastering de vos
-      titres.
-    </p>
-    <p>
-      Nous pouvons également apporter notre expertise musicale pour vous aider
-      dans vos compositions et vous proposer des musiciens de session
-      d’exception.
-    </p>
+    <div class="container">
+      <p>
+        Situés dans le 17ème arrondissement de Paris, le studio In the Pouchett
+        vous accueille pour accompagner vos projets musicaux. Studio orienté
+        autour des Live Sessions, nous proposons cependant des services plus
+        classiques tels que l’enregistrement, le mixage et le mastering de vos
+        titres.
+      </p>
+      <p>
+        Nous pouvons également apporter notre expertise musicale pour vous aider
+        dans vos compositions et vous proposer des musiciens de session
+        d’exception.
+      </p>
+    </div>
   </section>
 
   <section id="reference" class="filled">
-    <h1>References</h1>
-    <div class="videos">
-      {data.map((i) => <Video url={i.data.url} />)}
+    <div class="container">
+      <h1>References</h1>
+      <div class="videos">
+        {data.map((i) => <Video url={i.data.url} />)}
+      </div>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus.
+        Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies
+        sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius
+        a, semper congue, euismod non, mi.
+      </p>
     </div>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus.
-      Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies
-      sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a,
-      semper congue, euismod non, mi.
-    </p>
   </section>
 
   <h1 class="pattern" id="studio">Le studio</h1>
   <section class="filled">
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus.
-      Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies
-      sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a,
-      semper congue, euismod non, mi.
-    </p>
+    <div class="container">
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus.
+        Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies
+        sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius
+        a, semper congue, euismod non, mi.
+      </p>
+    </div>
   </section>
 
   <h1 class="pattern" id="materiel">Le matériel</h1>
   <section class="filled">
-    <p>
-      Microphones (dynamique, à condensateur, à ruban) - Préamplificateurs -
-      Interfaces audio - Moniteurs de studio - Casques de studio - Claviers MIDI
-      - Instruments (guitares, claviers, percussions, etc.) - Enregistreurs
-      multipistes - Logiciels de production musicale (DAW) - Plugins audio
-      (effets, instruments virtuels) - Câbles audio (XLR, jack, MIDI) - Panneaux
-      acoustiques - Supports de microphone - Table de mixage - DI boxes (boîtes
-      de direct) - Enceintes de monitoring - Systèmes de traitement du son -
-      Accessoires divers (pieds de micro, filtres anti-pop, etc.)
-    </p>
+    <div class="container">
+      <p>
+        Microphones (dynamique, à condensateur, à ruban) - Préamplificateurs -
+        Interfaces audio - Moniteurs de studio - Casques de studio - Claviers
+        MIDI - Instruments (guitares, claviers, percussions, etc.) -
+        Enregistreurs multipistes - Logiciels de production musicale (DAW) -
+        Plugins audio (effets, instruments virtuels) - Câbles audio (XLR, jack,
+        MIDI) - Panneaux acoustiques - Supports de microphone - Table de mixage
+        - DI boxes (boîtes de direct) - Enceintes de monitoring - Systèmes de
+        traitement du son - Accessoires divers (pieds de micro, filtres
+        anti-pop, etc.)
+      </p>
+    </div>
   </section>
 </Layout>

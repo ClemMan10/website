@@ -51,20 +51,6 @@ import Contact from "../components/Contact.astro";
     --navbar-color: black;
   }
 
-  body > div {
-    display: grid;
-    grid-template-columns: [full-width-start] 2rem [content-start] 4fr [content-end] 2rem [full-width-end];
-    height: 100%;
-
-    & > * {
-      grid-column: content;
-    }
-  }
-
-  .full-width {
-    grid-column: full-width;
-  }
-
   .pattern {
     font-size: 1.5rem;
     background-image: url("/website/pattern.svg");
