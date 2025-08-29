@@ -4,10 +4,44 @@ import Navbar from "../components/Navbar.astro";
 import Layout from "../layouts/Layout.astro";
 ---
 
+<style lang="scss">
+  @use "bulma/sass/layout/hero";
+  @use "bulma/sass/layout/container";
+  @use "bulma/sass/elements/title";
+  .cover-image {
+    background:
+      linear-gradient(0deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 1) 100%),
+      url("/website/cover.jpg") center/cover;
+    text-align: center;
+    font-weight: 700;
+    h1,
+    h2 {
+      color: white;
+    }
+  }
+</style>
+
 <Layout>
   <Navbar slot="navbar" />
+  <div class="hero is-medium cover-image">
+    <div class="container hero-body">
+      <h1 class="title">LIVE SESSIONS</h1>
+      <h2 class="subtitle">Captation, Mixage, Mastering, Edition, Colorimétrie</h2>
+    </div>
+  </div>
+  <section class="filled">
+      <div class="container">
+        <p>
+      Le studio In the Pouchett est spécialisé dans la réalisation de Live Sessions.
+      Nous proposons un service complet allant de la captation audio et vidéo à la
+      post-production (mixage, mastering, édition et colorimétrie).<br />
 
+      Vous serez accueillis dans un cadre chaleureux et intimiste, 
+      propice à livrer votre meilleure performance.
+        </p>
+      </div>
+  </section>
   <div>
-    Hello World
+
   </div>
 </Layout>
