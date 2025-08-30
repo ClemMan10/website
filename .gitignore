@@ -2,3 +2,4 @@
 dist/
 node_modules/
 Site pro studio.code-workspace
+.DS_Store
