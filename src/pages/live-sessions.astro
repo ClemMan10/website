@@ -11,7 +11,8 @@ import Layout from "../layouts/Layout.astro";
   .cover-image {
     background:
       linear-gradient(0deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 1) 100%),
-      url("website/live-sess-cover-small.jpg") center/cover;
+      // url("website/live-sess-cover-small.jpg") center/cover;
+      url("/website/cover.jpg") center/cover;
     text-align: center;
     font-weight: 700;
     h1,
@@ -50,28 +51,50 @@ import Layout from "../layouts/Layout.astro";
         </p>
       </div>
   </section>
-   <h1 class="filled" id="formats">Formats</h1>
+  <h1 class="filled" id="formats">Formats</h1>
   <section class="filled">
     <div class="container">
       <p>
-        Nous proposons plusieurs formats de Live Sessions : <br />
-        <ul>
-          <li>
-            <strong>Format <i>Live in the Pouchett</i></strong> : Le format classique où l'on fait une captation live d'un morceau 
-            avec possibilité de faire plusieurs prises pour sécuriser une prise de qualité, faire des plans d'inserts.
-          </li>
-          <li>
-            <strong>Format <i>Concert in the Pouchett</i></strong> : Pour apporter l'énergie du vrai live, 
-            on fait venir un petit public (une dizaine de personnes) et on fait une prise one-shot d'environ 20-25 minutes.
-          </li>
-          <li>
-            <strong>Format C</strong> : Description du format C
-          </li>
-        </ul>
+        Nous proposons plusieurs formats de Live Sessions, adaptés à vos besoins :
+      </p>
+
+      <ul>
+        <li>
+          <strong>Format <i>Live in the Pouchett</i></strong> : Le format “classique” d'une captation live. 
+          Nous enregistrons un morceau avec la possibilité de refaire plusieurs prises afin d'assurer la meilleure qualité possible, 
+          tout en intégrant des plans d'inserts pour enrichir le rendu visuel.
+        </li>
+        <li>
+          <strong>Format <i>Concert in the Pouchett</i></strong> : Une expérience plus spontanée et énergique. 
+          Nous accueillons un petit public (environ 10 personnes) pour créer l'ambiance d'un vrai concert intimiste, 
+          et nous enregistrons une session one-shot d'une vingtaine de minutes.
+        </li>
+        <li>
+          <strong>Format <i>Custom</i></strong> : Un projet particulier en tête ? 
+          Nous concevons avec vous un format sur-mesure, pensé pour correspondre parfaitement à votre univers.
+        </li>
+      </ul>
+    </div>
+  </section>
+  <h1 class="pattern" id="diffusion">Diffusion</h1>
+  <section class="pattern">
+    <div class="container">
+      <p>
+        Chez ITP, nous avons fait le choix de centraliser la diffusion de nos Live Sessions afin de bâtir une véritable communauté autour du studio.  
+        Chaque session est ainsi mise en valeur sur notre chaîne YouTube et nos réseaux sociaux, pour maximiser son impact et toucher un public déjà engagé.  
+        Pour prolonger cette visibilité, nous pouvons également vous offrir la possibilité de partager un ou deux titres de la session sur votre propre chaîne, afin de créer du lien direct avec vos abonnés.  
+        Et si vous souhaitez aller plus loin, des options de diffusion élargie peuvent être envisagées ensemble.
+      </p>
+
+    </div>
+  </section>
+  <h1 class="filled" id="tarifs">Tarifs</h1>
+  <section class="filled">
+    <div class="container">
+      <p>
+        Nos tarifs sont adaptés en fonction du format choisi et des services inclus. 
+        N'hésitez pas à nous contacter pour obtenir un devis personnalisé.
       </p>
     </div>
   </section>
-  <div>
-
-  </div>
 </Layout>
