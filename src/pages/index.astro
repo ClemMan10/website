@@ -44,20 +44,20 @@ const data = await getCollection("videos");
         Situés dans le 17ème arrondissement de Paris, le studio In the Pouchett
         vous accueille pour accompagner vos projets musicaux. Studio orienté
         autour des Live Sessions, nous proposons cependant des services plus
-        classiques tels que l’enregistrement, le mixage et le mastering de vos
+        classiques tels que l'enregistrement, le mixage et le mastering de vos
         titres.
       </p>
       <p>
         Nous pouvons également apporter notre expertise musicale pour vous aider
         dans vos compositions et vous proposer des musiciens de session
-        d’exception.
+        d'exception.
       </p>
     </div>
   </section>
 
-  <section id="reference" class="filled">
+  <h1 class="filled" id="reference">References</h1>
+  <section class="filled">
     <div class="container">
-      <h1>References</h1>
       <div class="videos">
         {data.map((i) => <Video url={i.data.url} />)}
       </div>
