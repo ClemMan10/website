@@ -51,31 +51,60 @@ import Layout from "../layouts/Layout.astro";
         </p>
       </div>
   </section>
+
   <h1 class="filled" id="formats">Formats</h1>
   <section class="filled">
     <div class="container">
-      <p>
-        Nous proposons plusieurs formats de Live Sessions, adaptés à vos besoins :
-      </p>
+      <div class="formats-grid">
+        
+        <!-- Format 1 -->
+        <div class="format-card">
+          <div class="card-image">
+            <img src="/public/classic-live-sess.jpg" alt="Live in the Pouchett" />
+          </div>
+          <div class="card-content">
+            <h3><strong>Format <i>Live in the Pouchett</i></strong></h3>
+            <p>
+              Le format “classique” d'une captation live.  
+              Possibilité de refaire plusieurs prises pour garantir la meilleure qualité, 
+              avec des plans d’inserts pour enrichir le rendu visuel.
+            </p>
+          </div>
+        </div>
 
-      <ul>
-        <li>
-          <strong>Format <i>Live in the Pouchett</i></strong> : Le format “classique” d'une captation live. 
-          Nous enregistrons un morceau avec la possibilité de refaire plusieurs prises afin d'assurer la meilleure qualité possible, 
-          tout en intégrant des plans d'inserts pour enrichir le rendu visuel.
-        </li>
-        <li>
-          <strong>Format <i>Concert in the Pouchett</i></strong> : Une expérience plus spontanée et énergique. 
-          Nous accueillons un petit public (environ 10 personnes) pour créer l'ambiance d'un vrai concert intimiste, 
-          et nous enregistrons une session one-shot d'une vingtaine de minutes.
-        </li>
-        <li>
-          <strong>Format <i>Custom</i></strong> : Un projet particulier en tête ? 
-          Nous concevons avec vous un format sur-mesure, pensé pour correspondre parfaitement à votre univers.
-        </li>
-      </ul>
+        <!-- Format 2 -->
+        <div class="format-card">
+          <div class="card-image">
+            <img src="/public/classic-live-sess.jpg" alt="Concert in the Pouchett" />
+          </div>
+          <div class="card-content">
+            <h3><strong>Format <i>Concert in the Pouchett</i></strong></h3>
+            <p>
+              Une expérience plus spontanée et énergique.  
+              Petit public (≈10 personnes) pour recréer l’ambiance d’un concert intimiste, 
+              capté en one-shot d’une vingtaine de minutes.
+            </p>
+          </div>
+        </div>
+
+        <!-- Format 3 -->
+        <div class="format-card">
+          <div class="card-image">
+            <img src="public/custom-live-sess.jpg" alt="Format Custom" />
+          </div>
+          <div class="card-content">
+            <h3><strong>Format Custom</strong></h3>
+            <p>
+              Un projet particulier en tête ?  
+              Nous concevons avec vous un format sur-mesure, adapté à votre univers.
+            </p>
+          </div>
+        </div>
+
+      </div>
     </div>
   </section>
+  
   <h1 class="pattern" id="diffusion">Diffusion</h1>
   <section class="pattern">
     <div class="container">
