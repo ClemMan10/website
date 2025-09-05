@@ -11,33 +11,67 @@ const data = await getCollection("videos");
   @use "bulma/sass/layout/hero";
   @use "bulma/sass/layout/container";
   @use "bulma/sass/elements/title";
+
   .cover-image {
     background:
       linear-gradient(0deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 1) 100%),
       url("/website/cover.jpg") center/cover;
     text-align: center;
     font-weight: 700;
+
     h1,
     h2 {
       color: white;
     }
   }
 
-  .videos {
-    display: flex;
-    flex-flow: row wrap;
-    gap: 1.5rem;
+  .videos-wrapper {
+    .videos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .toggle-videos {
+      display: none;
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background-color: #222;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  }
+
+  /* Mobile : collapse et bouton visible */
+  @media (max-width: 768px) {
+    .videos-wrapper .videos {
+      max-height: calc(3 * 180px + 1.5rem * 2); /* 3 vidéos + gaps */
+      overflow: hidden;
+      transition: max-height 0.5s ease;
+    }
+
+    .videos-wrapper .videos.expanded {
+      max-height: 1000px; /* assez grand pour toutes les vidéos */
+    }
+
+    .videos-wrapper .toggle-videos {
+      display: block;
+    }
   }
 </style>
 
 <Layout>
   <Navbar slot="navbar" />
+
   <div class="hero is-medium cover-image">
     <div class="container hero-body">
       <h1 class="title">IN THE POUCHETT</h1>
       <h2 class="subtitle">Enregistrements, Mixages, Live Sessions</h2>
     </div>
   </div>
+
   <section class="pattern">
     <div class="container">
       <p>
@@ -55,11 +89,15 @@ const data = await getCollection("videos");
     </div>
   </section>
 
+  <!-- Section Références avec collapse sur mobile -->
   <section class="filled" id="reference">
     <h1>Références</h1>
     <div class="container">
-      <div class="videos">
-        {data.map((i) => <Video url={i.data.url} />)}
+      <div class="videos-wrapper">
+        <div class="videos">
+          {data.map((i) => <Video url={i.data.url} />)}
+        </div>
+        <button class="toggle-videos">Voir toutes les vidéos</button>
       </div>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus.
@@ -98,4 +136,23 @@ const data = await getCollection("videos");
       </p>
     </div>
   </section>
+
+  <!-- Script pour collapse/expand sur mobile -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const isMobile = window.matchMedia("(max-width: 768px)").matches;
+      if (!isMobile) return;
+
+      const wrapper = document.querySelector(".videos-wrapper");
+      const videos = wrapper.querySelector(".videos");
+      const button = wrapper.querySelector(".toggle-videos");
+
+      button.addEventListener("click", () => {
+        videos.classList.toggle("expanded");
+        button.textContent = videos.classList.contains("expanded")
+          ? "Réduire"
+          : "Voir toutes les vidéos";
+      });
+    });
+  </script>
 </Layout>
