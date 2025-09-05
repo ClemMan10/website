@@ -64,10 +64,24 @@ import logo from "../assets/logo.webp";
   const burger = document.querySelector(".navbar-burger");
   const menu = document.querySelector("#websiteNavbar");
 
-  burger?.addEventListener("click", () => {
-    burger.classList.toggle("is-active");
-    menu?.classList.toggle("is-active");
-  });
+  if (burger && menu) {
+    burger.addEventListener("click", () => {
+      burger.classList.toggle("is-active");
+      menu.classList.toggle("is-active");
+    });
+
+    // Fermer le menu après un léger délai
+    document.querySelectorAll("#websiteNavbar a").forEach(link => {
+      link.addEventListener("click", () => {
+        if (menu.classList.contains("is-active")) {
+          setTimeout(() => {
+            menu.classList.remove("is-active");
+            burger.classList.remove("is-active");
+          }, 100); // délai de 100ms
+        }
+      });
+    });
+  }
 </script>
 
 <style lang="scss">
