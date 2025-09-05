@@ -67,11 +67,32 @@ import Contact from "../components/Contact.astro";
     --navbar-font: 1rem;
   }
 
+  section h1 {
+  margin-bottom: 1.5rem; /* réduit ou augmente selon besoin */
+  }
+
+  /* ✅ Ajustements mobile */
+@media (max-width: 768px) {
+  :root {
+    --font-base: 1rem;   /* ≈16px au lieu de 20px */
+    --font-card: 0.85rem;
+    --font-h1: clamp(1.25rem, 6vw, 2rem);
+    --font-h1-section: clamp(1.25rem, 6vw, 1.75rem);
+    --font-h2: clamp(1.1rem, 4vw, 1.5rem);
+    --font-h3: 1rem;
+    --navbar-font: 0.9rem;
+  }
+}
+
   html, body {
     margin: 0;
     font-family: "Open Sans", sans-serif;
     font-size: var(--font-base);
     width: 100%;
+  }
+  html {
+  scroll-behavior: smooth; /* optionnel mais agréable */
+  scroll-padding-top: 4.5rem; /* hauteur navbar fixe */
   }
 
   nav { font-size: var(--navbar-font); }
@@ -139,12 +160,14 @@ import Contact from "../components/Contact.astro";
     }
   }
 
-  /* --- Layout global --- */
   section {
     display: grid;
-    grid-template-columns: minmax(1rem, 1fr) minmax(20rem, 3fr) minmax(1rem, 1fr);
+    grid-template-columns: 1rem minmax(0, 1fr) 1rem;
     & > * { grid-column: 2; }
-  }
 
+    @media (min-width: 768px) {
+      grid-template-columns: minmax(1rem, 1fr) minmax(20rem, 3fr) minmax(1rem, 1fr);
+    }
+  }
   footer { width: 100%; }
 </style>
