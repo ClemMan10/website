@@ -5,10 +5,11 @@ import logo from "../assets/logo.webp";
 
 <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
-    <a class="navbar-item" href="/website">
+    <!-- Logo + texte fusionnés -->
+    <a class="navbar-item brand-link" href="/website">
       <Image width={40} src={logo} alt="Logo de In the Pouchett" />
+      <span class="brand-text">In The Pouchett</span>
     </a>
-    <a class="navbar-item" href="/website">In The Pouchett</a>
 
     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="websiteNavbar">
       <span aria-hidden="true"></span>
@@ -31,11 +32,22 @@ import logo from "../assets/logo.webp";
         </div>
       </div>
 
-      <!-- Page 2: Live Sessions -->
-      <a class="navbar-item" href="/website/live-sessions">Live Sessions</a>
+      <!-- Page 2: Live Sessions avec sous-sections -->
+      <div class="navbar-item has-dropdown is-hoverable desktop-dropdown">
+        <a class="navbar-link" href="/website/live-sessions">
+          Live Sessions
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="/website/live-sessions/#formats">Formats</a>
+          <a class="navbar-item" href="/website/live-sessions/#diffusion">Diffusion</a>
+          <a class="navbar-item" href="/website/live-sessions/#tarifs">Tarifs</a>
+        </div>
+      </div>
 
-      <!-- Page 3: Qui sommes-nous -->
-      <a class="navbar-item" href="/website/qui-sommes-nous">Qui sommes-nous ?</a>
+      <!-- Page 3: Qui sommes-nous ? (item simple, pas de wrapper .navbar-item) -->
+      <a class="navbar-item desktop-item" href="/website/qui-sommes-nous">
+        Qui sommes-nous ?
+      </a>
 
       <!-- Contact -->
       <div class="navbar-item">
@@ -59,60 +71,131 @@ import logo from "../assets/logo.webp";
 </script>
 
 <style lang="scss">
-  @use "bulma/sass/components/navbar" with (
-    $navbar-background-color: rgb(8, 15, 37),
-    $navbar-height: 4rem
-  );
-  @use "bulma/sass/elements/button";
+@use "bulma/sass/components/navbar" with (
+  $navbar-background-color: rgb(8, 15, 37),
+  $navbar-height: 4rem
+);
+@use "bulma/sass/elements/button";
 
-  /* Desktop hover classique */
+/* -----------------------
+   Dropdown (desktop)
+----------------------- */
+.desktop-dropdown .navbar-dropdown {
+  display: none;
+  position: absolute;
+  background-color: rgba(33,39,58,1);
+  border-radius: 0.5rem;
+}
+.desktop-dropdown .navbar-dropdown a {
+  color: white;
+  background-color: rgba(33,39,58,1);
+}
+.desktop-dropdown .navbar-dropdown a:hover {
+  color: #4358ff;
+}
+.desktop-dropdown:hover .navbar-dropdown {
+  display: block;
+}
+
+/* -----------------------
+   Couleur texte par défaut
+----------------------- */
+.navbar .navbar-item,
+.navbar .navbar-link {
+  color: #cbd5e1;
+  transition: background 0.2s, color 0.2s;
+}
+
+/* Hover pour items avec dropdown (desktop) */
+.navbar .navbar-item.has-dropdown:hover > .navbar-link {
+  color: #ffffff;
+  background-color: rgba(33,39,58,1);
+}
+
+/* -----------------------
+   Item simple top-level (ex: "Qui sommes-nous ?")
+   -> prend toute la hauteur + hover sombre
+----------------------- */
+.navbar .navbar-end > a.navbar-item {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 1rem;
+}
+.navbar .navbar-end > a.navbar-item:hover {
+  background-color: rgba(33,39,58,1);
+  color: #ffffff;
+}
+
+/* -----------------------
+   Brand (logo + texte fusionnés)
+----------------------- */
+.navbar .navbar-brand .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #cbd5e1;
+  transition: background 0.2s, color 0.2s;
+}
+.navbar .navbar-brand .brand-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+.navbar .navbar-brand .brand-text {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+.navbar-item .button.is-info {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem; /* espace entre icône et texte */
+}
+
+/* -----------------------
+   Mobile / Burger
+----------------------- */
+@media (max-width: 1024px) {
+  .navbar-menu.is-active { display: block; }
+
+  /* Items principaux alignés */
+  .navbar-menu.is-active > .navbar-end > .navbar-item,
+  .navbar-menu.is-active > .navbar-end > .desktop-dropdown > .navbar-link,
+  .navbar-menu.is-active > .navbar-end > a.navbar-item.desktop-item {
+    color: #cbd5e1;
+    background-color: rgb(8, 15, 37);
+    padding-left: 1.5rem;
+  }
+
+  /* Sous-items dropdown */
   .desktop-dropdown .navbar-dropdown {
-    display: none;
-    position: absolute;
+    display: flex !important;
+    flex-direction: column;
+    position: relative;
+    background-color: rgb(8, 15, 37);
+    border-radius: 0.25rem;
   }
-  .desktop-dropdown:hover .navbar-dropdown {
-    display: block;
+  .desktop-dropdown .navbar-dropdown a {
+    padding-left: 2.5rem;
+    color: #cbd5e1;
+    background-color: rgb(8, 15, 37);
   }
 
-  /* Mobile / burger */
-  @media (max-width: 1024px) {
-    .navbar-menu.is-active {
-      display: block;
-    }
-
-    /* Tous les items principaux alignés et blancs */
-    .navbar-menu.is-active > .navbar-end > .navbar-item,
-    .navbar-menu.is-active > .navbar-end > .desktop-dropdown > .navbar-link {
-      color: white;
-      background-color: rgb(8,15,37);
-      padding-left: 1.5rem;
-    }
-
-    /* Sous-items de Le Studio indentés */
-    .desktop-dropdown .navbar-dropdown {
-      display: flex !important;
-      flex-direction: column;
-      position: relative;
-      background-color: rgb(8,15,37);
-      border-radius: 0.25rem;
-    }
-
-    .desktop-dropdown .navbar-dropdown a {
-      padding-left: 2.5rem;
-      color: white;
-      background-color: rgb(8,15,37);
-    }
-
-    /* Hover pour mobile */
-    .navbar-menu.is-active .navbar-item:hover,
-    .desktop-dropdown .navbar-dropdown a:hover {
-      background-color: rgba(255,255,255,0.1);
-      color: white;
-    }
-
-    /* Cacher flèche */
-    .navbar-link .arrow {
-      display: none;
-    }
+  /* Hover mobile */
+  .navbar-menu.is-active .navbar-item:hover,
+  .desktop-dropdown .navbar-dropdown a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
   }
+
+  /* Cacher flèche sur mobile */
+  .navbar-link .arrow { display: none; }
+
+  /* Harmoniser "Qui sommes-nous ?" avec les autres items en burger */
+  .navbar-menu.is-active > .navbar-end > a.navbar-item.desktop-item {
+    padding-left: 3rem; /* même indentation que les autres liens principaux */
+  }
+  .navbar-menu.is-active > .navbar-end > .navbar-item:last-child {
+    padding-left: 3rem; /* décale tout le contenu du navbar-item */
+  }
+}
 </style>
