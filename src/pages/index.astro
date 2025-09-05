@@ -30,17 +30,30 @@ const data = await getCollection("videos");
       display: flex;
       flex-wrap: wrap;
       gap: 1.5rem;
+      transition: max-height 0.5s ease;
     }
 
+    /* Par défaut on masque clairement le bouton (redondance CSS) */
     .toggle-videos {
-      display: none;
+      display: none !important;
       margin-top: 1rem;
-      padding: 0.5rem 1rem;
-      background-color: #222;
+      padding: 0.5rem 0.75rem;
+      // background-color: #222;
+      background: linear-gradient(45deg, #ea475f, #92dbf5);
       color: white;
       border: none;
-      border-radius: 5px;
+      border-radius: 50%;
       cursor: pointer;
+      font-size: 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.25rem;
+      transition: background-color 0.2s ease;
+    }
+
+    .toggle-videos:hover {
+      background-color: #444;
     }
   }
 
@@ -49,7 +62,6 @@ const data = await getCollection("videos");
     .videos-wrapper .videos {
       max-height: calc(3 * 180px + 1.5rem * 2); /* 3 vidéos + gaps */
       overflow: hidden;
-      transition: max-height 0.5s ease;
     }
 
     .videos-wrapper .videos.expanded {
@@ -57,7 +69,7 @@ const data = await getCollection("videos");
     }
 
     .videos-wrapper .toggle-videos {
-      display: block;
+      display: flex !important; /* visible uniquement sur mobile */
     }
   }
 </style>
@@ -97,8 +109,16 @@ const data = await getCollection("videos");
         <div class="videos">
           {data.map((i) => <Video url={i.data.url} />)}
         </div>
-        <button class="toggle-videos">Voir toutes les vidéos</button>
+
+        <!--
+          Bouton REELLEMENT masqué par défaut via inline style.
+          Le script ci-dessous l'affichera uniquement si l'écran est mobile.
+        -->
+        <button class="toggle-videos" style="display:none;" aria-hidden="true">
+          <i class="fa-solid fa-plus" aria-hidden="true"></i>
+        </button>
       </div>
+
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus.
         Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies
@@ -137,21 +157,65 @@ const data = await getCollection("videos");
     </div>
   </section>
 
-  <!-- Script pour collapse/expand sur mobile -->
+  <!-- Script pour collapse/expand mobile avec activation DU BOUTON seulement côté client -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      const isMobile = window.matchMedia("(max-width: 768px)").matches;
-      if (!isMobile) return;
-
       const wrapper = document.querySelector(".videos-wrapper");
+      if (!wrapper) return;
+
       const videos = wrapper.querySelector(".videos");
       const button = wrapper.querySelector(".toggle-videos");
+      const icon = button?.querySelector("i");
 
-      button.addEventListener("click", () => {
-        videos.classList.toggle("expanded");
-        button.textContent = videos.classList.contains("expanded")
-          ? "Réduire"
-          : "Voir toutes les vidéos";
+      // MediaQuery et helper pour gérer l'affichage du bouton en live (resize)
+      const mq = window.matchMedia("(max-width: 768px)");
+
+      function updateVisibility() {
+        if (mq.matches) {
+          // mobile -> activer le bouton
+          button.style.display = "flex";
+          button.removeAttribute("aria-hidden");
+        } else {
+          // desktop -> masquer le bouton absolument, et reset l'état
+          button.style.display = "none";
+          button.setAttribute("aria-hidden", "true");
+          videos.classList.remove("expanded");
+          // s'assurer que l'icône est en état plus
+          if (icon) {
+            icon.classList.remove("fa-minus");
+            icon.classList.add("fa-plus");
+          }
+        }
+      }
+
+      // initial
+      updateVisibility();
+
+      // écouter changement de breakpoint (responsive)
+      if (typeof mq.addEventListener === "function") {
+        mq.addEventListener("change", updateVisibility);
+      } else if (typeof mq.addListener === "function") {
+        mq.addListener(updateVisibility);
+      }
+
+      // click handler (ne sera utilisable que si le bouton est visible)
+      button.addEventListener("click", (e) => {
+        e.preventDefault();
+        // si bouton caché pour une raison, on ignore
+        if (getComputedStyle(button).display === "none") return;
+
+        const expanded = videos.classList.toggle("expanded");
+
+        // changer icône + / -
+        if (icon) {
+          icon.classList.toggle("fa-plus", !expanded);
+          icon.classList.toggle("fa-minus", expanded);
+        }
+
+        // smooth scroll vers la section quand on étend
+        if (expanded) {
+          wrapper.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
       });
     });
   </script>
