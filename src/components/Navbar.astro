@@ -3,11 +3,57 @@ import { Image } from "astro:assets";
 import logo from "../assets/logo.webp";
 ---
 
+<nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="/website">
+      <Image width={40} src={logo} alt="Logo de In the Pouchett" />
+    </a>
+    <a class="navbar-item" href="/website">In The Pouchett</a>
+
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="websiteNavbar">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="websiteNavbar" class="navbar-menu">
+    <div class="navbar-end">
+
+      <!-- Page 1: Le Studio avec sous-sections -->
+      <div class="navbar-item has-dropdown is-hoverable desktop-dropdown">
+        <a class="navbar-link" href="/website">
+          Le Studio
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="/website/#materiel">Le Matériel</a>
+          <a class="navbar-item" href="/website/#reference">Références</a>
+        </div>
+      </div>
+
+      <!-- Page 2: Live Sessions -->
+      <a class="navbar-item" href="/website/live-sessions">Live Sessions</a>
+
+      <!-- Page 3: Qui sommes-nous -->
+      <a class="navbar-item" href="/website/qui-sommes-nous">Qui sommes-nous ?</a>
+
+      <!-- Contact -->
+      <div class="navbar-item">
+        <a class="button is-info" href="mailto:inthepouchett.studio@gmail.com">
+          <i class="fa-solid fa-envelope"></i> Contact
+        </a>
+      </div>
+
+    </div>
+  </div>
+</nav>
+
 <script>
-  const menu = document.querySelector<HTMLDivElement>(".navbar-menu");
-  const burger = document.querySelector<HTMLDivElement>(".navbar-burger");
-  burger?.addEventListener("click", (element) => {
-    element.target?.classList?.toggle("is-active");
+  const burger = document.querySelector(".navbar-burger");
+  const menu = document.querySelector("#websiteNavbar");
+
+  burger?.addEventListener("click", () => {
+    burger.classList.toggle("is-active");
     menu?.classList.toggle("is-active");
   });
 </script>
@@ -18,46 +64,55 @@ import logo from "../assets/logo.webp";
     $navbar-height: 4rem
   );
   @use "bulma/sass/elements/button";
+
+  /* Desktop hover classique */
+  .desktop-dropdown .navbar-dropdown {
+    display: none;
+    position: absolute;
+  }
+  .desktop-dropdown:hover .navbar-dropdown {
+    display: block;
+  }
+
+  /* Mobile / burger */
+  @media (max-width: 1024px) {
+    .navbar-menu.is-active {
+      display: block;
+    }
+
+    /* Tous les items principaux alignés et blancs */
+    .navbar-menu.is-active > .navbar-end > .navbar-item,
+    .navbar-menu.is-active > .navbar-end > .desktop-dropdown > .navbar-link {
+      color: white;
+      background-color: rgb(8,15,37);
+      padding-left: 1.5rem;
+    }
+
+    /* Sous-items de Le Studio indentés */
+    .desktop-dropdown .navbar-dropdown {
+      display: flex !important;
+      flex-direction: column;
+      position: relative;
+      background-color: rgb(8,15,37);
+      border-radius: 0.25rem;
+    }
+
+    .desktop-dropdown .navbar-dropdown a {
+      padding-left: 2.5rem;
+      color: white;
+      background-color: rgb(8,15,37);
+    }
+
+    /* Hover pour mobile */
+    .navbar-menu.is-active .navbar-item:hover,
+    .desktop-dropdown .navbar-dropdown a:hover {
+      background-color: rgba(255,255,255,0.1);
+      color: white;
+    }
+
+    /* Cacher flèche */
+    .navbar-link .arrow {
+      display: none;
+    }
+  }
 </style>
-
-<nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a class="navbar-item" href="/website">
-      <Image width={40} src={logo} alt="Logo de In the Pouchett" />
-    </a>
-    <a class="navbar-item" href="/website">In The Pouchett</a>
-
-    <a
-      role="button"
-      class="navbar-burger"
-      aria-label="menu"
-      aria-expanded="false"
-      data-target="websiteNavbar"
-    >
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
-  </div>
-
-  <div id="websiteNavbar" class="navbar-menu">
-    <div class="navbar-end">
-      <a class="navbar-item" href="/website/live-sessions">Live Sessions</a>
-      <a class="navbar-item" href="/website/#materiel">Le Matériel</a>
-      <a class="navbar-item" href="/website/#reference">Références</a>
-      <a class="navbar-item" class="reset-link-style">Le Studio</a>
-
-      <a class="navbar-item" href="/website/qui-sommes-nous"
-        >Qui sommes-nous ?
-      </a>
-
-      <div class="navbar-item">
-        <a class="button is-info" href="mailto:inthepouchett.studio@gmail.com">
-          <i class="fa-solid fa-envelope"></i>
-          Contact
-        </a>
-      </div>
-    </div>
-  </div>
-</nav>
