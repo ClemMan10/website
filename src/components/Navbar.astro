@@ -7,7 +7,7 @@ import logo from "../assets/logo.webp";
   <div class="navbar-brand">
     <!-- Logo + texte fusionnés -->
     <a class="navbar-item brand-link" href="/website">
-      <Image width={40} src={logo} alt="Logo de In the Pouchett" />
+      <Image src={logo} alt="Logo de In the Pouchett" />
       <span class="brand-text">In The Pouchett</span>
     </a>
 
@@ -150,6 +150,15 @@ import logo from "../assets/logo.webp";
   gap: 0.5rem;
   color: #cbd5e1;
   transition: background 0.2s, color 0.2s;
+  height: 100%; /* occupe toute la hauteur de la navbar */
+}
+
+/* Logo */ 
+.navbar .navbar-brand .brand-link img { 
+  display: block; /* supprime l’espace inline */ 
+  height: 100%; /* prend toute la hauteur de .brand-link */ 
+  width: auto; 
+  object-fit: contain; /* pas de déformation */ 
 }
 .navbar .navbar-brand .brand-link:hover {
   background-color: rgba(255, 255, 255, 0.1);
@@ -163,6 +172,14 @@ import logo from "../assets/logo.webp";
   display: inline-flex;
   align-items: center;
   gap: 0.5rem; /* espace entre icône et texte */
+  background: linear-gradient(45deg, #ea475f, #d57072);
+  // background-color: #ec6c6f;
+  color: white;                /* texte blanc */
+  border: none;
+}
+.navbar-item .button.is-info:hover {
+  background: linear-gradient(45deg, #ea475f, #92dbf5);
+  color: white;
 }
 
 /* -----------------------
