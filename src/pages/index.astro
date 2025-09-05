@@ -55,8 +55,8 @@ const data = await getCollection("videos");
     </div>
   </section>
 
-  <h1 class="filled" id="reference">References</h1>
-  <section class="filled">
+  <section class="filled" id="reference">
+    <h1>Références</h1>
     <div class="container">
       <div class="videos">
         {data.map((i) => <Video url={i.data.url} />)}
