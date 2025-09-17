@@ -124,7 +124,11 @@ import Contact from "../components/Contact.astro";
     gap: 2rem;
     grid-template-columns: 1fr;
 
-    @media (min-width: 768px) { grid-template-columns: repeat(2, 1fr); }
+    /* Téléphone en paysage (même si <768px) */
+    @media (orientation: landscape) and (max-width: 1023px) {grid-template-columns: repeat(2, 1fr); }
+    /* Tablettes ou mobiles un peu larges */
+    @media (min-width: 640px) { grid-template-columns: repeat(2, 1fr); }
+    /* PC */
     @media (min-width: 1024px) { grid-template-columns: repeat(3, 1fr); }
   }
 
