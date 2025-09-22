@@ -1,36 +1,136 @@
----
-
----
-
 <style lang="scss">
   @use "bulma/sass/layout/footer" with (
     $footer-background-color: rgb(8, 15, 37)
   );
-  @use "bulma/sass/layout/container";
   @use "bulma/sass/grid/columns";
-  @use "bulma/sass/helpers/typography";
+
+  .social-row {
+    gap: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .social-icon {
+    position: relative;            /* pour superposer les 2 glyphes */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 0.18s ease;
+    vertical-align: middle;
+    display: inline-block;
+  }
+
+  /* Les deux couches (solide + gradient) */
+  .social-icon .icon-layer {
+    position: absolute;
+    inset: 0;                      /* full size du parent */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.4rem;             /* taille de l'icône à ajuster si besoin */
+    line-height: 1;
+    transition: opacity 0.28s ease;
+    pointer-events: none;          /* seule l'ancre reçoit le click */
+  }
+
+  /* couche solide (gris) */
+  .social-icon .icon-solid {
+    color: #cbd5e1;
+    opacity: 1;
+  }
+
+  /* couche gradient (initialement invisible) */
+  .social-icon .icon-grad {
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    /* gradient par défaut ; on peut personnaliser par réseau */
+    background-image: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #bc1888);
+    opacity: 0;
+  }
+
+  /* Au hover : swap par opacité (plus fluide que changement de color) */
+  .social-icon:hover { transform: scale(1.08); }
+  .social-icon:hover .icon-solid { opacity: 0; }
+  .social-icon:hover .icon-grad  { opacity: 1; }
+
+  /* variantes réseaux */
+  .social-icon.youtube .icon-solid { color: #cbd5e1; } /* youtube gère couleur seule */
+  .social-icon.youtube:hover .icon-solid { color: #ff0000; opacity: 1; } /* pas de grad */
+
+  .social-icon.instagram .icon-grad {
+    background-image: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #bc1888);
+  }
+
+  .social-icon.tiktok .icon-grad {
+    background-image: linear-gradient(45deg, #25f4ee, #fe2c55);
+  }
+
+  /* Se concentrer sur l'accessibilité */
+  .social-icon:focus { outline: 3px solid rgba(99,102,241,0.14); outline-offset: 3px; }
+
+  /* Assure que le seul <i> de YouTube garde bien sa couleur et sa taille */
+  .social-icon.youtube > i {
+    font-size: 2.4rem; /* même taille que les layers */
+    color: #cbd5e1;    /* gris par défaut */
+    transition: color 0.22s ease, filter 0.25s ease;
+    position: absolute;
+    inset: 0;                     /* full size du parent */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.4rem;            /* même taille que .icon-layer */
+    line-height: 1;
+    pointer-events: none;         /* click géré par le <a> parent */
+  }
+
+  /* Au hover, passe en rouge avec une légère lueur */
+  .social-icon.youtube:hover > i {
+    color: #ff0000;
+    filter: drop-shadow(0 2px 8px rgba(255,0,0,0.22));
+  }
+  
+  footer { padding: 1.25rem 0; }
 </style>
 
 <footer class="footer">
-  <div class="columns is-centered">
+  <div class="columns is-mobile is-centered social-row">
+
+    <!-- YouTube (inchangé, Font Awesome simple) -->
     <div class="column has-text-centered is-narrow">
-      <a
-        class="remove-clicked-color"
-        href="https://www.youtube.com/@InthePouchett"
-        target="_blank"
-      >
-        <i style="font-size: 4rem" class="fa-brands fa-youtube"></i>
+      <a class="social-icon youtube"
+         href="https://www.youtube.com/@InthePouchett"
+         target="_blank" aria-label="YouTube">
+        <i class="fa-brands fa-youtube" style="font-size:2.4rem" aria-hidden="true"></i>
       </a>
     </div>
 
+    <!-- Instagram : deux couches superposées -->
     <div class="column has-text-centered is-narrow">
-      <a
-        class="remove-clicked-color"
-        href="https://www.instagram.com/inthepouchett/"
-        target="_blank"
-      >
-        <i style="font-size: 4rem" class="fa-brands fa-instagram"></i>
+      <a class="social-icon instagram"
+         href="https://www.instagram.com/inthepouchett/"
+         target="_blank" aria-label="Instagram">
+        <!-- couche solide (gris) -->
+        <i class="fa-brands fa-instagram icon-layer icon-solid" aria-hidden="true"></i>
+        <!-- couche gradient (invisible puis fade-in) -->
+        <i class="fa-brands fa-instagram icon-layer icon-grad" aria-hidden="true"></i>
       </a>
     </div>
+
+    <!-- TikTok : idem -->
+    <div class="column has-text-centered is-narrow">
+      <a class="social-icon tiktok"
+         href="https://www.tiktok.com/@inthepouchett"
+         target="_blank" aria-label="TikTok">
+        <i class="fa-brands fa-tiktok icon-layer icon-solid" aria-hidden="true"></i>
+        <i class="fa-brands fa-tiktok icon-layer icon-grad" aria-hidden="true"></i>
+      </a>
+    </div>
+
   </div>
 </footer>
