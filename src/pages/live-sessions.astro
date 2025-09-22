@@ -2,6 +2,7 @@
 import type { Picture } from "astro:assets";
 import Navbar from "../components/Navbar.astro";
 import Layout from "../layouts/Layout.astro";
+import YouTubeGrid from "../components/YouTubeGrid.astro";
 ---
 
 <style is:global lang="scss">
@@ -114,7 +115,16 @@ import Layout from "../layouts/Layout.astro";
         Pour prolonger cette visibilité, nous pouvons également vous offrir la possibilité de partager un ou deux titres de la session sur votre propre chaîne, afin de créer du lien direct avec vos abonnés.  
         Et si vous souhaitez aller plus loin, des options de diffusion élargie peuvent être envisagées ensemble.
       </p>
-
+      <a 
+        href="https://www.youtube.com/@inthepouchett?sub_confirmation=1" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="button is-danger is-large mt-4">
+        <span class="icon">
+          <i class="fab fa-youtube"></i>
+        </span>
+        <span>Notre chaîne YouTube</span>
+      </a>
     </div>
   </section>
 
