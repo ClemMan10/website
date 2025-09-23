@@ -174,4 +174,13 @@ import Contact from "../components/Contact.astro";
     }
   }
   footer { width: 100%; }
+
+  /* Réduire les marges du grid pour la section diffusion sur desktop */
+  #diffusion, #formats {
+    grid-template-columns: 0.5rem minmax(0, 1fr) 0.5rem;
+
+    @media (min-width: 768px) {
+      grid-template-columns: 0.5rem minmax(0, 3fr) 0.5rem;
+    }
+  }
 </style>
