@@ -5,7 +5,7 @@ import logo from "../assets/logo.webp";
 
 <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
-    <!-- Logo + texte fusionnés -->
+    <!-- Logo + texte -->
     <a class="navbar-item brand-link" href="/website">
       <Image src={logo} alt="Logo de In the Pouchett" />
       <span class="brand-text">In The Pouchett</span>
@@ -21,22 +21,16 @@ import logo from "../assets/logo.webp";
   <div id="websiteNavbar" class="navbar-menu">
     <div class="navbar-end">
 
-      <!-- Page 1: Le Studio avec sous-sections -->
       <div class="navbar-item has-dropdown is-hoverable desktop-dropdown">
-        <a class="navbar-link" href="/website">
-          Le Studio
-        </a>
+        <a class="navbar-link" href="/website">Le Studio</a>
         <div class="navbar-dropdown">
           <a class="navbar-item" href="/website/#materiel">Le Matériel</a>
           <a class="navbar-item" href="/website/#reference">Références</a>
         </div>
       </div>
 
-      <!-- Page 2: Live Sessions avec sous-sections -->
       <div class="navbar-item has-dropdown is-hoverable desktop-dropdown">
-        <a class="navbar-link" href="/website/live-sessions">
-          Live Sessions
-        </a>
+        <a class="navbar-link" href="/website/live-sessions">Live Sessions</a>
         <div class="navbar-dropdown">
           <a class="navbar-item" href="/website/live-sessions/#formats">Formats</a>
           <a class="navbar-item" href="/website/live-sessions/#diffusion">Diffusion</a>
@@ -44,12 +38,10 @@ import logo from "../assets/logo.webp";
         </div>
       </div>
 
-      <!-- Page 3: Qui sommes-nous ? (item simple, pas de wrapper .navbar-item) -->
       <a class="navbar-item desktop-item" href="/website/qui-sommes-nous">
         Qui sommes-nous ?
       </a>
 
-      <!-- Contact -->
       <div class="navbar-item">
         <a class="button is-info" href="mailto:inthepouchett.studio@gmail.com">
           <i class="fa-solid fa-envelope"></i> Contact
@@ -70,14 +62,13 @@ import logo from "../assets/logo.webp";
       menu.classList.toggle("is-active");
     });
 
-    // Fermer le menu après un léger délai
     document.querySelectorAll("#websiteNavbar a").forEach(link => {
       link.addEventListener("click", () => {
         if (menu.classList.contains("is-active")) {
           setTimeout(() => {
             menu.classList.remove("is-active");
             burger.classList.remove("is-active");
-          }, 100); // délai de 100ms
+          }, 100);
         }
       });
     });
@@ -114,24 +105,20 @@ import logo from "../assets/logo.webp";
 /* -----------------------
    Couleur texte par défaut
 ----------------------- */
+.navbar,
 .navbar .navbar-item,
 .navbar .navbar-link {
   color: #cbd5e1;
+  -webkit-text-size-adjust: none;
   transition: background 0.2s, color 0.2s;
 }
-.navbar {
-  -webkit-text-size-adjust: none;
-}
-
-/* Hover pour items avec dropdown (desktop) */
 .navbar .navbar-item.has-dropdown:hover > .navbar-link {
   color: #ffffff;
   background-color: rgba(33,39,58,1);
 }
 
 /* -----------------------
-   Item simple top-level (ex: "Qui sommes-nous ?")
-   -> prend toute la hauteur + hover sombre
+   Item simple top-level
 ----------------------- */
 .navbar .navbar-end > a.navbar-item {
   display: flex;
@@ -145,53 +132,83 @@ import logo from "../assets/logo.webp";
 }
 
 /* -----------------------
-   Brand (logo + texte fusionnés)
+   Brand (logo + texte)
 ----------------------- */
-.navbar .navbar-brand .brand-link {
+.navbar {
+  height: 4rem;
+  min-height: 4rem;
+}
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+.navbar .brand-link {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  height: 100%;
+  padding: 0.5rem 0.75rem; /* marge gauche/droite restaurée */
   color: #cbd5e1;
   transition: background 0.2s, color 0.2s;
-  height: 100%; /* occupe toute la hauteur de la navbar */
 }
-
-/* Logo */ 
-.navbar .navbar-brand .brand-link img { 
-  display: block; /* supprime l’espace inline */ 
-  height: 100%; /* prend toute la hauteur de .brand-link */ 
-  width: auto; 
-  object-fit: contain; /* pas de déformation */ 
-}
-.navbar .navbar-brand .brand-link:hover {
+.navbar .brand-link:hover {
   background-color: rgba(255, 255, 255, 0.1);
   color: #ffffff;
 }
-.navbar .navbar-brand .brand-text {
+.navbar .brand-link img {
+  display: block;
+  height: 2rem;
+  width: auto;
+  object-fit: contain;
+}
+.navbar .brand-text {
   font-weight: 600;
   font-size: 1.1rem;
-}
-.navbar-item .button.is-info {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem; /* espace entre icône et texte */
-  background: linear-gradient(45deg, #ea475f, #d57072);
-  // background-color: #ec6c6f;
-  color: white;                /* texte blanc */
-  border: none;
-}
-.navbar-item .button.is-info:hover {
-  background: linear-gradient(45deg, #ea475f, #92dbf5);
-  color: white;
+  line-height: 1;
 }
 
 /* -----------------------
-   Mobile / Burger
+   Bouton Contact
 ----------------------- */
+.navbar-item .button.is-info {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(45deg, #ea475f, #d57072);
+  color: white;
+  border: none;
+  transition: all 0.2s ease; /* plus court pour plus de réactivité */
+  transform: scale(1);
+}
+
+.navbar-item .button.is-info:hover {
+  background: linear-gradient(45deg, #ea475f, #92dbf5);
+  color: white;
+  transform: scale(1.05); /* petit zoom */
+  box-shadow: 0 4px 12px rgba(234, 71, 95, 0.4);
+}
+
+.navbar-item .button.is-info:active {
+  transform: scale(0.95); /* effet pressé */
+  box-shadow: 0 2px 6px rgba(234, 71, 95, 0.3); /* ombre plus courte */
+}
+
+
+/* -----------------------
+   Burger
+----------------------- */
+.navbar-burger {
+  display: none; /* caché en desktop */
+}
 @media (max-width: 1024px) {
+  .navbar-burger {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
   .navbar-menu.is-active { display: block; }
 
-  /* Items principaux alignés */
   .navbar-menu.is-active > .navbar-end > .navbar-item,
   .navbar-menu.is-active > .navbar-end > .desktop-dropdown > .navbar-link,
   .navbar-menu.is-active > .navbar-end > a.navbar-item.desktop-item {
@@ -200,7 +217,6 @@ import logo from "../assets/logo.webp";
     padding-left: 1.5rem;
   }
 
-  /* Sous-items dropdown */
   .desktop-dropdown .navbar-dropdown {
     display: flex !important;
     flex-direction: column;
@@ -214,22 +230,17 @@ import logo from "../assets/logo.webp";
     background-color: rgb(8, 15, 37);
   }
 
-  /* Hover mobile */
   .navbar-menu.is-active .navbar-item:hover,
   .desktop-dropdown .navbar-dropdown a:hover {
     background-color: rgba(255, 255, 255, 0.1);
     color: white;
   }
 
-  /* Cacher flèche sur mobile */
   .navbar-link .arrow { display: none; }
 
-  /* Harmoniser "Qui sommes-nous ?" avec les autres items en burger */
-  .navbar-menu.is-active > .navbar-end > a.navbar-item.desktop-item {
-    padding-left: 3rem; /* même indentation que les autres liens principaux */
-  }
+  .navbar-menu.is-active > .navbar-end > a.navbar-item.desktop-item,
   .navbar-menu.is-active > .navbar-end > .navbar-item:last-child {
-    padding-left: 3rem; /* décale tout le contenu du navbar-item */
+    padding-left: 3rem;
   }
 }
 </style>
