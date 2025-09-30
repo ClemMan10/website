@@ -77,12 +77,64 @@ const data = await getCollection("videos");
 <Layout>
   <Navbar slot="navbar" />
 
-  <div class="hero is-medium cover-image">
+  <!-- Cover modifiée -->
+  <div class="hero cover-image">
     <div class="container hero-body">
       <h1 class="title">IN THE POUCHETT</h1>
       <h2 class="subtitle">Enregistrements, Mixages, Live Sessions</h2>
     </div>
   </div>
+
+  <style lang="scss">
+    .cover-image {
+      background:
+        linear-gradient(0deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 1) 100%),
+        url("/website/cover.jpg") center/cover;
+      text-align: center;
+      font-weight: 700;
+
+      /* Hauteur 3/4 sur desktop */
+      min-height: 75vh;
+
+      h1,
+      h2 {
+        color: white;
+      }
+
+      /* Centrage vertical Bulma-friendly */
+      .hero-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* centre verticalement */
+        align-items: center; /* centre horizontalement */
+      }
+        /* Ajustement des tailles de texte */
+      .title {
+        font-size: 4rem; /* Taille principale */
+        line-height: 1.1;
+      }
+
+      .subtitle {
+        font-size: 2rem;
+        font-weight: 400;
+        margin-top: 0.5rem;
+      }
+    }
+
+    /* Mobile portrait : cover plus petite */
+    @media (max-width: 768px) and (orientation: portrait) {
+      .cover-image {
+        min-height: 33vh; /* 1/3 de l’écran */
+      }
+      .title {
+       font-size: 2.5rem !important;
+      }
+
+      .subtitle {
+        font-size: 1.5rem !important;
+      }
+    }
+  </style>
 
   <section class="pattern">
     <div class="container">
