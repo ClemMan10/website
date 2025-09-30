@@ -1,0 +1,109 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+---
+
+<Layout>
+  <Navbar slot="navbar" />
+
+  <section class="container legal-section filled">
+    <h1>Mentions légales</h1>
+
+    <h2>Éditeur du site</h2>
+    <p>
+      Le présent site <strong>In the Pouchett</strong> est édité par :
+    </p>
+    <ul>
+      <li><strong>Nom de l’organisation :</strong> In the Pouchett</li>
+      <li><strong>Forme juridique :</strong> Association loi 1901</li>
+      <li><strong>Siège social :</strong> Paris, France</li>
+      <li><strong>Responsable de la publication :</strong> [Nom du responsable]</li>
+      <li><strong>Contact :</strong> <a href="mailto:inthepouchett.studio@gmail.com">inthepouchett.studio@gmail.com</a></li>
+      <li><strong>Numéro RNA :</strong> [à compléter]</li>
+    </ul>
+
+    <h2>Hébergement</h2>
+    <p>
+      Le site est hébergé par :
+    </p>
+    <ul>
+      <li><strong>Nom de l’hébergeur :</strong> [ex : Vercel, Netlify, OVH, etc.]</li>
+      <li><strong>Adresse :</strong> [adresse postale de l’hébergeur]</li>
+      <li><strong>Téléphone :</strong> [numéro du support hébergeur]</li>
+    </ul>
+
+    <h2>Propriété intellectuelle</h2>
+    <p>
+      L’ensemble des éléments figurant sur le site <em>In the Pouchett</em> (textes, images, vidéos, graphismes, logo, etc.)
+      sont la propriété exclusive de l’association, sauf mention contraire.
+      Toute reproduction, distribution, modification ou utilisation sans autorisation préalable est interdite.
+    </p>
+
+    <h2>Protection des données personnelles</h2>
+    <p>
+      Aucune donnée personnelle n’est collectée sans votre consentement explicite.  
+      Si vous contactez l’association par e-mail, votre adresse ne sera utilisée que pour vous répondre
+      et ne sera pas partagée avec des tiers.
+    </p>
+    <p>
+      Conformément à la loi « Informatique et Libertés » du 6 janvier 1978 et au RGPD,
+      vous disposez d’un droit d’accès, de rectification et de suppression de vos données personnelles.
+      Pour exercer ce droit, vous pouvez nous contacter à l’adresse :
+      <a href="mailto:inthepouchett.studio@gmail.com">inthepouchett.studio@gmail.com</a>.
+    </p>
+
+    <h2>Responsabilité</h2>
+    <p>
+      Le site <em>In the Pouchett</em> met tout en œuvre pour assurer l’exactitude des informations
+      diffusées. Cependant, l’association ne saurait être tenue responsable d’erreurs, d’omissions ou
+      d’une indisponibilité du site.
+    </p>
+
+    <h2>Crédits</h2>
+    <p>
+      Conception et développement : <strong>In the Pouchett</strong><br />
+      Photos, vidéos et visuels : <strong>In the Pouchett</strong> et ses partenaires.
+    </p>
+  </section>
+
+  <style lang="scss">
+    .legal-section {
+    //   margin-top: 6rem;
+    //   margin-bottom: 4rem;
+      line-height: 1.7;
+      color: #cbd5e1;
+
+      h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 2rem;
+        text-align: center;
+      }
+
+      h2 {
+        margin-top: 2.5rem;
+        font-size: 1.4rem;
+        color: #ea475f;
+      }
+
+      ul {
+        margin-left: 1rem;
+        list-style: none;
+
+        li {
+          margin: 0.3rem 0;
+        }
+      }
+
+      a {
+        color: #92dbf5;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  </style>
+</Layout>
