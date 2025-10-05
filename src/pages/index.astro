@@ -134,6 +134,207 @@ const data = await getCollection("videos");
         font-size: 1.5rem !important;
       }
     }
+
+    // .studio-gallery {
+    //   display: grid;
+    //   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    //   gap: 1rem;
+    //   margin-top: 1.5rem;
+    // }
+
+    // .studio-item {
+    //   position: relative;
+    //   // aspect-ratio: 4/3; /* ajuste le ratio (4/3 ou 16/9) */
+    //   overflow: hidden;
+    //   border-radius: 8px;
+    //   cursor: pointer;
+    //   z-index: 1;
+    // }
+
+    // .studio-item.wide {
+    //   grid-column: span 2;
+    // }
+
+    // .studio-item.tall {
+    //   grid-row: span 2;
+    // }
+    // .studio-item img {
+    //   width: 100%;
+    //   height: 100%;
+    //   display: block;
+    //   object-fit: cover;
+    //   border-radius: 8px;
+    //   transition: transform 0.3s ease;
+    //   pointer-events: auto;
+    // }
+
+    // .studio-item:hover img {
+    //   transform: scale(1.05);
+    // }
+
+    // /* Légende au hover */
+    // .caption {
+    //   position: absolute;
+    //   bottom: 0;
+    //   left: 0;
+    //   right: 0;
+    //   background: rgba(0,0,0,0.6);
+    //   color: white;
+    //   text-align: center;
+    //   padding: 0.5rem;
+    //   opacity: 0;
+    //   transition: opacity 0.3s ease;
+    // }
+
+    // .studio-item:hover .caption {
+    //   opacity: 1;
+    // }
+
+    .studio-wrapper {
+      width: 100%;
+
+      .studio-gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 0.75rem;
+        transition: max-height 0.5s ease;
+      }
+
+      .studio-item {
+        position: relative;
+        overflow: hidden;
+        border-radius: 8px;
+        cursor: pointer;
+        z-index: 1;
+
+        &.wide { grid-column: span 2; }
+        &.tall { grid-row: span 2; }
+
+        img {
+          width: 100%;
+          height: 100%;
+          display: block;
+          object-fit: cover;
+          border-radius: 8px;
+          transition: transform 0.3s ease;
+        }
+
+        &:hover img {
+          transform: scale(1.05);
+        }
+
+        .caption {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          background: rgba(0, 0, 0, 0.6);
+          color: white;
+          text-align: center;
+          padding: 0.5rem;
+          opacity: 0;
+          transition: opacity 0.3s ease;
+        }
+
+        &:hover .caption {
+          opacity: 1;
+        }
+      }
+
+      .toggle-studio {
+        margin: 1rem auto 0;
+        display: none;
+        padding: 0.5rem 1rem;
+        background: #222;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+
+        &:hover {
+          background: #444;
+        }
+      }
+
+      /* === MOBILE uniquement === */
+      @media (max-width: 768px) {
+        .studio-item:nth-child(n + 7) {
+          display: none;
+        }
+
+        .studio-gallery.expanded .studio-item {
+          display: block;
+        }
+
+        .toggle-studio {
+          display: block;
+          margin: 1rem auto;
+          padding: 0.5rem 1rem;
+          background: #222;
+          color: #fff;
+          border: none;
+          border-radius: 6px;
+          cursor: pointer;
+          font-size: 1rem;
+          transition: background 0.3s ease;
+
+          &:hover {
+            background: #444;
+          }
+        }
+      }
+
+      /* === Desktop : bouton caché === */
+      @media (min-width: 769px) {
+        .toggle-studio {
+          display: none;
+        }
+      }
+
+    }
+
+    /* Lightbox plein écran */
+    #lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8); /* un peu plus transparent */
+      display: none;       /* caché par défaut */
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 20px;
+      box-sizing: border-box;
+      flex-direction: column; /* image + légende en colonne */
+      text-align: center;     /* centre le texte */
+    }
+
+    #lightbox.active {
+      display: flex;
+    }
+
+    #lightbox img {
+      max-width: 90%;
+      max-height: 80vh;
+      border-radius: 8px;
+      margin-bottom: 10px; /* espace entre image et légende */
+    }
+
+    #lightbox .lightbox-caption {
+      color: #fff;
+      font-size: 1rem;
+    }
+
+    /* Croix de fermeture */
+    #lightbox .close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 30px;
+      color: #fff;
+      cursor: pointer;
+      z-index: 10000; /* toujours au-dessus */
+    }
   </style>
 
   <section class="pattern">
@@ -181,16 +382,62 @@ const data = await getCollection("videos");
   </section>
 
   <h1 class="pattern" id="studio">Le studio</h1>
-  <section class="filled">
+  <section class="filled studio-section">
     <div class="container">
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus.
-        Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies
-        sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius
-        a, semper congue, euismod non, mi.
+        Découvrez notre studio à travers ces images : ambiance, matériel et espace de travail.
       </p>
+
+      <!-- Ajout de studio-wrapper -->
+      <div class="studio-wrapper">
+        <div class="studio-gallery">
+          <div class="studio-item tall wide">
+            <img src="/website/close_mic_green.jpg" alt="Vue générale du studio" />
+            <div class="caption">Vue générale du studio</div>
+          </div>
+          <div class="studio-item wide">
+            <img src="/website/classic-live-sess.jpg" alt="Console de mixage" />
+            <div class="caption">Console de mixage</div>
+          </div>
+          <div class="studio-item">
+            <img src="/website/live-concert.jpg" alt="Cabine d'enregistrement" />
+            <div class="caption">Cabine d'enregistrement</div>
+          </div>
+          <div class="studio-item">
+            <img src="/website/cover.jpg" alt="Instruments et matériel" />
+            <div class="caption">Instruments et matériel</div>
+          </div>
+          <div class="studio-item">
+            <img src="/website/live-sess-cover-small.jpg" alt="Espace d'accueil" />
+            <div class="caption">Espace d'accueil</div>
+          </div>
+          <div class="studio-item tall">
+            <img src="/website/close_mic_green.jpg" alt="Espace d'accueil 2" />
+            <div class="caption">Espace d'accueil 2</div>
+          </div>
+          <div class="studio-item wide">
+            <img src="/website/close_mic_green.jpg" alt="Instruments et matériel 2" />
+            <div class="caption">Instruments et matériel 2</div>
+          </div>
+          <div class="studio-item tall wide">
+            <img src="/website/close_mic_green.jpg" alt="Instruments et matériel 3" />
+            <div class="caption">Instruments et matériel 3</div>
+          </div>
+        </div>
+
+        <!-- Bouton voir plus -->
+        <button class="toggle-studio">Voir plus</button>
+      </div>
     </div>
   </section>
+
+  <!-- Lightbox Overlay -->
+  <div id="lightbox" class="lightbox">
+    <span class="close">&times;</span>
+    <img class="lightbox-img" src="" alt="Aperçu studio" />
+    <div class="lightbox-caption"></div>
+  </div>
+
 
   <h1 class="pattern" id="materiel">Le matériel</h1>
   <section class="filled">
@@ -270,5 +517,63 @@ const data = await getCollection("videos");
         }
       });
     });
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const wrapper = document.querySelector(".studio-wrapper");
+      if (!wrapper) return;
+
+      const gallery = wrapper.querySelector(".studio-gallery");
+      const button = wrapper.querySelector(".toggle-studio");
+
+      const mq = window.matchMedia("(max-width: 768px)");
+
+      function updateButtonVisibility() {
+        if (mq.matches) {
+          button.style.display = "block";
+        } else {
+          button.style.display = "none";
+          gallery.classList.remove("expanded");
+          button.textContent = "Voir plus";
+        }
+      }
+
+      updateButtonVisibility();
+      mq.addEventListener("change", updateButtonVisibility);
+
+      button.addEventListener("click", () => {
+        gallery.classList.toggle("expanded");
+        button.textContent = gallery.classList.contains("expanded")
+          ? "Voir moins"
+          : "Voir plus";
+
+        if (gallery.classList.contains("expanded")) {
+          wrapper.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      });
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImg = lightbox.querySelector(".lightbox-img");
+      const captionText = lightbox.querySelector(".lightbox-caption");
+      const closeBtn = lightbox.querySelector(".close");
+
+      document.querySelectorAll(".studio-item img").forEach(img => {
+        img.addEventListener("click", () => {
+          lightbox.style.display = "flex"; // bien flex pour centrer
+          lightboxImg.src = img.src;
+          captionText.textContent = img.closest(".studio-item").querySelector(".caption")?.textContent || img.alt;
+        });
+      });
+
+      closeBtn.addEventListener("click", () => {
+        lightbox.style.display = "none";
+      });
+
+      lightbox.addEventListener("click", (e) => {
+        if (e.target === lightbox) lightbox.style.display = "none";
+      });
+    });
+
   </script>
 </Layout>
