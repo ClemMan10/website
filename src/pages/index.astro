@@ -140,10 +140,11 @@ const data = await getCollection("videos");
 
       .studio-gallery {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
         grid-auto-rows: 200px; /* hauteur de chaque ligne */
         gap: 0.75rem;
         transition: max-height 0.5s ease;
+        grid-auto-flow: dense;
       }
 
       .studio-item {
@@ -174,6 +175,7 @@ const data = await getCollection("videos");
           height: 100%;
           display: block;
           object-fit: cover;
+          object-position: center center; /* Par défaut centré */
           border-radius: 8px;
           transition: transform 0.3s ease;
         }
@@ -233,6 +235,32 @@ const data = await getCollection("videos");
       @media (max-width: 768px) {
         .toggle-studio {
           display: flex;
+        }
+        .studio-gallery {
+          grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+          grid-auto-rows: 160px; /* hauteur de base plus petite */
+        }
+
+        /* ✅ Les “wide” restent plus larges, mais s’adaptent s’il n’y a pas la place */
+        .studio-item.wide {
+          grid-column: span 2;
+        }
+
+        /* ✅ Les “tall” gardent une vraie hauteur, sans être trop fines */
+        .studio-item.tall {
+          grid-row: span 2;
+          grid-auto-rows: auto;
+        }
+
+        /* ✅ Empêche les très grandes tall d’être trop étroites quand en 2 colonnes */
+        .studio-item.tall img {
+          object-fit: cover;
+          object-position: center top;
+        }
+
+        /* ✅ Optionnel : espacement un peu réduit */
+        .studio-gallery {
+          gap: 0.5rem;
         }
       }
 
@@ -396,7 +424,7 @@ const data = await getCollection("videos");
       <div class="studio-wrapper">
         <div class="studio-gallery">
           <div class="studio-item tall">
-            <img src="/website/close_mic_green.jpg" alt="Vue générale du studio" />
+            <img src="/website/studio_large_portrait.jpg" alt="Vue générale du studio" />
             <div class="caption">Vue générale du studio</div>
           </div>
           <div class="studio-item tall wide">
@@ -415,17 +443,25 @@ const data = await getCollection("videos");
             <img src="/website/oc818.jpg" alt="Austrian Audio OC818" />
             <!-- <div class="caption">Espace d'accueil</div> -->
           </div>
-          <div class="studio-item wide">
-            <img src="/website/flamand-cache.jpg" alt="Flamand Rose" />
+          <div class="studio-item tall wide">
+            <img src="/website/flamand-cache.jpg" alt="Flamand Rose" style="object-position: 50% 30%;" />
             <!-- <div class="caption">Espace d'accueil 2</div> -->
           </div>
           <div class="studio-item">
-            <img src="/website/d190-mic.jpg" alt="AKG D190C" />
+            <img src="/website/d190-mic.jpg" alt="AKG D190C" style="object-position: 50% 10%;" />
             <!-- <div class="caption">Instruments et matériel 2</div> -->
           </div>
           <div class="studio-item tall">
             <img src="/website/soyuz-013.jpg" alt="Soyuz 013 fet" />
             <!-- <div class="caption">Instruments et matériel 3</div> -->
+          </div>
+          <div class="studio-item wide">
+            <img src="/website/machine_patchbay.jpg" alt="Control Room" />
+            <div class="caption">Control Room</div>
+          </div>
+          <div class="studio-item tall">
+            <img src="/website/close_mic_green.jpg" alt="Prise de son" />
+            <div class="caption">Prise de son</div>
           </div>
         </div>
 
