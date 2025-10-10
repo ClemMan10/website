@@ -482,282 +482,320 @@ const data = await getCollection("videos");
   </div>
 
 
-  <h1 class="pattern" id="materiel">Le matériel</h1>
-  <section class="filled materiel-section">
-    <div class="container">
-      <div class="materiel-grid">
-        <!-- Colonne 1: Monitoring -->
-        <div class="materiel-category">
-          <h2>Monitoring / AD-DA / DAW</h2>
+<h1 class="pattern" id="materiel">Le matériel</h1>
+<section class="filled materiel-section">
+  <div class="container">
+    <div class="materiel-grid">
+      <!-- Colonne 1: Monitoring -->
+      <div class="materiel-category">
+        <h2>Monitoring / AD-DA / DAW</h2>
+        <ul>
+          <li>RME Fireface UFXIII</li>
+          <li>Trinnov Nova</li>
+          <li>Kali Audio IN-8 V2</li>
+          <li>Reaper 7</li>
+        </ul>
+      </div>
+
+      <!-- Colonne 2: Headphones -->
+      <div class="materiel-category">
+        <h2>Headphones</h2>
+        <ul>
+          <li>Neumann NDH30</li>
+          <li>Beyerdynamic DT 990 Pro</li>
+          <li>Sony MDR-7506</li>
+          <li>AKG K92</li>
+          <li>Audio-Technica ATH-M50x</li>
+          <li>Presonus HP60</li>
+        </ul>
+      </div>
+
+      <!-- Colonne 3: Préamplis / DYN -->
+      <div class="materiel-category">
+        <h2>Préamplifieurs / DYN</h2>
+        <ul>
+          <li>Focusrite ISA Two</li>
+          <li>Audient ASP800/880</li>
+          <li>RME Fireface UFX III</li>
+          <li>Focusrite Scarlett 18i20</li>
+        </ul>
+      </div>
+
+      <!-- Colonne 4: Microphones -->
+      <div class="materiel-category">
+        <h2>Microphones</h2>
+        <ul>
+          <li>AEA R84</li>
+          <li>AKG D190C</li>
+          <li>Aston Origin</li>
+          <li>Austrian Audio OC818</li>
+          <li>Lewitt LCT 40 x 2</li>
+          <li>Sennheiser MD421</li>
+          <li>Shure SM7B, SM57</li>
+          <li>Soyuz 013FET x2</li>
+        </ul>
+      </div>
+
+      <!-- Colonne 5: Direct Boxes -->
+      <div class="materiel-category">
+        <h2>Direct Boxes</h2>
+        <ul>
+          <li>Radial JDI, J48, Pro D2</li>
+          <li>Samson S-direct</li>
+        </ul>
+      </div>
+
+      <!-- Images équipement -->
+      <div class="materiel-images">
+        <img src="/website/studio_large_portrait.jpg" alt="Microphones de studio" />
+        <img src="/website/piano_close.jpg" alt="Setup d'enregistrement" />
+        <img src="/website/fader.jpg" alt="Amplis Orange" />
+      </div>
+
+      <!-- Colonne 6: Instruments avec toutes les sous-catégories -->
+      <div class="materiel-category instruments">
+        <h2>Instruments</h2>
+        <div class="instrument-group">
+          <h3>Claviers / Piano</h3>
           <ul>
-            <li>RME Fireface UFXIII</li>
-            <li>Trinnov Nova</li>
-            <li>Kali Audio IN-8 V2</li>
-            <li>Reaper 7</li>
+            <li>Gunther Piano droit</li>
+            <li>Yamaha CK61</li>
           </ul>
         </div>
 
-        <!-- Colonne 2: Headphones -->
-        <div class="materiel-category">
-          <h2>Headphones</h2>
+        <div class="instrument-group">
+          <h3>Synthétiseurs</h3>
           <ul>
-            <li>Neumann NDH30</li>
-            <li>Beyerdynamic DT 990 Pro</li>
-            <li>Sony MDR-7506</li>
-            <li>AKG K92</li>
-            <li>Audio-Technica ATH-M50x</li>
-            <li>Presonus HP60</li>
+            <li>Behringer DeepMind</li>
+            <li>Behringer RD8</li>
+            <li>Korg Modwave</li>
           </ul>
         </div>
 
-        <!-- Colonne 3: Préamplis / DYN -->
-        <div class="materiel-category">
-          <h2>Préamplifieurs / DYN</h2>
+        <div class="instrument-group">
+          <h3>Guitars / Basses</h3>
           <ul>
-            <li>Focusrite ISA Two</li>
-            <li>Audient ASP800/880</li>
-            <li>Focusrite Scarlett Solo</li>
-            <li>RME OctaMic II</li>
-            <li>Universal Audio 4-110</li>
-            <li>Purple Audio MC-77</li>
+            <li>Marcus Miller V7 Swamp Ash NT</li>
+            <li>Epiphone Guitare folk</li>
           </ul>
         </div>
 
-        <!-- Colonne 4: Microphones -->
-        <div class="materiel-category">
-          <h2>Microphones</h2>
-          <ul>
-            <li>AKG 388</li>
-            <li>AKG C12A (Vintage)</li>
-            <li>Audio DS</li>
-            <li>Beyerdynamic M160, M88(s), M201N x 2, Opus 87</li>
-            <li>Blue Bottle x 2</li>
-            <li>DPA 4099</li>
-            <li>Electro Voice RE20</li>
-            <li>Lauten Audio Clarion FC-387 (FET)</li>
-            <li>Neumann KM184 x 2, U87 Al</li>
-            <li>Oktava MK-012 (capsules cardioid)</li>
-            <li>Peluso 22U7 (u87 clone)</li>
-            <li>Pearl Audio CopperHead</li>
-            <li>Sennheiser MD21, MD421 (vintage), MD421 x 2, E609</li>
-            <li>Shure SM7 x 3, SM58</li>
-            <li>Soyuz 013FET Bomblet</li>
-            <li>Warm MS42 x 2 (vintage)</li>
-            <li>Lewitt LCT 640 TS</li>
-          </ul>
-        </div>
-
-        <!-- Colonne 5: Direct Boxes -->
-        <div class="materiel-category">
-          <h2>Direct Boxes</h2>
-          <ul>
-            <li>Avalon U5</li>
-            <li>BSS AR133</li>
-            <li>Orchid Electronics Amp Interface</li>
-            <li>Radial J-Amp</li>
-          </ul>
-        </div>
-
-        <!-- Images équipement -->
-        <div class="materiel-images">
-          <img src="/website/studio_large_portrait.jpg" alt="Microphones de studio" />
-          <img src="/website/piano_close.jpg" alt="Setup d'enregistrement" />
-          <img src="/website/fader.jpg" alt="Amplis Orange" />
-        </div>
-
-        <!-- Colonne 6: Instruments - Drums -->
-        <div class="materiel-category">
-          <h2>Instruments</h2>
-          <h3>Drums</h3>
-          <ul>
-            <li>Boswill Cymbals (14k 20", 22k (20"), 14" Hi-hat</li>
-            <li>Cymbals - Zildjian, Meinl Istanbul, Murat, Bahrein</li>
-            <li>Drum Workshop 22 / 16 / 12</li>
-            <li>Pearl Mastercast 22 / 16 / 14 / 12 / 10</li>
-            <li>Stands (avec x 3, hi-hat x 2, cymbales x8)</li>
-            <li>Tama Exotic</li>
-            <li>Yamaha Maple Custom Snare Drum 14x5</li>
-          </ul>
-        </div>
-
-        <!-- Colonne 7: Keyboards / Piano -->
-        <div class="materiel-category">
-          <h3>Keyboards / Piano</h3>
-          <ul>
-            <li>Casio Juliol BE-organ</li>
-            <li>Yamaha Piano upright IKCA</li>
-          </ul>
-          
-          <h3>Others</h3>
-          <ul>
-            <li>Jen SM 2007 String Machine</li>
-            <li>Kawai 100F</li>
-            <li>Korg Monologue, MS20</li>
-          </ul>
-        </div>
-
-        <!-- Colonne 8: Guitars / Basses -->
-        <div class="materiel-category">
-          <h2>Guitars / Basses</h2>
-          <ul>
-            <li>Fender Stratocaster Standard</li>
-            <li>Gretsch Broad Tron Baby</li>
-          </ul>
-
+        <div class="instrument-group">
           <h3>Amps / Cabs</h3>
           <ul>
-            <li>Eden Traveler WT 320</li>
-            <li>Orange Rockeverb MKII</li>
-            <li>Eden 15 1x12s</li>
-            <li>Orange PPC412 (25 4" [2] closed)</li>
+            <li>Tech 21 Sans Amp rack</li>
+            <li>Peavey Valveking 112</li>
           </ul>
+        </div>
 
+        <div class="instrument-group">
           <h3>Percussions</h3>
           <ul>
-            <li>Bongos, Berimbau, Djembé</li>
-            <li>Cajons, Darboukas, Udu</li>
-            <li>Chimes, Glockenspiel</li>
-            <li>Shakers, Tambourines</li>
+            <li>Claves</li>
+            <li>Udu</li>
+            <li>Kalimba</li>
+            <li>Shakers</li>
           </ul>
-        </div>
-
-        <!-- Colonne 9: Amps -->
-        <div class="materiel-category">
-          <h2>Amps</h2>
-          <ul>
-            <li>Moogerfooger MF-102</li>
-            <li>Strymon Dsiable</li>
-          </ul>
-
-          <h3>Processors</h3>
-          <ul>
-            <li>EAPSI Quincy Deluxe Terminal</li>
-            <li>SPL Stereo Vitalizer, MK2 Gold</li>
-            <li>Orb Bougie big muff, Coral Chorus, Small Stone Nano</li>
-            <li>Jim Tate Vintage SVS</li>
-            <li>d+s Charlie Brown</li>
-            <li>Keeley Little Red Treblebooster</li>
-            <li>Line6 POD X3 Live</li>
-            <li>Mxr M083 Chorus, M22 Echo Box</li>
-            <li>Stabo Nosch EQ7</li>
-            <li>Strymon Volante</li>
-          </ul>
-        </div>
-
-        <!-- Images équipement 2 -->
-        <div class="materiel-images-bottom">
-          <img src="/website/piano1.jpg" alt="Piano de studio" />
-          <img src="/website/machine_patchbay.jpg" alt="Batterie studio" />
-          <img src="/website/oc818.jpg" alt="Amplis guitare" />
         </div>
       </div>
+
+      <!-- Colonne 7: Plugins -->
+      <div class="materiel-category">
+        <h2>Plugins</h2>
+        <ul>
+          <li>FabFilter</li>
+          <li>Waves</li>
+          <li>iZotope</li>
+          <li>Antares Autotune</li>
+          <li>Melodyne</li>
+          <li>Arturia</li>
+          <li>Soundtoys</li>
+          <li>Plugin Alliance</li>
+          <li>Toontrack SD5</li>
+          <li>UAD</li>
+        </ul>
+      </div>
+
+      <!-- Images équipement 2 -->
+      <div class="materiel-images-bottom">
+        <img src="/website/piano1.jpg" alt="Piano de studio" />
+        <img src="/website/machine_patchbay.jpg" alt="Batterie studio" />
+        <img src="/website/oc818.jpg" alt="Amplis guitare" />
+      </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <style lang="scss">
-    .materiel-section {
-      .materiel-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 2rem 1.5rem;
-        margin-top: 1.5rem;
+<style lang="scss">
+  .materiel-section {
+    .materiel-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .materiel-category {
+      h2 {
+        font-size: 1rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        margin-bottom: 0.75rem;
+        color: white;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        padding-bottom: 0.25rem;
       }
 
-      .materiel-category {
-        h2 {
-          font-size: 1rem;
-          font-weight: 700;
-          text-transform: uppercase;
-          margin-bottom: 0.75rem;
-          color: white;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-          padding-bottom: 0.25rem;
-        }
-
-        h3 {
-          font-size: 0.9rem;
-          font-weight: 600;
-          margin-top: 1rem;
-          margin-bottom: 0.5rem;
-          color: rgba(255, 255, 255, 0.9);
-        }
-
-        ul {
-          list-style: none;
-          padding: 0;
-          margin: 0;
-
-          li {
-            font-size: 0.85rem;
-            line-height: 1.6;
-            color: rgba(255, 255, 255, 0.85);
-            margin-bottom: 0.25rem;
-            padding-left: 0;
-          }
-        }
+      h3 {
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+        color: rgba(255, 255, 255, 0.9);
       }
 
-      .materiel-images {
-        grid-column: span 3;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1rem;
-        margin: 1.5rem 0;
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
 
-        img {
-          width: 100%;
-          height: 200px;
-          object-fit: cover;
-          border-radius: 8px;
-        }
-      }
-
-      .materiel-images-bottom {
-        grid-column: span 3;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1rem;
-        margin-top: 1.5rem;
-
-        img {
-          width: 100%;
-          height: 200px;
-          object-fit: cover;
-          border-radius: 8px;
-        }
-      }
-
-      /* Responsive mobile */
-      @media (max-width: 768px) {
-        .materiel-grid {
-          grid-template-columns: 1fr;
-          gap: 1.5rem;
-        }
-
-        .materiel-images,
-        .materiel-images-bottom {
-          grid-column: 1;
-          grid-template-columns: 1fr;
-          
-          img {
-            height: 150px;
-          }
-        }
-      }
-
-      /* Responsive tablette */
-      @media (min-width: 769px) and (max-width: 1023px) {
-        .materiel-grid {
-          grid-template-columns: repeat(2, 1fr);
-        }
-
-        .materiel-images,
-        .materiel-images-bottom {
-          grid-column: span 2;
+        li {
+          font-size: 0.85rem;
+          line-height: 1.6;
+          color: rgba(255, 255, 255, 0.85);
+          margin-bottom: 0.25rem;
+          padding-left: 0;
         }
       }
     }
-  </style>
+
+    .materiel-category.instruments {
+      grid-column: span 2;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      /* vertical | horizontal */
+      gap: 0.75rem 3rem; /* 👈 réduit l'espace vertical */
+      align-items: start;
+
+      h2 {
+        grid-column: 1 / -1;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        margin-bottom: 1rem;
+        padding-bottom: 0.25rem;
+      }
+
+      .instrument-group {
+        break-inside: avoid;
+        margin: 0; /* retire tout margin interne */
+      }
+
+      h3 {
+        margin: 0 0 0.25rem 0;
+      }
+
+      ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+    }
+
+    /* Responsive mobile (instruments) */
+    @media (max-width: 768px) {
+      .materiel-category.instruments {
+        grid-column: 1; /* occupe juste sa colonne */
+        grid-template-columns: 1fr; /* passe à une seule colonne interne */
+        gap: 1rem; /* un peu d’air entre les groupes */
+
+        h2 {
+          grid-column: 1;
+        }
+      }
+    }
+    .materiel-images {
+      grid-column: span 3;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin: 1.5rem 0;
+
+      img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 8px;
+      }
+    }
+
+    .materiel-images-bottom {
+      grid-column: span 3;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 1.5rem;
+
+      img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 8px;
+      }
+    }
+
+    /* Responsive mobile */
+    @media (max-width: 768px) {
+      .materiel-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .materiel-images,
+      .materiel-images-bottom {
+        grid-column: 1;
+        grid-template-columns: 1fr;
+        
+        img {
+          height: 150px;
+        }
+      }
+    }
+
+    /* Responsive tablette */
+    @media (min-width: 769px) and (max-width: 1023px) {
+      .materiel-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .materiel-images,
+      .materiel-images-bottom {
+        grid-column: span 2;
+      }
+    }
+  }
+  // .materiel-section {
+  //   .materiel-category:nth-child(6) { // la colonne "Instruments"
+  //     max-height: 350px; /* limite la hauteur visible */
+  //     overflow-y: auto; /* permet le scroll si trop long */
+      
+  //     /* 🪄 Pour diviser automatiquement en plusieurs colonnes */
+  //     ul, h3 {
+  //       column-count: 2;
+  //       column-gap: 2rem;
+  //     }
+
+  //     /* Empêche les titres de sous-sections de se couper entre colonnes */
+  //     h3 {
+  //       break-after: avoid;
+  //       break-before: avoid;
+  //     }
+
+  //     /* Amélioration visuelle */
+  //     ul li {
+  //       break-inside: avoid;
+  //     }
+  //   }
+  // }
+</style>
 
   <!-- Script pour collapse/expand mobile avec activation DU BOUTON seulement côté client -->
   <script>
