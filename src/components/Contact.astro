@@ -5,10 +5,15 @@
   @use "bulma/sass/grid/columns";
 
   .social-row {
-    gap: 0.75rem;
+    gap: 0.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 0.25rem !important;
+    padding-bottom: 0 !important;
+  }
+  .columns.social-row {
+    margin-bottom: 0 !important;
   }
 
   .social-icon {
@@ -16,8 +21,8 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 3rem;
-    height: 3rem;
+    width: 2.5rem;
+    height: 2.5rem;
     text-decoration: none;
     -webkit-tap-highlight-color: transparent;
     transition: transform 0.18s ease;
@@ -32,7 +37,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: 2.4rem;             /* taille de l'icône à ajuster si besoin */
+    font-size: 2rem;             /* taille de l'icône à ajuster si besoin */
     line-height: 1;
     transition: opacity 0.28s ease;
     pointer-events: none;          /* seule l'ancre reçoit le click */
@@ -84,7 +89,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: 2.4rem;            /* même taille que .icon-layer */
+    font-size: 2rem;            /* même taille que .icon-layer */
     line-height: 1;
     pointer-events: none;         /* click géré par le <a> parent */
   }
@@ -95,34 +100,119 @@
     filter: drop-shadow(0 2px 8px rgba(255,0,0,0.22));
   }
   
-  footer { padding: 1.25rem 0; }
+  footer { 
+    padding: 0.75rem 0 0.5rem 0; 
+    position: relative;
+  }
+  .footer-info {
+    position: absolute;
+    bottom: 0.75rem;
+    right: 1rem;
+    text-align: right;
+    font-size: 0.75rem;
+    color: rgba(203, 213, 225, 0.7);
+    line-height: 1.4;
+
+    a {
+      color: rgba(203, 213, 225, 0.7);
+      text-decoration: underline;
+      transition: color 0.2s ease;
+      margin-left: 1rem;
+
+      &:hover {
+        color: #cbd5e1;
+      }
+    }
+  }
+  .footer-contact {
+    display: grid;
+    grid-template-columns: 1rem minmax(0, 1fr) 1rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.75rem;
+    color: rgba(203, 213, 225, 0.9);
+    line-height: 1.6;
+
+    @media (min-width: 768px) {
+      grid-template-columns: minmax(1rem, 1fr) minmax(20rem, 3fr) minmax(1rem, 1fr);
+    }
+
+    .contact-lines {
+      grid-column: 2;
+    }
+
+    .contact-line {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 0.5rem;
+      margin-bottom: 0.3rem;
+
+      i {
+        font-size: 0.9rem;
+        color: rgba(203, 213, 225, 0.7);
+        width: 1rem;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+        
+        &:hover {
+          color: #cbd5e1;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .footer-info {
+      position: static;
+      text-align: center;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(203, 213, 225, 0.2);
+    }
+  }
 </style>
 
 <footer class="footer">
-  <div class="columns is-mobile is-centered social-row">
+  <div class="footer-contact">
+    <div class="contact-lines">
+      <div class="contact-line">
+        <i class="fa-solid fa-location-dot"></i>
+        <span>Quartier Guy Moquet, 17ème arr., Paris</span>
+      </div>
+      <div class="contact-line">
+        <i class="fa-solid fa-envelope"></i>
+        <a href="mailto:inthepouchett.studio@gmail.com">inthepouchett.studio@gmail.com</a>
+      </div>
+      <div class="contact-line">
+        <i class="fa-solid fa-phone"></i>
+        <a href="tel:+33695065809">06 95 06 58 09</a>
+      </div>
+    </div>
+  </div>
 
-    <!-- YouTube (inchangé, Font Awesome simple) -->
+  <!-- Réseaux sociaux -->
+  <div class="columns is-mobile is-centered social-row">
     <div class="column has-text-centered is-narrow">
       <a class="social-icon youtube"
          href="https://www.youtube.com/@InthePouchett"
          target="_blank" aria-label="YouTube">
-        <i class="fa-brands fa-youtube" style="font-size:2.4rem" aria-hidden="true"></i>
+        <i class="fa-brands fa-youtube" aria-hidden="true"></i>
       </a>
     </div>
 
-    <!-- Instagram : deux couches superposées -->
     <div class="column has-text-centered is-narrow">
       <a class="social-icon instagram"
          href="https://www.instagram.com/inthepouchett/"
          target="_blank" aria-label="Instagram">
-        <!-- couche solide (gris) -->
         <i class="fa-brands fa-instagram icon-layer icon-solid" aria-hidden="true"></i>
-        <!-- couche gradient (invisible puis fade-in) -->
         <i class="fa-brands fa-instagram icon-layer icon-grad" aria-hidden="true"></i>
       </a>
     </div>
 
-    <!-- TikTok : idem -->
     <div class="column has-text-centered is-narrow">
       <a class="social-icon tiktok"
          href="https://www.tiktok.com/@inthepouchett"
@@ -131,6 +221,16 @@
         <i class="fa-brands fa-tiktok icon-layer icon-grad" aria-hidden="true"></i>
       </a>
     </div>
-
   </div>
+
+  <!-- Mentions légales -->
+  <div class="footer-info">
+    <a href="/website/mentions-legales">Mentions Légales</a>
+  </div>
+
+  <!-- </div> -->
+  <!-- Infos en bas à droite -->
+<!-- <div class="footer-info">
+  Quartier Guy Moquet, 17ème arr., Paris • <a href="/website/mentions-legales">Mentions Légales</a>
+</div> -->
 </footer>

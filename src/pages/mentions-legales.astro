@@ -1,109 +1,247 @@
 ---
-import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/Navbar.astro";
+import Layout from "../layouts/Layout.astro";
 ---
+
+<style lang="scss">
+  .hero-mentions {
+    background: linear-gradient(135deg, #080f25 0%, #1a2847 100%);
+    text-align: center;
+    padding: 3rem 1rem;
+    color: white;
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+  }
+
+  .mentions-content {
+    font-size: 0.95rem;
+    line-height: 1.6;
+
+    h2 {
+      font-size: 1.4rem;
+      color: white;
+      border-bottom: 2px solid #ea475f;
+      padding-bottom: 0.5rem;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+
+      &:first-of-type {
+        margin-top: 0;
+      }
+    }
+
+    h3 {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.95);
+      margin-top: 1.5rem;
+      margin-bottom: 0.75rem;
+      font-weight: 600;
+    }
+
+    .info-box {
+      background: rgba(255, 255, 255, 0.05);
+      border-left: 4px solid #92dbf5;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 0.5rem;
+
+      p {
+        margin-bottom: 0.4rem;
+        font-size: 0.9rem;
+        
+        strong {
+          color: #92dbf5;
+        }
+      }
+
+      p:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    .highlight-box {
+      background: rgba(234, 71, 95, 0.1);
+      border: 1px solid rgba(234, 71, 95, 0.3);
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 0.5rem;
+      font-size: 0.9rem;
+
+      p {
+        margin-bottom: 0.5rem;
+      }
+
+      ul {
+        margin: 0.5rem 0 0 1.5rem;
+        
+        li {
+          margin-bottom: 0.3rem;
+        }
+      }
+    }
+
+    p {
+      margin-bottom: 0.75rem;
+    }
+
+    ul {
+      margin-left: 1.5rem;
+      margin-bottom: 1rem;
+      
+      li {
+        margin-bottom: 0.4rem;
+      }
+    }
+
+    .date-update {
+      text-align: center;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      font-style: italic;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.85rem;
+    }
+
+    a {
+        color: inherit;
+        text-decoration: none;
+        
+        &:hover {
+        text-decoration: underline;
+        }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero-mentions {
+      padding: 2rem 1rem;
+    }
+
+    .mentions-content {
+      font-size: 0.9rem;
+
+      h2 {
+        font-size: 1.2rem;
+      }
+
+      h3 {
+        font-size: 1rem;
+      }
+    }
+  }
+</style>
 
 <Layout>
   <Navbar slot="navbar" />
 
-  <section class="container legal-section filled">
-    <h1>Mentions légales</h1>
+  <!-- Hero Section -->
+  <div class="hero-mentions">
+    <div class="container">
+      <h1>Mentions Légales</h1>
+      <p>Informations légales et conditions d'utilisation</p>
+    </div>
+  </div>
 
-    <h2>Éditeur du site</h2>
-    <p>
-      Le présent site <strong>In the Pouchett</strong> est édité par :
-    </p>
-    <ul>
-      <li><strong>Nom de l’organisation :</strong> In the Pouchett</li>
-      <li><strong>Forme juridique :</strong> Association loi 1901</li>
-      <li><strong>Siège social :</strong> Paris, France</li>
-      <li><strong>Responsable de la publication :</strong> [Nom du responsable]</li>
-      <li><strong>Contact :</strong> <a href="mailto:inthepouchett.studio@gmail.com">inthepouchett.studio@gmail.com</a></li>
-      <li><strong>Numéro RNA :</strong> [à compléter]</li>
-    </ul>
+  <!-- Un seul bloc filled avec tout le contenu -->
+  <section class="filled">
+    <div class="container mentions-content">
+      
+      <!-- Éditeur du site -->
+      <h2>Éditeur du site</h2>
+      <div class="info-box">
+        <p><strong>Raison sociale :</strong> IN THE POUCHETT (ITP)</p>
+        <p><strong>Forme juridique :</strong> Association Loi 1901</p>
+        <p><strong>Adresse :</strong> 17eme Arrondissement, Paris, France</p>
+        <p><strong>Email :</strong> <a href="mailto:inthepouchett.studio@gmail.com"> inthepouchett.studio@gmail.com</a> • <strong>Tél :</strong> <a href="tel:+33695065809"> 0695065809</a></p>
+        <p><strong>RNA :</strong> W751278739</p>
+        <p><strong>SIRET :</strong> 98904608100018</p>
+        <p><strong>Directeur de publication :</strong> Gauthier Thierry, Président de l'association</p>
+      </div>
 
-    <h2>Hébergement</h2>
-    <p>
-      Le site est hébergé par :
-    </p>
-    <ul>
-      <li><strong>Nom de l’hébergeur :</strong> [ex : Vercel, Netlify, OVH, etc.]</li>
-      <li><strong>Adresse :</strong> [adresse postale de l’hébergeur]</li>
-      <li><strong>Téléphone :</strong> [numéro du support hébergeur]</li>
-    </ul>
+      <!-- Hébergeur -->
+      <h2>Hébergeur</h2>
+      <div class="info-box">
+        <p><strong>Hébergeur :</strong> GitHub, Inc.</p>
+        <p><strong>Adresse :</strong> 88 Colin P Kelly Jr St, San Francisco, CA 94107, États-Unis</p>
+        <p><strong>Site web :</strong> <a href="https://github.com"> https://github.com</a></p>
+      </div>
 
-    <h2>Propriété intellectuelle</h2>
-    <p>
-      L’ensemble des éléments figurant sur le site <em>In the Pouchett</em> (textes, images, vidéos, graphismes, logo, etc.)
-      sont la propriété exclusive de l’association, sauf mention contraire.
-      Toute reproduction, distribution, modification ou utilisation sans autorisation préalable est interdite.
-    </p>
+      <!-- Propriété intellectuelle -->
+      <h2>Propriété intellectuelle</h2>
+      <p>
+        L'ensemble du contenu de ce site (textes, images, vidéos, musiques) est la propriété exclusive 
+        de <strong>IN THE POUCHETT</strong> ou de ses partenaires. Toute reproduction sans autorisation 
+        est interdite et constitue une contrefaçon sanctionnée par le Code de la propriété intellectuelle.
+      </p>
+      <p>
+        Les Live Sessions et enregistrements sont protégés par le droit d'auteur. Les artistes conservent 
+        leurs droits sur leurs œuvres conformément aux accords établis.
+      </p>
 
-    <h2>Protection des données personnelles</h2>
-    <p>
-      Aucune donnée personnelle n’est collectée sans votre consentement explicite.  
-      Si vous contactez l’association par e-mail, votre adresse ne sera utilisée que pour vous répondre
-      et ne sera pas partagée avec des tiers.
-    </p>
-    <p>
-      Conformément à la loi « Informatique et Libertés » du 6 janvier 1978 et au RGPD,
-      vous disposez d’un droit d’accès, de rectification et de suppression de vos données personnelles.
-      Pour exercer ce droit, vous pouvez nous contacter à l’adresse :
-      <a href="mailto:inthepouchett.studio@gmail.com">inthepouchett.studio@gmail.com</a>.
-    </p>
+      <!-- RGPD -->
+      <h2>Protection des données personnelles</h2>
+      <p>
+        Conformément au RGPD, vous disposez d'un droit d'accès, de rectification et de suppression 
+        de vos données personnelles.
+      </p>
+      
+      <h3>Données collectées</h3>
+      <p>
+        Les données collectées via le formulaire de contact (nom, email, téléphone, message) sont 
+        uniquement utilisées pour traiter votre demande et ne sont jamais transmises à des tiers.
+      </p>
 
-    <h2>Responsabilité</h2>
-    <p>
-      Le site <em>In the Pouchett</em> met tout en œuvre pour assurer l’exactitude des informations
-      diffusées. Cependant, l’association ne saurait être tenue responsable d’erreurs, d’omissions ou
-      d’une indisponibilité du site.
-    </p>
+      <div class="highlight-box">
+        <p><strong>Pour exercer vos droits :</strong></p>
+        <ul>
+          <li>Email : <strong><a href="mailto:inthepouchett.studio@gmail.com"> inthepouchett.studio@gmail.com</a></strong></li>
+        </ul>
+      </div>
 
-    <h2>Crédits</h2>
-    <p>
-      Conception et développement : <strong>In the Pouchett</strong><br />
-      Photos, vidéos et visuels : <strong>In the Pouchett</strong> et ses partenaires.
-    </p>
+      <!-- Responsabilité -->
+      <h2>Limitation de responsabilité</h2>
+      <p>
+        Les informations du site sont fournies à titre informatif. <strong>IN THE POUCHETT</strong> 
+        ne peut garantir leur exhaustivité et décline toute responsabilité en cas d'erreur, 
+        d'interruption de service ou de dommage résultant de l'utilisation du site.
+      </p>
+
+      <!-- Liens -->
+      <h2>Liens hypertextes</h2>
+      <p>
+        Ce site peut contenir des liens vers d'autres sites (YouTube, réseaux sociaux). 
+        Nous ne contrôlons pas ces sites externes et déclinons toute responsabilité quant à leur contenu.
+      </p>
+
+      <!-- Crédits -->
+      <h2>Crédits</h2>
+      <div class="info-box">
+        <p><strong>Conception et développement :</strong> Baptiste Prunot, Clément Maniette</p>
+        <p><strong>Photographies :</strong> Matthieu Crépu, Clément Maniette</p>
+        <p><strong>Vidéos :</strong> In the Pouchett Studio</p>
+        <p><strong>Icônes :</strong> Font Awesome</p>
+      </div>
+
+      <!-- Droit applicable -->
+      <h2>Droit applicable</h2>
+      <p>
+        Ces mentions légales sont régies par le droit français. En cas de litige, 
+        les tribunaux français sont seuls compétents.
+      </p>
+
+      <div class="date-update">
+        <p>Dernière mise à jour : 11 octobre 2025</p>
+      </div>
+
+    </div>
   </section>
-
-  <style lang="scss">
-    .legal-section {
-    //   margin-top: 6rem;
-    //   margin-bottom: 4rem;
-      line-height: 1.7;
-      color: #cbd5e1;
-
-      h1 {
-        font-size: 2rem;
-        font-weight: 700;
-        color: white;
-        margin-bottom: 2rem;
-        text-align: center;
-      }
-
-      h2 {
-        margin-top: 2.5rem;
-        font-size: 1.4rem;
-        color: #ea475f;
-      }
-
-      ul {
-        margin-left: 1rem;
-        list-style: none;
-
-        li {
-          margin: 0.3rem 0;
-        }
-      }
-
-      a {
-        color: #92dbf5;
-        text-decoration: none;
-
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-    }
-  </style>
 </Layout>
