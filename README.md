@@ -1,7 +1,7 @@
 # Astro Starter Kit: Basics
 
 > [!NOTE]
-> The website is deployed at [https://clemman10.github.io/website/](https://clemman10.github.io/website/)
+> The website is deployed at [https://inthepouchett.com](https://inthepouchett.com)
 
 ## Install dependencies
 ```bash
