@@ -62,16 +62,16 @@ const canonicalAbsolute = canonical ? toAbsoluteWithTrailing(canonical) : (SITE_
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-    <title>{title}</title>
-    <meta name="description" content={description} />
-    {canonical ? <link rel="canonical" href={canonical} /> : null}
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  {canonical ? <link rel="canonical" href={canonicalAbsolute} /> : null}
 
     <!-- Open Graph -->
     <meta property="og:site_name" content={SITE_NAME} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={canonical ?? SITE_URL} />
+  <meta property="og:url" content={canonicalAbsolute} />
     {image ? <meta property="og:image" content={image} /> : null}
 
     <!-- Twitter Card -->
