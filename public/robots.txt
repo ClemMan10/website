@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 
 # Point to the sitemap (helpful for crawlers)
-Sitemap: /sitemap-index.xml
+Sitemap: https://inthepouchett.com/sitemap-index.xml
