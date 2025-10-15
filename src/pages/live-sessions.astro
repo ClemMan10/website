@@ -15,6 +15,17 @@ import YouTubeGrid from "../components/YouTubeGrid.astro";
   *::before,
   *::after { box-sizing: border-box; }
 
+  a {
+  color: inherit;
+  text-decoration: underline;
+  }
+
+  a:hover {
+    color: inherit;
+    text-decoration-thickness: 2px; /* optionnel, pour un soulignement plus visible */
+  }
+
+
   /* wrapper interne centré dans la colonne centrale fournie par Layout */
   .diffusion-inner {
     display: flex;
@@ -158,21 +169,20 @@ import YouTubeGrid from "../components/YouTubeGrid.astro";
   <section class="filled">
       <div class="container">
         <p>
-      Le studio In the Pouchett est spécialisé dans la réalisation de Live Sessions.
-      Nous proposons un service complet allant de la captation audio et vidéo à la
-      post-production (mixage, mastering, édition et colorimétrie).<br />
+          Le studio In the Pouchett est spécialisé dans la réalisation de Live Sessions.
+          Nous proposons un service complet allant de la captation audio et vidéo à la
+          post-production (mixage, mastering, édition et colorimétrie).<br />
 
-      Vous serez accueillis dans un cadre chaleureux et intimiste, 
-      propice à livrer votre meilleure performance.
+          L'enregistrement se déroule dans un cadre chaleureux et intimiste, idéal pour livrer votre meilleure performance.
         </p>
       </div>
   </section>
   <section class="pattern">
       <div class="container">
         <p>
-      Le studio est modulaire pour s'adapter à chaque projet et chaque formation.<br />
-      Nous pouvons accueillir des groupes jusqu'à 7 musiciens avec retours casques indépendants.
-      De plus nous mettons à disposition tous le matériel et instruments dont nous disposons (cf. section "Le Matériel").
+          Nous pouvons accueillir jusqu'à 7 musicien·nes simultanément avec retours casques indépendants.
+          Notre plateau est modulable et s'adaptera à chaque projet de création et à chaque formation musicale.<br />
+          De plus nous mettons à disposition tout le matériel et instruments dont nous disposons (cf. section <a href="/#materiel">Le Matériel</a>).
         </p>
       </div>
   </section>

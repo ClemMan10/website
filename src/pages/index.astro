@@ -24,6 +24,16 @@ const data = await getCollection("videos");
       color: white;
     }
   }
+  a {
+    color: inherit;
+    text-decoration: underline;
+  }
+
+  a:hover {
+    color: inherit;
+    text-decoration-thickness: 2px; /* optionnel, pour un soulignement plus visible */
+  }
+
 
   .videos-wrapper {
     .videos {
@@ -373,9 +383,9 @@ const data = await getCollection("videos");
   <section class="pattern">
     <div class="container">
       <p>
-        Situés dans le 17ème arrondissement de Paris, le studio In the Pouchett
+        Situés dans le 17ème arrondissement de Paris (proche Guy Moquet, Porte de Clichy, Brochant), le studio <strong>In the Pouchett</strong>
         vous accueille pour accompagner vos projets musicaux. Studio orienté
-        autour des Live Sessions, nous proposons cependant des services plus
+        autour des <a href="/live-sessions">Live Sessions</a>, nous proposons cependant des services plus
         classiques tels que l'enregistrement, le mixage et le mastering de vos
         titres.
       </p>
@@ -405,28 +415,19 @@ const data = await getCollection("videos");
         </button>
       </div>
 
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus.
-        Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies
-        sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius
-        a, semper congue, euismod non, mi.
-      </p>
     </div>
   </section>
 
   <h1 class="pattern" id="studio">Le studio</h1>
   <section class="filled studio-section">
     <div class="container">
-      <p>
-        Découvrez notre studio à travers ces images : ambiance, matériel et espace de travail.
-      </p>
 
       <!-- Ajout de studio-wrapper -->
       <div class="studio-wrapper">
         <div class="studio-gallery">
           <div class="studio-item tall">
-            <img src="/studio_large_portrait.jpg" alt="Vue générale du studio" />
-            <div class="caption">Vue générale du studio</div>
+            <img src="/studio_large_portrait.jpg" alt="Vue du studio portrait" />
+            <!-- <div class="caption">Vue générale du studio</div> -->
           </div>
           <div class="studio-item tall wide">
             <img src="/piano_close.jpg" alt="Piano acoustique" />
