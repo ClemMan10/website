@@ -1,12 +1,43 @@
 ---
 import Contact from "../components/Contact.astro";
+
+const DEFAULT_TITLE = "In the Pouchett (Recording studio, Live session, Mixing, Mastering)";
+const DEFAULT_DESC = "In the Pouchett — studio d'enregistrement et Live Sessions à Paris : captation, mixage, mastering et production vidéo.";
+const SITE_URL = "https://inthepouchett.com";
+const SITE_NAME = "In the Pouchett";
+
+export interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  image?: string;
+  lang?: string;
+}
+
+const { title = DEFAULT_TITLE, description = DEFAULT_DESC, canonical = null, image = null, lang = 'fr' } = Astro.props as Props;
+
+function toAbsoluteWithTrailing(pathOrUrl: string) {
+  // If no path provided, return site root with trailing slash
+  if (!pathOrUrl) return SITE_URL.endsWith('/') ? SITE_URL : SITE_URL + '/';
+  try {
+    const url = new URL(pathOrUrl, SITE_URL);
+    let pathname = url.pathname;
+    if (!pathname.endsWith('/')) pathname = pathname + '/';
+    return `${url.protocol}//${url.host}${pathname}${url.search}${url.hash}`;
+  } catch (e) {
+    if (!pathOrUrl.startsWith('/')) pathOrUrl = `/${pathOrUrl}`;
+    return toAbsoluteWithTrailing(pathOrUrl);
+  }
+}
+
+const canonicalAbsolute = canonical ? toAbsoluteWithTrailing(canonical) : (SITE_URL.endsWith('/') ? SITE_URL : SITE_URL + '/');
 ---
 
 <!doctype html>
-<html lang="en" class="has-navbar-fixed-top">
+<html lang={lang} class="has-navbar-fixed-top">
   <head>
-    <meta charset="utf8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -31,7 +62,34 @@ import Contact from "../components/Contact.astro";
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-    <title>In the Pouchett</title>
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {canonical ? <link rel="canonical" href={canonical} /> : null}
+
+    <!-- Open Graph -->
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical ?? SITE_URL} />
+    {image ? <meta property="og:image" content={image} /> : null}
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content={image ? "summary_large_image" : "summary"} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {image ? <meta name="twitter:image" content={image} /> : null}
+
+    <!-- JSON-LD Organization (basic) -->
+    <script type="application/ld+json">
+      {JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "MusicOrganization",
+        "name": SITE_NAME,
+        "url": SITE_URL,
+        "description": DEFAULT_DESC,
+      })}
+    </script>
   </head>
 
   <body>

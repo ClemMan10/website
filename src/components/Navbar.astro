@@ -1,12 +1,29 @@
 ---
 import { Image } from "astro:assets";
 import logo from "../assets/logo.webp";
+ 
+function ensureTrailing(href: string) {
+  if (!href) return href;
+  // preserve absolute URLs and protocols
+  if (href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:')) return href;
+  // preserve local anchors
+  if (href.startsWith('#')) return href;
+
+  // split base and hash
+  const [base, hash] = href.split('#');
+  let b = base || '/';
+  // ensure leading slash
+  if (!b.startsWith('/')) b = '/' + b;
+  // ensure trailing slash (except for root which is just '/')
+  if (b !== '/' && !b.endsWith('/')) b = b + '/';
+  return hash ? `${b}#${hash}` : b;
+}
 ---
 
 <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <!-- Logo + texte -->
-    <a class="navbar-item brand-link" href="/">
+    <a class="navbar-item brand-link" href={ensureTrailing('/') }>
       <Image src={logo} alt="Logo de In the Pouchett" />
       <span class="brand-text">In The Pouchett</span>
     </a>
@@ -22,23 +39,23 @@ import logo from "../assets/logo.webp";
     <div class="navbar-end">
 
       <div class="navbar-item has-dropdown is-hoverable desktop-dropdown">
-        <a class="navbar-link" href="/">Le Studio</a>
+        <a class="navbar-link" href={ensureTrailing('/')}>Le Studio</a>
         <div class="navbar-dropdown">
-          <a class="navbar-item" href="/#reference">Références</a>
-          <a class="navbar-item" href="/#materiel">Le Matériel</a>
+          <a class="navbar-item" href={ensureTrailing('/#reference')}>Références</a>
+          <a class="navbar-item" href={ensureTrailing('/#materiel')}>Le Matériel</a>
         </div>
       </div>
 
       <div class="navbar-item has-dropdown is-hoverable desktop-dropdown">
-        <a class="navbar-link" href="/live-sessions">Live Sessions</a>
+        <a class="navbar-link" href={ensureTrailing('/live-sessions')}>Live Sessions</a>
         <div class="navbar-dropdown">
-          <a class="navbar-item" href="/live-sessions/#formats">Formats</a>
-          <a class="navbar-item" href="/live-sessions/#diffusion">Diffusion</a>
-          <a class="navbar-item" href="/live-sessions/#tarifs">Tarifs</a>
+          <a class="navbar-item" href={ensureTrailing('/live-sessions/#formats')}>Formats</a>
+          <a class="navbar-item" href={ensureTrailing('/live-sessions/#diffusion')}>Diffusion</a>
+          <a class="navbar-item" href={ensureTrailing('/live-sessions/#tarifs')}>Tarifs</a>
         </div>
       </div>
 
-      <a class="navbar-item desktop-item" href="/qui-sommes-nous">
+      <a class="navbar-item desktop-item" href={ensureTrailing('/qui-sommes-nous')}>
         Qui sommes-nous ?
       </a>
 

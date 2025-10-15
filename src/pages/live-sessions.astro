@@ -3,6 +3,17 @@ import { Picture } from "astro:assets";
 import Navbar from "../components/Navbar.astro";
 import Layout from "../layouts/Layout.astro";
 import YouTubeGrid from "../components/YouTubeGrid.astro";
+
+function ensureTrailing(href: string) {
+  if (!href) return href;
+  if (href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:')) return href;
+  if (href.startsWith('#')) return href;
+  const [base, hash] = href.split('#');
+  let b = base || '/';
+  if (!b.startsWith('/')) b = '/' + b;
+  if (b !== '/' && !b.endsWith('/')) b = b + '/';
+  return hash ? `${b}#${hash}` : b;
+}
 ---
 
 <style is:global lang="scss">
@@ -15,12 +26,13 @@ import YouTubeGrid from "../components/YouTubeGrid.astro";
   *::before,
   *::after { box-sizing: border-box; }
 
-  a {
-  color: inherit;
-  text-decoration: underline;
+  /* Limit link styles to the page main content so navbar links aren't affected */
+  main a {
+    color: inherit;
+    text-decoration: underline;
   }
 
-  a:hover {
+  main a:hover {
     color: inherit;
     text-decoration-thickness: 2px; /* optionnel, pour un soulignement plus visible */
   }
@@ -158,7 +170,7 @@ import YouTubeGrid from "../components/YouTubeGrid.astro";
   }
 </style>
 
-<Layout>
+<Layout title="Live Sessions — In the Pouchett" description="Live Sessions au studio In the Pouchett — captation, mixage, mastering et production vidéo à Paris." canonical="/live-sessions">
   <Navbar slot="navbar" />
   <div class="hero is-medium cover-image">
     <div class="container hero-body">
@@ -182,7 +194,7 @@ import YouTubeGrid from "../components/YouTubeGrid.astro";
         <p>
           Nous pouvons accueillir jusqu'à 7 musicien·nes simultanément avec retours casques indépendants.
           Notre plateau est modulable et s'adaptera à chaque projet de création et à chaque formation musicale.<br />
-          De plus nous mettons à disposition tout le matériel et instruments dont nous disposons (cf. section <a href="/#materiel">Le Matériel</a>).
+          De plus nous mettons à disposition tout le matériel et instruments dont nous disposons (cf. section <a href={ensureTrailing('/#materiel')}>Le Matériel</a>).
         </p>
       </div>
   </section>

@@ -5,6 +5,17 @@ import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 
 const data = await getCollection("videos");
+
+function ensureTrailing(href: string) {
+  if (!href) return href;
+  if (href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:')) return href;
+  if (href.startsWith('#')) return href;
+  const [base, hash] = href.split('#');
+  let b = base || '/';
+  if (!b.startsWith('/')) b = '/' + b;
+  if (b !== '/' && !b.endsWith('/')) b = b + '/';
+  return hash ? `${b}#${hash}` : b;
+}
 ---
 
 <style lang="scss">
@@ -84,7 +95,7 @@ const data = await getCollection("videos");
   }
 </style>
 
-<Layout>
+<Layout title="In the Pouchett — Enregistrements, Mixages, Live Sessions" description="In the Pouchett: studio d'enregistrement à Paris spécialisé dans les Live Sessions. Captation audio/vidéo, mixage et mastering." canonical="/">
   <Navbar slot="navbar" />
 
   <!-- Cover modifiée -->
@@ -382,10 +393,10 @@ const data = await getCollection("videos");
 
   <section class="pattern">
     <div class="container">
-      <p>
+        <p>
         Situés dans le 17ème arrondissement de Paris (proche Guy Moquet, Porte de Clichy, Brochant), le studio <strong>In the Pouchett</strong>
         vous accueille pour accompagner vos projets musicaux. Studio orienté
-        autour des <a href="/live-sessions">Live Sessions</a>, nous proposons cependant des services plus
+        autour des <a href={ensureTrailing('/live-sessions')}>Live Sessions</a>, nous proposons cependant des services plus
         classiques tels que l'enregistrement, le mixage et le mastering de vos
         titres.
       </p>

@@ -1,3 +1,16 @@
+---
+function ensureTrailing(href: string) {
+  if (!href) return href;
+  if (href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:')) return href;
+  if (href.startsWith('#')) return href;
+  const [base, hash] = href.split('#');
+  let b = base || '/';
+  if (!b.startsWith('/')) b = '/' + b;
+  if (b !== '/' && !b.endsWith('/')) b = b + '/';
+  return hash ? `${b}#${hash}` : b;
+}
+
+---
 <style lang="scss">
   @use "bulma/sass/layout/footer" with (
     $footer-background-color: rgb(8, 15, 37)
@@ -227,7 +240,7 @@
 
   <!-- Mentions légales -->
   <div class="footer-info">
-    <a href="/mentions-legales">Mentions Légales</a>
+    <a href={ensureTrailing('/mentions-legales')}>Mentions Légales</a>
   </div>
 
   <!-- </div> -->
