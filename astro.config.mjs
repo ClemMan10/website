@@ -4,7 +4,8 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://intepouchett.com",
+  // corrected site domain (was a typo: "intepouchett.com")
+  site: "https://inthepouchett.com",
   base: "",
   trailingSlash: 'always',
   integrations: [sitemap()],
