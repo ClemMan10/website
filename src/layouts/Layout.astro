@@ -81,15 +81,31 @@ const canonicalAbsolute = canonical ? toAbsoluteWithTrailing(canonical) : (SITE_
     {image ? <meta name="twitter:image" content={image} /> : null}
 
     <!-- JSON-LD Organization (basic) -->
-    <script type="application/ld+json">
-      {JSON.stringify({
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
         "@context": "https://schema.org",
         "@type": "MusicOrganization",
         "name": SITE_NAME,
         "url": SITE_URL,
         "description": DEFAULT_DESC,
+        "logo": `${SITE_URL}/favicon/favicon-512x512.png`,
+        "image": `${SITE_URL}/favicon/favicon-512x512.png`,
+        "foundingLocation": {
+          "@type": "Place",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Paris",
+            "addressCountry": "FR"
+          }
+        },
+        "sameAs": [
+          "https://www.youtube.com/@inthepouchett",
+          "https://www.instagram.com/inthepouchett",
+          "https://www.tiktok.com/@inthepouchett"
+        ]
       })}
-    </script>
+    ></script>
   </head>
 
   <body>
