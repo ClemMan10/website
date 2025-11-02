@@ -52,6 +52,10 @@ function ensureTrailing(href: string) {
       flex-wrap: wrap;
       gap: 1.5rem;
       transition: max-height 0.5s ease;
+      align-items: flex-start;
+    }
+    .videos > * {
+      min-width: 0;
     }
 
     /* Par défaut on masque clairement le bouton (redondance CSS) */
@@ -867,6 +871,7 @@ function ensureTrailing(href: string) {
         // si bouton caché pour une raison, on ignore
         if (getComputedStyle(button).display === "none") return;
 
+        // Toggle class
         const expanded = videos.classList.toggle("expanded");
 
         // changer icône + / -
@@ -875,6 +880,26 @@ function ensureTrailing(href: string) {
           icon.classList.toggle("fa-minus", expanded);
         }
 
+        // Pour s'assurer que l'ouverture montre TOUT le contenu, on utilise
+        // scrollHeight et on applique inline maxHeight (meilleure UX que
+        // fixer une valeur arbitraire comme 1000px). On remet à la valeur
+        // CSS par défaut au collapse en supprimant le style inline.
+        if (expanded) {
+          // force l'ouverture complète (animation fluide si CSS transition sur max-height)
+          videos.style.maxHeight = videos.scrollHeight + "px";
+        } else {
+          // reset: laisse la règle CSS (collapsed) s'appliquer
+          videos.style.maxHeight = "";
+        }
+
+
+      // Si la fenêtre est redimensionnée alors que la section est ouverte,
+      // on recalcule la hauteur pour rester entièrement visible.
+      window.addEventListener('resize', () => {
+        if (videos.classList.contains('expanded')) {
+          videos.style.maxHeight = videos.scrollHeight + 'px';
+        }
+      });
         // smooth scroll vers la section quand on étend
         // if (expanded) {
         //   wrapper.scrollIntoView({ behavior: "smooth", block: "start" });
