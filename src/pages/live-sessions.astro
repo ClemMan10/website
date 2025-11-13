@@ -130,7 +130,7 @@ function ensureTrailing(href: string) {
   .cover-image {
     background:
       linear-gradient(0deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 1) 100%),
-      url("/live-sess-cover-small.jpg") center/cover;
+      image-set(url("/live-sess-cover-small.webp") type("image/webp") 1x, url("/live-sess-cover-small.jpg") type("image/jpeg") 1x) center/cover;
       //url("/cover.jpg") center/cover;
     text-align: center;
     font-weight: 700;
@@ -207,7 +207,10 @@ function ensureTrailing(href: string) {
         <!-- Format 1 -->
         <div class="format-card">
           <div class="card-image">
-            <img src ="/classic-live-sess.jpg" alt="Live in the Pouchett" />
+            <picture>
+              <source srcset="/classic-live-sess.webp" type="image/webp" />
+              <img src="/classic-live-sess.jpg" alt="Live in the Pouchett" />
+            </picture>
           </div>
           <div class="card-content">
             <h3><strong>Format <i>Live in the Pouchett</i></strong></h3>
@@ -222,7 +225,10 @@ function ensureTrailing(href: string) {
         <!-- Format 2 -->
         <div class="format-card">
           <div class="card-image">
-            <img src="/live-concert.jpg" alt="Concert in the Pouchett" />
+            <picture>
+              <source srcset="/live-concert.webp" type="image/webp" />
+              <img src="/live-concert.jpg" alt="Concert in the Pouchett" />
+            </picture>
           </div>
           <div class="card-content">
             <h3><strong>Format <i>Concert in the Pouchett</i></strong></h3>
@@ -237,7 +243,10 @@ function ensureTrailing(href: string) {
         <!-- Format 3 -->
         <div class="format-card">
           <div class="card-image">
-            <img src="/custom-live-sess.jpg" alt="Format Custom" />
+            <picture>
+              <source srcset="/custom-live-sess.webp" type="image/webp" />
+              <img src="/custom-live-sess.jpg" alt="Format Custom" />
+            </picture>
           </div>
           <div class="card-content">
             <h3><strong>Format Custom</strong></h3>

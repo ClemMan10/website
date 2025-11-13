@@ -24,9 +24,10 @@ function ensureTrailing(href: string) {
   @use "bulma/sass/elements/title";
 
   .cover-image {
-    background:
-      linear-gradient(0deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 1) 100%),
-      url("/cover.jpg") center/cover;
+    /* Fallback background (JPEG) for maximum compatibility */
+    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 1) 100%), url("/cover.jpg");
+    background-position: center;
+    background-size: cover;
     text-align: center;
     font-weight: 700;
 
@@ -43,6 +44,15 @@ function ensureTrailing(href: string) {
   a:hover {
     color: inherit;
     text-decoration-thickness: 2px; /* optionnel, pour un soulignement plus visible */
+  }
+
+  /* If the browser supports image-set for background-image, prefer WebP */
+  @supports (background-image: image-set(url("/cover.webp") type("image/webp"))) {
+    .cover-image {
+      background-image: linear-gradient(0deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 1) 100%), image-set(url("/cover.webp") type("image/webp") 1x, url("/cover.jpg") type("image/jpeg") 1x);
+      background-position: center;
+      background-size: cover;
+    }
   }
 
 
@@ -114,7 +124,8 @@ function ensureTrailing(href: string) {
     .cover-image {
       background:
         linear-gradient(0deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 1) 100%),
-        url("/cover.jpg") center/cover;
+        /* prefer WebP with JPEG fallback */
+        image-set(url("/cover.webp") type("image/webp") 1x, url("/cover.jpg") type("image/jpeg") 1x) center/cover;
       text-align: center;
       font-weight: 700;
 
@@ -441,47 +452,80 @@ function ensureTrailing(href: string) {
       <div class="studio-wrapper">
         <div class="studio-gallery">
           <div class="studio-item tall">
-            <img src="/studio_large_portrait.jpg" alt="Vue du studio portrait" />
+            <picture>
+              <source srcset="/studio_large_portrait.webp" type="image/webp" />
+              <img src="/studio_large_portrait.jpg" alt="Vue du studio portrait" />
+            </picture>
             <!-- <div class="caption">Vue générale du studio</div> -->
           </div>
           <div class="studio-item tall wide">
-            <img src="/piano_close.jpg" alt="Piano acoustique" />
+            <picture>
+              <source srcset="/piano_close.webp" type="image/webp" />
+              <img src="/piano_close.jpg" alt="Piano acoustique" />
+            </picture>
             <!-- <div class="caption">Console de mixage</div> -->
           </div>
           <div class="studio-item">
-            <img src="/fader.jpg" alt="Fader" />
+            <picture>
+              <source srcset="/fader.webp" type="image/webp" />
+              <img src="/fader.jpg" alt="Fader" />
+            </picture>
             <!-- <div class="caption">Cabine d'enregistrement</div> -->
           </div>
           <div class="studio-item">
-            <img src="/piano1.jpg" alt="Piano droit" />
+            <picture>
+              <source srcset="/piano1.webp" type="image/webp" />
+              <img src="/piano1.jpg" alt="Piano droit" />
+            </picture>
             <div class="caption">Piano droit</div>
           </div>
           <div class="studio-item tall">  
-            <img src="/oc818.jpg" alt="Austrian Audio OC818" />
+            <picture>
+              <source srcset="/oc818.webp" type="image/webp" />
+              <img src="/oc818.jpg" alt="Austrian Audio OC818" />
+            </picture>
             <!-- <div class="caption">Espace d'accueil</div> -->
           </div>
           <div class="studio-item tall wide">
-            <img src="/flamand-cache.jpg" alt="Flamand Rose" style="object-position: 50% 30%;" />
+            <picture>
+              <source srcset="/flamand-cache.webp" type="image/webp" />
+              <img src="/flamand-cache.jpg" alt="Flamand Rose" style="object-position: 50% 30%;" />
+            </picture>
             <!-- <div class="caption">Espace d'accueil 2</div> -->
           </div>
           <div class="studio-item">
-            <img src="/d190-mic.jpg" alt="AKG D190C" style="object-position: 50% 10%;" />
+            <picture>
+              <source srcset="/d190-mic.webp" type="image/webp" />
+              <img src="/d190-mic.jpg" alt="AKG D190C" style="object-position: 50% 10%;" />
+            </picture>
             <!-- <div class="caption">Instruments et matériel 2</div> -->
           </div>
           <div class="studio-item tall">
-            <img src="/soyuz-013.jpg" alt="Soyuz 013 fet" />
+            <picture>
+              <source srcset="/soyuz-013.webp" type="image/webp" />
+              <img src="/soyuz-013.jpg" alt="Soyuz 013 fet" />
+            </picture>
             <!-- <div class="caption">Instruments et matériel 3</div> -->
           </div>
           <div class="studio-item wide">
-            <img src="/machine_patchbay.jpg" alt="Control Room" />
+            <picture>
+              <source srcset="/machine_patchbay.webp" type="image/webp" />
+              <img src="/machine_patchbay.jpg" alt="Control Room" />
+            </picture>
             <div class="caption">Control Room</div>
           </div>
           <div class="studio-item tall">
-            <img src="/close_mic_green.jpg" alt="Prise de son" />
+            <picture>
+              <source srcset="/close_mic_green.webp" type="image/webp" />
+              <img src="/close_mic_green.jpg" alt="Prise de son" />
+            </picture>
             <div class="caption">Prise de son</div>
           </div>
           <div class="studio-item">
-            <img src="/bureau_large.jpg" alt="Bureau Studio" />
+            <picture>
+              <source srcset="/bureau_large.webp" type="image/webp" />
+              <img src="/bureau_large.jpg" alt="Bureau Studio" />
+            </picture>
             <div class="caption">Bureau Studio</div>
           </div>
         </div>
@@ -567,9 +611,18 @@ function ensureTrailing(href: string) {
 
       <!-- Images équipement -->
       <div class="materiel-images instrument-carousel">
-        <img src="/hardware_close_blur.jpg" alt="Studio Hardware" />
-        <img src="/soyuz_013_close.jpg" alt="Micros Soyuz" style="object-position: 50% 25%;" />
-        <img src="/fader.jpg" alt="Amplis Orange" />
+        <picture>
+          <source srcset="/hardware_close_blur.webp" type="image/webp" />
+          <img src="/hardware_close_blur.jpg" alt="Studio Hardware" />
+        </picture>
+        <picture>
+          <source srcset="/soyuz_013_close.webp" type="image/webp" />
+          <img src="/soyuz_013_close.jpg" alt="Micros Soyuz" style="object-position: 50% 25%;" />
+        </picture>
+        <picture>
+          <source srcset="/fader.webp" type="image/webp" />
+          <img src="/fader.jpg" alt="Amplis Orange" />
+        </picture>
       </div>
 
       <!-- Colonne 6: Instruments avec toutes les sous-catégories -->
@@ -639,9 +692,18 @@ function ensureTrailing(href: string) {
 
       <!-- Images équipement 2 -->
       <div class="materiel-images-bottom instrument-carousel">
-        <img src="/piano_close_right.jpg" alt="Piano du studio" />
-        <img src="/deepmind_close.jpg" alt="Synthé deepmind" style="object-position: 50% 90%;" />
-        <img src="/guitare_acoustique.jpg" alt="Guitare acoustique" style="object-position: 50% 40%;"/>
+        <picture>
+          <source srcset="/piano_close_right.webp" type="image/webp" />
+          <img src="/piano_close_right.jpg" alt="Piano du studio" />
+        </picture>
+        <picture>
+          <source srcset="/deepmind_close.webp" type="image/webp" />
+          <img src="/deepmind_close.jpg" alt="Synthé deepmind" style="object-position: 50% 90%;" />
+        </picture>
+        <picture>
+          <source srcset="/guitare_acoustique.webp" type="image/webp" />
+          <img src="/guitare_acoustique.jpg" alt="Guitare acoustique" style="object-position: 50% 40%;"/>
+        </picture>
       </div>
     </div>
   </div>
@@ -816,9 +878,21 @@ function ensureTrailing(href: string) {
       -webkit-overflow-scrolling: touch;
     }
 
-    .instrument-carousel img {
+    /* If carousel items are wrapped in <picture>, make the picture the flex item */
+    .instrument-carousel > picture,
+    .materiel-images.instrument-carousel > picture,
+    .materiel-images-bottom.instrument-carousel > picture {
       flex: 0 0 100%;
-      scroll-snap-align: start; /* chaque image s’aligne au début */
+      scroll-snap-align: start;
+    }
+
+    .instrument-carousel picture img,
+    .materiel-images.instrument-carousel picture img,
+    .materiel-images-bottom.instrument-carousel picture img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      display: block;
     }
   }
 
@@ -830,9 +904,13 @@ function ensureTrailing(href: string) {
       const wrapper = document.querySelector(".videos-wrapper");
       if (!wrapper) return;
 
-      const videos = wrapper.querySelector(".videos");
-      const button = wrapper.querySelector(".toggle-videos");
-      const icon = button?.querySelector("i");
+  const videos = wrapper.querySelector(".videos");
+  const button = wrapper.querySelector(".toggle-videos");
+  // ensure required elements exist and are HTMLElements for .style/.classList
+  if (!(videos instanceof HTMLElement) || !(button instanceof HTMLElement)) return;
+  const videosEl = videos as HTMLElement;
+  const buttonEl = button as HTMLElement;
+  const icon = buttonEl.querySelector("i");
 
       // MediaQuery et helper pour gérer l'affichage du bouton en live (resize)
       const mq = window.matchMedia("(max-width: 768px)");
@@ -840,13 +918,13 @@ function ensureTrailing(href: string) {
       function updateVisibility() {
         if (mq.matches) {
           // mobile -> activer le bouton
-          button.style.display = "flex";
-          button.removeAttribute("aria-hidden");
+          buttonEl.style.display = "flex";
+          buttonEl.removeAttribute("aria-hidden");
         } else {
           // desktop -> masquer le bouton absolument, et reset l'état
-          button.style.display = "none";
-          button.setAttribute("aria-hidden", "true");
-          videos.classList.remove("expanded");
+          buttonEl.style.display = "none";
+          buttonEl.setAttribute("aria-hidden", "true");
+          videosEl.classList.remove("expanded");
           // s'assurer que l'icône est en état plus
           if (icon) {
             icon.classList.remove("fa-minus");
@@ -868,11 +946,12 @@ function ensureTrailing(href: string) {
       // click handler (ne sera utilisable que si le bouton est visible)
       button.addEventListener("click", (e) => {
         e.preventDefault();
-        // si bouton caché pour une raison, on ignore
-        if (getComputedStyle(button).display === "none") return;
+
+  // si bouton caché pour une raison, on ignore
+  if (getComputedStyle(buttonEl).display === "none") return;
 
         // Toggle class
-        const expanded = videos.classList.toggle("expanded");
+  const expanded = videosEl.classList.toggle("expanded");
 
         // changer icône + / -
         if (icon) {
@@ -886,18 +965,18 @@ function ensureTrailing(href: string) {
         // CSS par défaut au collapse en supprimant le style inline.
         if (expanded) {
           // force l'ouverture complète (animation fluide si CSS transition sur max-height)
-          videos.style.maxHeight = videos.scrollHeight + "px";
+          videosEl.style.maxHeight = videosEl.scrollHeight + "px";
         } else {
           // reset: laisse la règle CSS (collapsed) s'appliquer
-          videos.style.maxHeight = "";
+          videosEl.style.maxHeight = "";
         }
 
 
       // Si la fenêtre est redimensionnée alors que la section est ouverte,
       // on recalcule la hauteur pour rester entièrement visible.
       window.addEventListener('resize', () => {
-        if (videos.classList.contains('expanded')) {
-          videos.style.maxHeight = videos.scrollHeight + 'px';
+        if (videosEl.classList.contains('expanded')) {
+          videosEl.style.maxHeight = videosEl.scrollHeight + 'px';
         }
       });
         // smooth scroll vers la section quand on étend
@@ -911,34 +990,42 @@ function ensureTrailing(href: string) {
       const wrapper = document.querySelector(".studio-wrapper");
       if (!wrapper) return;
 
-      const gallery = wrapper.querySelector(".studio-gallery");
-      const button = wrapper.querySelector(".toggle-studio");
-      const icon = button.querySelector("i");
+  const gallery = wrapper.querySelector(".studio-gallery");
+  const button = wrapper.querySelector(".toggle-studio");
+  // require HTMLElements
+  if (!(gallery instanceof HTMLElement) || !(button instanceof HTMLElement)) return;
+  const galleryEl = gallery as HTMLElement;
+  const buttonEl2 = button as HTMLElement;
+  const icon = buttonEl2.querySelector("i");
       const mq = window.matchMedia("(max-width: 768px)");
 
       function updateButtonVisibility() {
         if (mq.matches) {
-          button.style.display = "flex";
+          buttonEl2.style.display = "flex";
         } else {
-          button.style.display = "none";
-          gallery.classList.remove("expanded");
-          button.classList.remove("expanded");
-          icon.classList.remove("fa-minus");
-          icon.classList.add("fa-plus");
+          buttonEl2.style.display = "none";
+          galleryEl.classList.remove("expanded");
+          buttonEl2.classList.remove("expanded");
+          if (icon) {
+            icon.classList.remove("fa-minus");
+            icon.classList.add("fa-plus");
+          }
         }
       }
 
       updateButtonVisibility();
       mq.addEventListener("change", updateButtonVisibility);
 
-      button.addEventListener("click", (e) => {
+      buttonEl2.addEventListener("click", (e) => {
         e.preventDefault();
-        const expanded = gallery.classList.toggle("expanded");
+        const expanded = galleryEl.classList.toggle("expanded");
 
-        if (expanded) {
-          icon.className = "fa-solid fa-minus";
-        } else {
-          icon.className = "fa-solid fa-plus";
+        if (icon) {
+          if (expanded) {
+            icon.className = "fa-solid fa-minus";
+          } else {
+            icon.className = "fa-solid fa-plus";
+          }
         }
       });
     });
@@ -946,21 +1033,31 @@ function ensureTrailing(href: string) {
 
     document.addEventListener("DOMContentLoaded", () => {
       const lightbox = document.getElementById("lightbox");
+      if (!lightbox) return;
       const lightboxImg = lightbox.querySelector(".lightbox-img");
       const captionText = lightbox.querySelector(".lightbox-caption");
       const closeBtn = lightbox.querySelector(".close");
 
-      document.querySelectorAll(".studio-item img").forEach(img => {
+      document.querySelectorAll(".studio-item img").forEach(node => {
+        if (!(node instanceof HTMLImageElement)) return;
+        const img = node;
         img.addEventListener("click", () => {
+          // ensure elements exist before using them
+          if (!lightbox) return;
           lightbox.style.display = "flex"; // bien flex pour centrer
-          lightboxImg.src = img.src;
-          captionText.textContent = img.closest(".studio-item").querySelector(".caption")?.textContent || img.alt;
+          if (lightboxImg instanceof HTMLImageElement) lightboxImg.src = img.src;
+          if (captionText) {
+            const caption = img.closest(".studio-item")?.querySelector(".caption")?.textContent;
+            captionText.textContent = caption || img.alt || "";
+          }
         });
       });
 
-      closeBtn.addEventListener("click", () => {
-        lightbox.style.display = "none";
-      });
+      if (closeBtn) {
+        closeBtn.addEventListener("click", () => {
+          lightbox.style.display = "none";
+        });
+      }
 
       lightbox.addEventListener("click", (e) => {
         if (e.target === lightbox) lightbox.style.display = "none";
@@ -990,7 +1087,8 @@ function ensureTrailing(href: string) {
         const mq = window.matchMedia("(max-width: 768px)");
         if (!mq.matches) return; // Desktop : rien à faire
 
-        const imgs = Array.from(carousel.querySelectorAll('img'));
+    // prefer picture elements (we replaced imgs with <picture>)
+    const imgs = Array.from(carousel.querySelectorAll('picture'));
         const total = imgs.length;
 
         // Cloner les images pour la boucle infinie
@@ -999,8 +1097,9 @@ function ensureTrailing(href: string) {
           carousel.appendChild(clone);
         });
 
-        let index = 0;
-        const imgWidth = carousel.offsetWidth;
+  let index = 0;
+  // use clientWidth for a stable width measurement
+  let imgWidth = carousel.clientWidth;
 
         // Scroll automatique
         let interval = setInterval(() => {
@@ -1018,32 +1117,38 @@ function ensureTrailing(href: string) {
 
         // Ajuster resize
         window.addEventListener('resize', () => {
-          const newWidth = carousel.offsetWidth;
-          carousel.scrollLeft = newWidth * index;
+          imgWidth = carousel.clientWidth;
+          carousel.scrollLeft = imgWidth * index;
         });
 
         // Swipe manuel : reset index quand on swipe
         let isDragging = false;
         let startX = 0;
-
         carousel.addEventListener('touchstart', (e) => {
           isDragging = true;
-          startX = e.touches[0].pageX;
+          if (e instanceof TouchEvent) {
+            startX = e.touches[0]?.pageX || 0;
+          } else {
+            startX = 0;
+          }
         });
 
         carousel.addEventListener('touchmove', (e) => {
           if (!isDragging) return;
-          const dx = startX - e.touches[0].pageX;
-          carousel.scrollLeft += dx;
-          startX = e.touches[0].pageX;
+          if (e instanceof TouchEvent) {
+            const currX = e.touches[0]?.pageX || 0;
+            const dx = startX - currX;
+            carousel.scrollLeft += dx;
+            startX = currX;
+          }
         });
 
         carousel.addEventListener('touchend', () => {
           isDragging = false;
           // recalculer l'index sur l'image la plus proche
-          index = Math.round(carousel.scrollLeft / carousel.offsetWidth) % total;
+          index = Math.round(carousel.scrollLeft / imgWidth) % total;
           // forcer le scroll sur l'image exacte
-          carousel.scrollTo({ left: carousel.offsetWidth * index, behavior: 'smooth' });
+          carousel.scrollTo({ left: imgWidth * index, behavior: 'smooth' });
         });
       });
     });
