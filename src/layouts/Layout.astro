@@ -1,12 +1,10 @@
 ---
 import Contact from "../components/Contact.astro";
 
-// Defaults
-const DEFAULT_TITLE = "In the Pouchett – Recording Studio, Live Session, Mixing & Mastering";
-const DEFAULT_DESC = "In the Pouchett — studio d'enregistrement et Live Sessions à Paris : captation audio/vidéo, mixage, mastering et production.";
+const DEFAULT_TITLE = "In the Pouchett (Recording studio, Live session, Mixing, Mastering)";
+const DEFAULT_DESC = "In the Pouchett — studio d'enregistrement et Live Sessions à Paris : captation, mixage, mastering et production vidéo.";
 const SITE_URL = "https://inthepouchett.com";
 const SITE_NAME = "In the Pouchett";
-const DEFAULT_IMAGE = '/cover.jpg';
 
 export interface Props {
   title?: string;
@@ -16,7 +14,7 @@ export interface Props {
   lang?: string;
 }
 
-const { title = DEFAULT_TITLE, description = DEFAULT_DESC, canonical = null, image = DEFAULT_IMAGE, lang = 'fr' } = Astro.props as Props;
+const { title = DEFAULT_TITLE, description = DEFAULT_DESC, canonical = null, image = null, lang = 'fr' } = Astro.props as Props;
 
 function toAbsoluteWithTrailing(pathOrUrl: string) {
   // If no path provided, return site root with trailing slash
@@ -41,59 +39,58 @@ const canonicalAbsolute = canonical ? toAbsoluteWithTrailing(canonical) : (SITE_
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <meta name="robots" content="index, follow" />
 
-    <title>{title}</title>
-    <meta name="description" content={description} />
-
-    {canonicalAbsolute && <link rel="canonical" href={canonicalAbsolute} />}
-
-    <!-- Preconnect Fonts (SEO/LCP) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-    <!-- Fonts -->
     <link
       href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
       rel="stylesheet"
     />
-    
-    <!-- Icons -->
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+    />
+
     <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
     <link rel="shortcut icon" href="/favicon/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
-    <link rel="manifest" href="/favicon/site.webmanifest" />
     <meta name="apple-mobile-web-app-title" content="In the Pouchett" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="manifest" href="/favicon/site.webmanifest" />
+    <!-- iOS web app meta (optionnel mais utile) -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  {canonical ? <link rel="canonical" href={canonicalAbsolute} /> : null}
 
     <!-- Open Graph -->
     <meta property="og:site_name" content={SITE_NAME} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={canonicalAbsolute} />
-    {image && <meta property="og:image" content={image} />}
-    {image && <meta property="og:image:alt" content={title} />}
+  <meta property="og:url" content={canonicalAbsolute} />
+    {image ? <meta property="og:image" content={image} /> : null}
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content={image ? "summary_large_image" : "summary"} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    {image && <meta name="twitter:image" content={image} />}
+    {image ? <meta name="twitter:image" content={image} /> : null}
 
     <!-- JSON-LD Organization (basic) -->
     <script
       type="application/ld+json"
       set:html={JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "MusicOrganization",
-          "name": SITE_NAME,
-          "url": SITE_URL,
-          "description": DEFAULT_DESC,
-          "logo": `${SITE_URL}/favicon/web-app-manifest-512x512.png`,
-          "image": `${SITE_URL}/favicon/web-app-manifest-512x512.png`,
+        "@context": "https://schema.org",
+        "@type": "MusicOrganization",
+        "name": SITE_NAME,
+        "url": SITE_URL,
+        "description": DEFAULT_DESC,
+        "logo": `${SITE_URL}/favicon/web-app-manifest-512x512.png`,
+        "image": `${SITE_URL}/favicon/web-app-manifest-512x512.png`,
         "foundingLocation": {
           "@type": "Place",
           "address": {
@@ -101,12 +98,12 @@ const canonicalAbsolute = canonical ? toAbsoluteWithTrailing(canonical) : (SITE_
             "addressLocality": "Paris",
             "addressCountry": "FR"
           }
-          },
-          "sameAs": [
-            "https://www.youtube.com/@inthepouchett",
-            "https://www.instagram.com/inthepouchett",
-            "https://www.tiktok.com/@inthepouchett"
-          ]
+        },
+        "sameAs": [
+          "https://www.youtube.com/@inthepouchett",
+          "https://www.instagram.com/inthepouchett",
+          "https://www.tiktok.com/@inthepouchett"
+        ]
       })}
     ></script>
   </head>
@@ -196,15 +193,11 @@ const canonicalAbsolute = canonical ? toAbsoluteWithTrailing(canonical) : (SITE_
   .pattern { color: black; }
 
   /* --- Titres --- */
-  h1 { 
-    font-size: var(--font-h1); 
-    text-transform: uppercase; 
-    text-align: center; 
-    font-family:  'Open Sans', sans-serif;
-  }
+  h1 { font-size: var(--font-h1); text-transform: uppercase; text-align: center; }
   h1.filled, h1.pattern { font-size: var(--font-h1-section); } /* sections */
   h2 { font-size: var(--font-h2); }
   h3 { font-size: var(--font-h3); }
+
   .filled p, .filled li, .pattern p, .pattern li {
     font-size: var(--font-base);
   }

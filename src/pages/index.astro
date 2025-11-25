@@ -109,61 +109,12 @@ function ensureTrailing(href: string) {
   }
 </style>
 
-
-<link rel="preload" as="image" href="/cover.webp" type="image/webp" />
-<link rel="preload" as="image" href="/cover.jpg" type="image/jpeg" />
-
-
-<script type="application/ld+json" set:html={JSON.stringify({
-  "@context": "https://schema.org",
-  "@type": "MusicOrganization",
-  "name": "In the Pouchett",
-  "url": "https://inthepouchett.com/",
-  "logo": "https://inthepouchett.com/favicon/web-app-manifest-512x512.png",
-  "image": "https://inthepouchett.com/og-default.jpg",
-  "description": "In the Pouchett — studio d'enregistrement et Live Sessions à Paris : captation, mixage, mastering et production vidéo.",
-  "foundingLocation": {
-    "@type": "Place",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Paris",
-      "addressCountry": "FR"
-    }
-  },
-  "sameAs": [
-    "https://www.youtube.com/@inthepouchett",
-    "https://www.instagram.com/inthepouchett",
-    "https://www.tiktok.com/@inthepouchett"
-  ]
-})}></script>
-
-<script type="application/ld+json" set:html={JSON.stringify({
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "url": "https://inthepouchett.com/",
-  "name": "In the Pouchett",
-  "description": "Studio d'enregistrement et Live Sessions à Paris",
-  "publisher": {
-    "@type": "MusicOrganization",
-    "name": "In the Pouchett"
-  }
-})}></script>
-
-
-<Layout 
-  title="In the Pouchett — Enregistrement, Mixage, Mastering Live Sessions" 
-  description="In the Pouchett: studio d'enregistrement à Paris spécialisé dans les Live Sessions. Captation audio/vidéo, mixage et mastering." 
-  canonical="/"
-  image="/cover.webp"
->
+<Layout title="In the Pouchett — Enregistrement, Mixage, Mastering Live Sessions" description="In the Pouchett: studio d'enregistrement à Paris spécialisé dans les Live Sessions. Captation audio/vidéo, mixage et mastering." canonical="/">
   <Navbar slot="navbar" />
 
   <!-- Cover modifiée -->
-  <!-- précharger l'image pour aider Google à voir l'image dès le rendu -->
-  <img src="/cover.webp" width="1920" height="1080" alt="" aria-hidden="true" style="display:none;" /> 
-   
   <div class="hero cover-image">
-   <div class="container hero-body">
+    <div class="container hero-body">
       <h1 class="title">IN THE POUCHETT</h1>
       <h2 class="subtitle">Enregistrement, Mixage, Mastering, Live Sessions</h2>
     </div>
@@ -183,7 +134,6 @@ function ensureTrailing(href: string) {
 
       h1,
       h2 {
-        font-weight: 700;
         color: white;
       }
 
