@@ -2,7 +2,6 @@
 import { Picture } from "astro:assets";
 import Navbar from "../components/Navbar.astro";
 import Layout from "../layouts/Layout.astro";
-import YouTubeGrid from "../components/YouTubeGrid.astro";
 
 function ensureTrailing(href: string) {
   if (!href) return href;
@@ -170,8 +169,61 @@ function ensureTrailing(href: string) {
   }
 </style>
 
+<link rel="preload" as="image" href="/cover.webp" type="image/webp" />
+<link rel="preload" as="image" href="/cover.jpg" type="image/jpeg" />
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Quels formats de Live Sessions proposez-vous ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nous proposons plusieurs formats :\n- Live in the Pouchett : captation classique avec plusieurs prises.\n- Concert in the Pouchett : expérience spontanée avec petit public.\n- Format Custom : création sur-mesure selon vos besoins et votre univers."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Comment se déroule la captation au studio ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "L'enregistrement se fait dans un cadre chaleureux et intimiste, avec tous les équipements nécessaires pour garantir une haute qualité audio et vidéo. Nous prenons en charge la post-production : mixage, mastering, édition et colorimétrie."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quel est le nombre de musiciens que vous pouvez accueillir ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Notre plateau est modulable et peut accueillir jusqu'à 7 musiciens simultanément, avec retours casques indépendants pour chacun."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Comment fonctionne la diffusion des Live Sessions ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Chaque session est diffusée sur notre chaîne YouTube et nos réseaux sociaux pour maximiser la visibilité. Il est aussi possible de partager certains titres sur votre propre chaîne pour créer du lien avec vos abonnés."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quels sont vos tarifs pour les Live Sessions ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Les tarifs dépendent du format choisi et des services inclus. N'hésitez pas à nous contacter pour obtenir un devis personnalisé."
+      }
+    }
+  ]
+})}></script>
+
+
 <Layout title="Live Sessions — In the Pouchett" description="Live Sessions au studio In the Pouchett — captation, mixage, mastering et production vidéo à Paris." canonical="/live-sessions">
   <Navbar slot="navbar" />
+   <!-- précharger l'image pour aider Google à voir l'image dès le rendu -->
+  <img src="/live-sess-cover-small.webp" width="1920" height="1080" alt="" aria-hidden="true" style="display:none;" /> 
   <div class="hero is-medium cover-image">
     <div class="container hero-body">
       <h1 class="title">LIVE SESSIONS</h1>
