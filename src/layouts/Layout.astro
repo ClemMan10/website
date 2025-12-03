@@ -17,20 +17,26 @@ export interface Props {
 const { title = DEFAULT_TITLE, description = DEFAULT_DESC, canonical = null, image = null, lang = 'fr' } = Astro.props as Props;
 
 function toAbsoluteWithTrailing(pathOrUrl: string) {
-  // If no path provided, return site root with trailing slash
+  // Si le chemin n'est pas fourni, nous utilisons la racine du site (fallback si Astro.url n'est pas disponible, mais peu probable)
   if (!pathOrUrl) return SITE_URL.endsWith('/') ? SITE_URL : SITE_URL + '/';
   try {
     const url = new URL(pathOrUrl, SITE_URL);
     let pathname = url.pathname;
     if (!pathname.endsWith('/')) pathname = pathname + '/';
+    // S'assurer que le chemin absolu est retourné
     return `${url.protocol}//${url.host}${pathname}${url.search}${url.hash}`;
   } catch (e) {
+    // Si la construction URL échoue, on suppose que c'est un chemin relatif à traiter
     if (!pathOrUrl.startsWith('/')) pathOrUrl = `/${pathOrUrl}`;
     return toAbsoluteWithTrailing(pathOrUrl);
   }
 }
 
-const canonicalAbsolute = canonical ? toAbsoluteWithTrailing(canonical) : (SITE_URL.endsWith('/') ? SITE_URL : SITE_URL + '/');
+// 🎯 NOUVEAU: Si "canonical" est null, nous utilisons l'URL de la page actuelle (Astro.url.pathname)
+const canonicalDefault = toAbsoluteWithTrailing(Astro.url.pathname);
+
+// La canonique sera celle spécifiée (si elle existe) ou l'URL de la page actuelle.
+const canonicalAbsolute = canonical ? toAbsoluteWithTrailing(canonical) : canonicalDefault;
 ---
 
 <!doctype html>
@@ -81,6 +87,15 @@ const canonicalAbsolute = canonical ? toAbsoluteWithTrailing(canonical) : (SITE_
     {image ? <meta name="twitter:image" content={image} /> : null}
 
     <!-- JSON-LD Organization (basic) -->
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": SITE_NAME,
+        "url": SITE_URL
+      })}
+    ></script>
     <script
       type="application/ld+json"
       set:html={JSON.stringify({
