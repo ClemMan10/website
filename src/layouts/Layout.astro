@@ -156,6 +156,17 @@ const canonicalAbsolute = canonical ? toAbsoluteWithTrailing(canonical) : canoni
   @use "../styles/pattern.scss";
 
   /* --- Variables typographie --- */
+  main p a,
+  main li a {
+    color: inherit;
+    text-decoration: underline;
+  }
+
+  main p a:hover,
+  main li a:hover {
+    color: inherit;
+    text-decoration-thickness: 2px;
+  }
   :root {
     --font-base: 1.25rem;          /* Texte normal */
     --font-card: 0.9rem;        /* Texte dans les cards */
@@ -208,13 +219,8 @@ const canonicalAbsolute = canonical ? toAbsoluteWithTrailing(canonical) : canoni
   .pattern { 
     color: black; 
     strong { 
-    font-weight: bold; 
-    color: inherit; /* Hérite du noir du parent */
-  }
-  
-    a {
-      color: inherit;
-      text-decoration: underline;
+      font-weight: bold; 
+      color: inherit; /* Hérite du noir du parent */
     }
   }
 
