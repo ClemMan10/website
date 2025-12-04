@@ -4,6 +4,12 @@ import Navbar from "../components/Navbar.astro";
 import Layout from "../layouts/Layout.astro";
 import YouTubeGrid from "../components/YouTubeGrid.astro";
 
+// --- IMPORTS DES IMAGES ---
+import liveSessCover from "../assets/live-sess-cover-small.jpg";
+import classicLiveSess from "../assets/classic-live-sess.jpg";
+import liveConcert from "../assets/live-concert.jpg";
+import customLiveSess from "../assets/custom-live-sess.jpg";
+
 function ensureTrailing(href: string) {
   if (!href) return href;
   if (href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:')) return href;
@@ -21,12 +27,11 @@ function ensureTrailing(href: string) {
   @use "bulma/sass/layout/container";
   @use "bulma/sass/elements/title";
 
-  /* RESET si tu n'as pas déjà cette règle */
+  /* RESET */
   *,
   *::before,
   *::after { box-sizing: border-box; }
 
-  /* Limit link styles to the page main content so navbar links aren't affected */
   main a {
     color: inherit;
     text-decoration: underline;
@@ -34,38 +39,32 @@ function ensureTrailing(href: string) {
 
   main a:hover {
     color: inherit;
-    text-decoration-thickness: 2px; /* optionnel, pour un soulignement plus visible */
+    text-decoration-thickness: 2px;
   }
 
-
-  /* wrapper interne centré dans la colonne centrale fournie par Layout */
+  /* wrapper interne centré */
   .diffusion-inner {
     display: flex;
-    flex-wrap: nowrap;        /* no wrap par défaut sur desktop */
+    flex-wrap: nowrap;
     gap: 1.5rem;
     align-items: flex-start;
     justify-content: flex-start;
     width: 100%;
-    max-width: 1200px;         /* borne raisonnable, aligne avec les autres sections */
-    margin: 0 auto;           /* centre dans la .container */
+    max-width: 1200px;
+    margin: 0 auto;
     box-sizing: border-box;
   }
 
-  /* Permet au flex de réduire correctement (évite l'overflow) */
   .diffusion-inner > * { min-width: 0; }
 
-  /* Texte : prend la majorité de l'espace */
   .diffusion-text {
     flex: 1 1 60%;
     min-width: 0;
-    /* ajuste l'interligne si besoin */
-    /* padding-right: 0.5rem; */
   }
 
-  /* Vidéo : fixe une largeur max pour éviter le tiraillement */
   .diffusion-video-wrapper {
-    flex: 0 0 36%;    /* taille fixe relative sur desktop */
-    max-width: 420px; /* évite dépassement visuel */
+    flex: 0 0 36%;
+    max-width: 420px;
     min-width: 0;
     display: flex;
     flex-direction: column;
@@ -74,7 +73,6 @@ function ensureTrailing(href: string) {
     box-sizing: border-box;
   }
 
-  /* responsive wrapper pour l'iframe */
   .video-embed {
     width: 100%;
     aspect-ratio: 16 / 9;
@@ -90,7 +88,6 @@ function ensureTrailing(href: string) {
     display: block;
   }
 
-  /* bouton : position naturelle au-dessus de la vidéo */
   .youtube-btn {
     display: inline-flex;
     align-items: center;
@@ -104,10 +101,10 @@ function ensureTrailing(href: string) {
   /* ========== MOBILE / TABLETTE ========== */
   @media (max-width: 992px) {
     .diffusion-inner {
-      flex-direction: column;   /* empile texte puis vidéo */
-      align-items: center;      /* centre le contenu */
+      flex-direction: column;
+      align-items: center;
       gap: 1.25rem;
-      max-width: 900px;         /* cohérence avec sections */
+      max-width: 900px;
       padding: 0 1rem;
     }
 
@@ -127,17 +124,29 @@ function ensureTrailing(href: string) {
 
     .video-embed { width: 100%; max-width: 900px; }
   }
+  
+  /* Style Cover optimisée */
   .cover-image {
-    background:
-      linear-gradient(0deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 1) 100%),
-      image-set(url("/live-sess-cover-small.webp") type("image/webp") 1x, url("/live-sess-cover-small.jpg") type("image/jpeg") 1x) center/cover;
-      //url("/cover.jpg") center/cover;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 1) 100%);
     text-align: center;
     font-weight: 700;
+    position: relative; 
+
     h1,
     h2 {
       color: white;
     }
+  }
+
+  .cover-background-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    filter: brightness(0.75);
   }
 
   .youtube-btn {
@@ -168,16 +177,70 @@ function ensureTrailing(href: string) {
   .youtube-btn .icon {
     font-size: 1.4rem;
   }
+  
+  /* GRID DES FORMATS */
+  .formats-grid {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+
+      /* NOTE: Les styles de base de .format-card (fond blanc, animation, ombre) 
+         sont gérés globalement dans Layout.astro. 
+         Ici, on ne gère que la mise en page (Flexbox) et l'aspect-ratio de l'image. */
+
+      .format-card {
+        flex: 1 1 calc(33.333% - 1rem); /* 3 cartes par ligne */
+        min-width: 280px;
+
+        /* On cible l'image pour forcer le format carré */
+        .card-image {
+          aspect-ratio: 1 / 1; 
+          overflow: hidden;
+
+          /* S'assurer que le Picture et l'img remplissent bien le carré */
+          picture, img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+          }
+        }
+      }
+
+      @media (max-width: 992px) {
+        justify-content: center;
+        .format-card {
+            flex: 1 1 calc(50% - 1rem); /* 2 cartes sur tablette */
+            max-width: 400px;
+        }
+      }
+      @media (max-width: 600px) {
+        .format-card {
+            flex: 1 1 100%; /* 1 carte sur mobile */
+            max-width: 100%;
+        }
+      }
+  }
 </style>
 
 <Layout title="Live Sessions — In the Pouchett" description="Live Sessions au studio In the Pouchett — captation, mixage, mastering et production vidéo à Paris." canonical="/live-sessions/">
   <Navbar slot="navbar" />
+  
   <div class="hero is-medium cover-image">
+    <Picture
+      src={liveSessCover}
+      alt="Live Sessions Cover"
+      widths={[600, 1200, 1800]}
+      sizes="100vw"
+      class="cover-background-img"
+    />
     <div class="container hero-body">
       <h1 class="title">LIVE SESSIONS</h1>
       <h2 class="subtitle">Captation, Mixage, Mastering, Edition, Colorimétrie</h2>
     </div>
   </div>
+  
   <section class="filled">
       <div class="container">
         <p>
@@ -204,13 +267,14 @@ function ensureTrailing(href: string) {
     <div class="container">
       <div class="formats-grid">
         
-        <!-- Format 1 -->
         <div class="format-card">
           <div class="card-image">
-            <picture>
-              <source srcset="/classic-live-sess.webp" type="image/webp" />
-              <img src="/classic-live-sess.jpg" alt="Live in the Pouchett" />
-            </picture>
+            <Picture
+              src={classicLiveSess}
+              alt="Live in the Pouchett"
+              widths={[300, 600]}
+              sizes="(max-width: 768px) 90vw, 300px"
+            />
           </div>
           <div class="card-content">
             <h3><strong>Format <i>Live in the Pouchett</i></strong></h3>
@@ -222,13 +286,14 @@ function ensureTrailing(href: string) {
           </div>
         </div>
 
-        <!-- Format 2 -->
         <div class="format-card">
           <div class="card-image">
-            <picture>
-              <source srcset="/live-concert.webp" type="image/webp" />
-              <img src="/live-concert.jpg" alt="Concert in the Pouchett" />
-            </picture>
+            <Picture
+              src={liveConcert}
+              alt="Concert in the Pouchett"
+              widths={[300, 600]}
+              sizes="(max-width: 768px) 90vw, 300px"
+            />
           </div>
           <div class="card-content">
             <h3><strong>Format <i>Concert in the Pouchett</i></strong></h3>
@@ -240,16 +305,17 @@ function ensureTrailing(href: string) {
           </div>
         </div>
 
-        <!-- Format 3 -->
         <div class="format-card">
           <div class="card-image">
-            <picture>
-              <source srcset="/custom-live-sess.webp" type="image/webp" />
-              <img src="/custom-live-sess.jpg" alt="Format Custom" />
-            </picture>
+            <Picture
+              src={customLiveSess}
+              alt="Format Custom"
+              widths={[300, 600]}
+              sizes="(max-width: 768px) 90vw, 300px"
+            />
           </div>
           <div class="card-content">
-            <h3><strong>Format Custom</strong></h3>
+            <h3><strong>Format <i>Custom</i></strong></h3>
             <p>
               Un projet particulier en tête ? Envie de filmer dans un lieu spécifique ? 
               Nous concevons avec vous un format sur-mesure, adapté à votre univers.
@@ -263,10 +329,7 @@ function ensureTrailing(href: string) {
 
   <section class="pattern" id="diffusion">
     <h1>Diffusion</h1>
-
-    <!-- <-- enfant DIRECT du section : respecte le grid du Layout -->
     <div class="container">
-      <!-- wrapper interne qui contient le flex et est centré par le container -->
       <div class="diffusion-inner">
         <div class="diffusion-text">
           <p>
@@ -298,8 +361,8 @@ function ensureTrailing(href: string) {
             </iframe>
           </div>
         </div>
-      </div> <!-- .diffusion-inner -->
-    </div> <!-- .container -->
+      </div>
+    </div>
   </section>
 
   <section class="filled" id="tarifs">

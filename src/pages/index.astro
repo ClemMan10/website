@@ -3,6 +3,37 @@ import Navbar from "../components/Navbar.astro";
 import Video from "../components/Video.astro";
 import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
+import { Picture } from "astro:assets"; // ⬅️ NOUVEL IMPORT
+
+// --- IMPORTS DES IMAGES (Doivent pointer vers /src/assets) ---
+// Note: Le composant Picture se chargera de générer le WebP et le responsive
+
+// Cover
+import coverImage from "../assets/cover.jpg";
+
+// Studio Gallery (11 images)
+import studioLargePortrait from "../assets/studio_large_portrait.jpg";
+import pianoClose from "../assets/piano_close.jpg";
+import fader from "../assets/fader.jpg";
+import piano1 from "../assets/piano1.jpg";
+import oc818 from "../assets/oc818.jpg";
+import flamandCache from "../assets/flamand-cache.jpg";
+import d190Mic from "../assets/d190-mic.jpg";
+import soyuz013 from "../assets/soyuz-013.jpg";
+import machinePatchbay from "../assets/machine_patchbay.jpg";
+import closeMicGreen from "../assets/close_mic_green.jpg";
+import bureauLarge from "../assets/bureau_large.jpg";
+
+// Matériel Images (6 images)
+import hardwareCloseBlur from "../assets/hardware_close_blur.jpg";
+import soyuz013Close from "../assets/soyuz_013_close.jpg";
+// fader est déjà importé
+import pianoCloseRight from "../assets/piano_close_right.jpg";
+import deepmindClose from "../assets/deepmind_close.jpg";
+import guitareAcoustique from "../assets/guitare_acoustique.jpg";
+
+// --- FIN DES IMPORTS ---
+
 
 const data = await getCollection("videos");
 
@@ -24,12 +55,12 @@ function ensureTrailing(href: string) {
   @use "bulma/sass/elements/title";
 
   .cover-image {
-    /* Fallback background (JPEG) for maximum compatibility */
-    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 1) 100%), url("/cover.jpg");
+    /* Suppression des background-image statiques pour utiliser le Picture optimisé */
     background-position: center;
     background-size: cover;
     text-align: center;
     font-weight: 700;
+    position: relative; /* Ajout pour positionner l'image de fond */
 
     h1,
     h2 {
@@ -43,18 +74,11 @@ function ensureTrailing(href: string) {
 
   a:hover {
     color: inherit;
-    text-decoration-thickness: 2px; /* optionnel, pour un soulignement plus visible */
+    text-decoration-thickness: 2px;
+    /* optionnel, pour un soulignement plus visible */
   }
 
-  /* If the browser supports image-set for background-image, prefer WebP */
-  @supports (background-image: image-set(url("/cover.webp") type("image/webp"))) {
-    .cover-image {
-      background-image: linear-gradient(0deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 1) 100%), image-set(url("/cover.webp") type("image/webp") 1x, url("/cover.jpg") type("image/jpeg") 1x);
-      background-position: center;
-      background-size: cover;
-    }
-  }
-
+  /* SUPPRESSION DU BLOC @supports ICI */
 
   .videos-wrapper {
     .videos {
@@ -112,8 +136,14 @@ function ensureTrailing(href: string) {
 <Layout title="In the Pouchett — Enregistrement, Mixage, Mastering Live Sessions" description="In the Pouchett: studio d'enregistrement à Paris spécialisé dans les Live Sessions. Captation audio/vidéo, mixage et mastering.">
   <Navbar slot="navbar" />
 
-  <!-- Cover modifiée -->
   <div class="hero cover-image">
+    <Picture
+      src={coverImage}
+      alt="Studio In the Pouchett"
+      widths={[600, 1200, 1800]} 
+      sizes="100vw" 
+      class="cover-background-img"
+    />
     <div class="container hero-body">
       <h1 class="title">IN THE POUCHETT</h1>
       <h2 class="subtitle">Enregistrement, Mixage, Mastering, Live Sessions</h2>
@@ -121,17 +151,27 @@ function ensureTrailing(href: string) {
   </div>
 
   <style lang="scss">
+    /* NOUVEAU STYLE pour l'image de fond */
+    .cover-background-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Equivalent de background-size: cover */
+      z-index: -1; /* Place l'image derrière le contenu */
+      filter: brightness(0.9); /* Optionnel : pour assombrir légèrement l'image */
+    }
+
     .cover-image {
-      background:
-        linear-gradient(0deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 1) 100%),
-        /* prefer WebP with JPEG fallback */
-        image-set(url("/cover.webp") type("image/webp") 1x, url("/cover.jpg") type("image/jpeg") 1x) center/cover;
+      background: linear-gradient(0deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 1) 100%); 
+      /* Supprime l'image du background CSS, ne garde que le dégradé */
+      
       text-align: center;
       font-weight: 700;
 
       /* Hauteur 3/4 sur desktop */
       min-height: 75vh;
-
       h1,
       h2 {
         color: white;
@@ -173,7 +213,6 @@ function ensureTrailing(href: string) {
 
     .studio-wrapper {
       width: 100%;
-
       .studio-gallery {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -192,7 +231,6 @@ function ensureTrailing(href: string) {
         opacity: 0;
         transform: translateY(20px);
         transition: opacity 0.5s ease, transform 0.5s ease;
-
         &.wide { 
           grid-column: span 2;
         }
@@ -206,7 +244,9 @@ function ensureTrailing(href: string) {
           transform: translateY(0);
         }
         
-        img {
+        /* Cible l'image générée par le composant Picture */
+        img, 
+        picture { 
           width: 100%;
           height: 100%;
           display: block;
@@ -215,8 +255,9 @@ function ensureTrailing(href: string) {
           border-radius: 8px;
           transition: transform 0.3s ease;
         }
-
-        &:hover img {
+        
+        /* On cible le conteneur Picture (qui a 100% de width/height) */
+        &:hover picture img { 
           transform: scale(1.05);
         }
 
@@ -353,14 +394,14 @@ function ensureTrailing(href: string) {
       position: fixed;
       inset: 0;
       background: rgba(0, 0, 0, 0.8); /* un peu plus transparent */
-      display: none;       /* caché par défaut */
+      display: none; /* caché par défaut */
       align-items: center;
       justify-content: center;
       z-index: 9999;
       padding: 20px;
       box-sizing: border-box;
       flex-direction: column; /* image + légende en colonne */
-      text-align: center;     /* centre le texte */
+      text-align: center; /* centre le texte */
     }
 
     #lightbox.active {
@@ -414,16 +455,15 @@ function ensureTrailing(href: string) {
         autour des <a href={ensureTrailing('/live-sessions')}>Live Sessions</a>, nous proposons cependant des services plus
         classiques tels que l'enregistrement, le mixage et le mastering de vos
         titres.
-      </p>
+        </p>
       <p>
         Nous pouvons également apporter notre expertise musicale pour vous aider
         dans vos compositions et vous proposer des musiciens de session
         d'exception.
-      </p>
+        </p>
     </div>
   </section>
 
-  <!-- Section Références avec collapse sur mobile -->
   <section class="filled" id="reference">
     <h1>Références</h1>
     <div class="container">
@@ -432,10 +472,6 @@ function ensureTrailing(href: string) {
           {data.map((i) => <Video url={i.data.url} />)}
         </div>
 
-        <!--
-          Bouton REELLEMENT masqué par défaut via inline style.
-          Le script ci-dessous l'affichera uniquement si l'écran est mobile.
-        -->
         <button class="toggle-videos" style="display:none;" aria-hidden="true">
           <i class="fa-solid fa-plus" aria-hidden="true"></i>
         </button>
@@ -448,89 +484,116 @@ function ensureTrailing(href: string) {
   <section class="filled studio-section">
     <div class="container">
 
-      <!-- Ajout de studio-wrapper -->
       <div class="studio-wrapper">
         <div class="studio-gallery">
+          
           <div class="studio-item tall">
-            <picture>
-              <source srcset="/studio_large_portrait.webp" type="image/webp" />
-              <img src="/studio_large_portrait.jpg" alt="Vue du studio portrait" />
-            </picture>
-            <!-- <div class="caption">Vue générale du studio</div> -->
-          </div>
+            <Picture 
+              src={studioLargePortrait} 
+              alt="Vue du studio portrait" 
+              widths={[400, 800]} 
+              sizes="(max-width: 768px) 100vw, 33vw"
+            />
+            </div>
+          
           <div class="studio-item tall wide">
-            <picture>
-              <source srcset="/piano_close.webp" type="image/webp" />
-              <img src="/piano_close.jpg" alt="Piano acoustique" />
-            </picture>
-            <!-- <div class="caption">Console de mixage</div> -->
-          </div>
+            <Picture 
+              src={pianoClose} 
+              alt="Piano acoustique" 
+              widths={[600, 1200]} 
+              sizes="(max-width: 768px) 100vw, 66vw"
+            />
+            </div>
+          
           <div class="studio-item">
-            <picture>
-              <source srcset="/fader.webp" type="image/webp" />
-              <img src="/fader.jpg" alt="Fader" />
-            </picture>
-            <!-- <div class="caption">Cabine d'enregistrement</div> -->
-          </div>
+            <Picture 
+              src={fader} 
+              alt="Fader" 
+              widths={[300, 600]} 
+              sizes="(max-width: 768px) 50vw, 33vw"
+            />
+            </div>
+          
           <div class="studio-item">
-            <picture>
-              <source srcset="/piano1.webp" type="image/webp" />
-              <img src="/piano1.jpg" alt="Piano droit" />
-            </picture>
+            <Picture 
+              src={piano1} 
+              alt="Piano droit" 
+              widths={[300, 600]} 
+              sizes="(max-width: 768px) 50vw, 33vw"
+            />
             <div class="caption">Piano droit</div>
           </div>
+          
           <div class="studio-item tall">  
-            <picture>
-              <source srcset="/oc818.webp" type="image/webp" />
-              <img src="/oc818.jpg" alt="Austrian Audio OC818" />
-            </picture>
-            <!-- <div class="caption">Espace d'accueil</div> -->
-          </div>
+            <Picture 
+              src={oc818} 
+              alt="Austrian Audio OC818" 
+              widths={[400, 800]} 
+              sizes="(max-width: 768px) 50vw, 33vw"
+            />
+            </div>
+          
           <div class="studio-item tall wide">
-            <picture>
-              <source srcset="/flamand-cache.webp" type="image/webp" />
-              <img src="/flamand-cache.jpg" alt="Flamand Rose" style="object-position: 50% 30%;" />
-            </picture>
-            <!-- <div class="caption">Espace d'accueil 2</div> -->
-          </div>
+            <Picture 
+              src={flamandCache} 
+              alt="Flamand Rose" 
+              widths={[600, 1200]} 
+              sizes="(max-width: 768px) 100vw, 66vw"
+              style="object-position: 50% 30%;"
+            />
+            </div>
+          
           <div class="studio-item">
-            <picture>
-              <source srcset="/d190-mic.webp" type="image/webp" />
-              <img src="/d190-mic.jpg" alt="AKG D190C" style="object-position: 50% 10%;" />
-            </picture>
-            <!-- <div class="caption">Instruments et matériel 2</div> -->
-          </div>
+            <Picture 
+              src={d190Mic} 
+              alt="AKG D190C" 
+              widths={[300, 600]} 
+              sizes="(max-width: 768px) 50vw, 33vw"
+              style="object-position: 50% 10%;"
+            />
+            </div>
+          
           <div class="studio-item tall">
-            <picture>
-              <source srcset="/soyuz-013.webp" type="image/webp" />
-              <img src="/soyuz-013.jpg" alt="Soyuz 013 fet" />
-            </picture>
-            <!-- <div class="caption">Instruments et matériel 3</div> -->
-          </div>
+            <Picture 
+              src={soyuz013} 
+              alt="Soyuz 013 fet" 
+              widths={[400, 800]} 
+              sizes="(max-width: 768px) 50vw, 33vw"
+            />
+            </div>
+          
           <div class="studio-item wide">
-            <picture>
-              <source srcset="/machine_patchbay.webp" type="image/webp" />
-              <img src="/machine_patchbay.jpg" alt="Control Room" />
-            </picture>
+            <Picture 
+              src={machinePatchbay} 
+              alt="Control Room" 
+              widths={[600, 1200]} 
+              sizes="(max-width: 768px) 100vw, 66vw"
+            />
             <div class="caption">Control Room</div>
           </div>
+          
           <div class="studio-item tall">
-            <picture>
-              <source srcset="/close_mic_green.webp" type="image/webp" />
-              <img src="/close_mic_green.jpg" alt="Prise de son" />
-            </picture>
+            <Picture 
+              src={closeMicGreen} 
+              alt="Prise de son" 
+              widths={[400, 800]} 
+              sizes="(max-width: 768px) 50vw, 33vw"
+            />
             <div class="caption">Prise de son</div>
           </div>
+          
           <div class="studio-item">
-            <picture>
-              <source srcset="/bureau_large.webp" type="image/webp" />
-              <img src="/bureau_large.jpg" alt="Bureau Studio" />
-            </picture>
+            <Picture 
+              src={bureauLarge} 
+              alt="Bureau Studio" 
+              widths={[300, 600]} 
+              sizes="(max-width: 768px) 50vw, 33vw"
+            />
             <div class="caption">Bureau Studio</div>
           </div>
+          
         </div>
 
-        <!-- Bouton voir plus -->
         <button class="toggle-studio" aria-label="Voir plus">
           <i class="fa-solid fa-plus"></i>
         </button>
@@ -538,7 +601,6 @@ function ensureTrailing(href: string) {
     </div>
   </section>
 
-  <!-- Lightbox Overlay -->
   <div id="lightbox" class="lightbox">
     <span class="close">&times;</span>
     <img class="lightbox-img" src="" alt="Aperçu studio" />
@@ -550,7 +612,6 @@ function ensureTrailing(href: string) {
 <section class="filled materiel-section">
   <div class="container">
     <div class="materiel-grid">
-      <!-- Colonne 1: Monitoring -->
       <div class="materiel-category">
         <h2>Monitoring / AD-DA / DAW</h2>
         <ul>
@@ -561,7 +622,6 @@ function ensureTrailing(href: string) {
         </ul>
       </div>
 
-      <!-- Colonne 2: Headphones -->
       <div class="materiel-category">
         <h2>Headphones</h2>
         <ul>
@@ -574,7 +634,6 @@ function ensureTrailing(href: string) {
         </ul>
       </div>
 
-      <!-- Colonne 3: Préamplis / DYN -->
       <div class="materiel-category">
         <h2>Préamplifieurs / DYN</h2>
         <ul>
@@ -585,7 +644,6 @@ function ensureTrailing(href: string) {
         </ul>
       </div>
 
-      <!-- Colonne 4: Microphones -->
       <div class="materiel-category">
         <h2>Microphones</h2>
         <ul>
@@ -600,7 +658,6 @@ function ensureTrailing(href: string) {
         </ul>
       </div>
 
-      <!-- Colonne 5: Direct Boxes -->
       <div class="materiel-category">
         <h2>Direct Boxes</h2>
         <ul>
@@ -609,23 +666,28 @@ function ensureTrailing(href: string) {
         </ul>
       </div>
 
-      <!-- Images équipement -->
       <div class="materiel-images instrument-carousel">
-        <picture>
-          <source srcset="/hardware_close_blur.webp" type="image/webp" />
-          <img src="/hardware_close_blur.jpg" alt="Studio Hardware" />
-        </picture>
-        <picture>
-          <source srcset="/soyuz_013_close.webp" type="image/webp" />
-          <img src="/soyuz_013_close.jpg" alt="Micros Soyuz" style="object-position: 50% 25%;" />
-        </picture>
-        <picture>
-          <source srcset="/fader.webp" type="image/webp" />
-          <img src="/fader.jpg" alt="Amplis Orange" />
-        </picture>
+        <Picture 
+          src={hardwareCloseBlur} 
+          alt="Studio Hardware" 
+          widths={[400, 800]} 
+          sizes="(max-width: 768px) 100vw, 33vw"
+        />
+        <Picture 
+          src={soyuz013Close} 
+          alt="Micros Soyuz" 
+          widths={[400, 800]} 
+          sizes="(max-width: 768px) 100vw, 33vw"
+          style="object-position: 50% 25%;"
+        />
+        <Picture 
+          src={fader} 
+          alt="Amplis Orange" 
+          widths={[400, 800]} 
+          sizes="(max-width: 768px) 100vw, 33vw"
+        />
       </div>
 
-      <!-- Colonne 6: Instruments avec toutes les sous-catégories -->
       <div class="materiel-category instruments">
         <h2>Instruments</h2>
         <div class="instrument-group">
@@ -673,7 +735,6 @@ function ensureTrailing(href: string) {
         </div>
       </div>
 
-      <!-- Colonne 7: Plugins -->
       <div class="materiel-category">
         <h2>Plugins</h2>
         <ul>
@@ -690,20 +751,27 @@ function ensureTrailing(href: string) {
         </ul>
       </div>
 
-      <!-- Images équipement 2 -->
       <div class="materiel-images-bottom instrument-carousel">
-        <picture>
-          <source srcset="/piano_close_right.webp" type="image/webp" />
-          <img src="/piano_close_right.jpg" alt="Piano du studio" />
-        </picture>
-        <picture>
-          <source srcset="/deepmind_close.webp" type="image/webp" />
-          <img src="/deepmind_close.jpg" alt="Synthé deepmind" style="object-position: 50% 90%;" />
-        </picture>
-        <picture>
-          <source srcset="/guitare_acoustique.webp" type="image/webp" />
-          <img src="/guitare_acoustique.jpg" alt="Guitare acoustique" style="object-position: 50% 40%;"/>
-        </picture>
+        <Picture 
+          src={pianoCloseRight} 
+          alt="Piano du studio" 
+          widths={[400, 800]} 
+          sizes="(max-width: 768px) 100vw, 33vw"
+        />
+        <Picture 
+          src={deepmindClose} 
+          alt="Synthé deepmind" 
+          widths={[400, 800]} 
+          sizes="(max-width: 768px) 100vw, 33vw"
+          style="object-position: 50% 90%;"
+        />
+        <Picture 
+          src={guitareAcoustique} 
+          alt="Guitare acoustique" 
+          widths={[400, 800]} 
+          sizes="(max-width: 768px) 100vw, 33vw"
+          style="object-position: 50% 40%;"
+        />
       </div>
     </div>
   </div>
@@ -759,7 +827,6 @@ function ensureTrailing(href: string) {
       /* vertical | horizontal */
       gap: 0.75rem 3rem; /* 👈 réduit l'espace vertical */
       align-items: start;
-
       h2 {
         grid-column: 1 / -1;
         border-bottom: 1px solid rgba(255, 255, 255, 0.2);
@@ -795,34 +862,28 @@ function ensureTrailing(href: string) {
         }
       }
     }
-    .materiel-images {
-      grid-column: span 3;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-      margin: 1.5rem 0;
-
-      img {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-        border-radius: 8px;
-      }
-    }
-
+    .materiel-images,
     .materiel-images-bottom {
       grid-column: span 3;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    
+    /* Cible le conteneur Picture (ou l'image qu'il contient) */
+    .materiel-images picture,
+    .materiel-images-bottom picture,
+    .materiel-images img,
+    .materiel-images-bottom img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    
+    .materiel-images-bottom {
       margin-top: 1.5rem;
-
-      img {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-        border-radius: 8px;
-      }
     }
 
     /* Responsive mobile */
@@ -837,7 +898,7 @@ function ensureTrailing(href: string) {
         grid-column: 1;
         grid-template-columns: 1fr;
         
-        img {
+        img, picture {
           height: 150px;
         }
       }
@@ -864,6 +925,8 @@ function ensureTrailing(href: string) {
       padding: 0;
     }
 
+    .materiel-images.instrument-carousel picture,
+    .materiel-images-bottom.instrument-carousel picture,
     .materiel-images.instrument-carousel img,
     .materiel-images-bottom.instrument-carousel img {
       flex: 0 0 100%;
@@ -878,7 +941,7 @@ function ensureTrailing(href: string) {
       -webkit-overflow-scrolling: touch;
     }
 
-    /* If carousel items are wrapped in <picture>, make the picture the flex item */
+    /* Si carousel items are wrapped in <picture>, make the picture the flex item */
     .instrument-carousel > picture,
     .materiel-images.instrument-carousel > picture,
     .materiel-images-bottom.instrument-carousel > picture {
@@ -898,7 +961,6 @@ function ensureTrailing(href: string) {
 
 </style>
 
-  <!-- Script pour collapse/expand mobile avec activation DU BOUTON seulement côté client -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const wrapper = document.querySelector(".videos-wrapper");
@@ -935,7 +997,6 @@ function ensureTrailing(href: string) {
 
       // initial
       updateVisibility();
-
       // écouter changement de breakpoint (responsive)
       if (typeof mq.addEventListener === "function") {
         mq.addEventListener("change", updateVisibility);
@@ -1029,8 +1090,6 @@ function ensureTrailing(href: string) {
         }
       });
     });
-
-
     document.addEventListener("DOMContentLoaded", () => {
       const lightbox = document.getElementById("lightbox");
       if (!lightbox) return;
@@ -1042,6 +1101,7 @@ function ensureTrailing(href: string) {
         if (!(node instanceof HTMLImageElement)) return;
         const img = node;
         img.addEventListener("click", () => {
+          
           // ensure elements exist before using them
           if (!lightbox) return;
           lightbox.style.display = "flex"; // bien flex pour centrer
@@ -1076,7 +1136,6 @@ function ensureTrailing(href: string) {
         }
       });
     }, { threshold: 0.2 });
-
     const gallery = document.querySelector(".studio-gallery");
     if (gallery) observer.observe(gallery);
 
@@ -1091,7 +1150,7 @@ function ensureTrailing(href: string) {
     const imgs = Array.from(carousel.querySelectorAll('picture'));
         const total = imgs.length;
 
-        // Cloner les images pour la boucle infinie
+        // Cloner les images pour la boucle 
         imgs.forEach(img => {
           const clone = img.cloneNode(true);
           carousel.appendChild(clone);
@@ -1114,13 +1173,11 @@ function ensureTrailing(href: string) {
             }, 300); // durée correspond à smooth scroll
           }
         }, 3000);
-
         // Ajuster resize
         window.addEventListener('resize', () => {
           imgWidth = carousel.clientWidth;
           carousel.scrollLeft = imgWidth * index;
         });
-
         // Swipe manuel : reset index quand on swipe
         let isDragging = false;
         let startX = 0;
@@ -1132,7 +1189,6 @@ function ensureTrailing(href: string) {
             startX = 0;
           }
         });
-
         carousel.addEventListener('touchmove', (e) => {
           if (!isDragging) return;
           if (e instanceof TouchEvent) {
@@ -1142,7 +1198,6 @@ function ensureTrailing(href: string) {
             startX = currX;
           }
         });
-
         carousel.addEventListener('touchend', () => {
           isDragging = false;
           // recalculer l'index sur l'image la plus proche
