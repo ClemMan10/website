@@ -205,7 +205,18 @@ const canonicalAbsolute = canonical ? toAbsoluteWithTrailing(canonical) : canoni
     strong { font-weight: bold; color: inherit; }
   }
 
-  .pattern { color: black; }
+  .pattern { 
+    color: black; 
+    strong { 
+    font-weight: bold; 
+    color: inherit; /* Hérite du noir du parent */
+  }
+  
+    a {
+      color: inherit;
+      text-decoration: underline;
+    }
+  }
 
   /* --- Titres --- */
   h1 { font-size: var(--font-h1); text-transform: uppercase; text-align: center; }
