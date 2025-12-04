@@ -1,26 +1,32 @@
 [
   {
     "slug": "first",
-    "url": "https://www.youtube.com/embed/MZtTgbOv4R0?si=94c67m1Rsl0OQ3Nl"
+    "url": "https://www.youtube.com/embed/MZtTgbOv4R0?si=94c67m1Rsl0OQ3Nl",
+    "title": "Eliana - Rêverie (Live in the Pouchett)"
   },
   {
     "slug": "second",
-    "url": "https://www.youtube.com/embed/SmpFXZ-35sk?si=NyowHr2WI7VdRfzR"
+    "url": "https://www.youtube.com/embed/SmpFXZ-35sk?si=NyowHr2WI7VdRfzR",
+    "title": "LUZ - Live in the Pouchett"
   },
   {
     "slug": "third",
-    "url": "https://www.youtube.com/embed/Em4Kb0mudoM?si=fAQ-APviDAkP3rCk"
+    "url": "https://www.youtube.com/embed/Em4Kb0mudoM?si=fAQ-APviDAkP3rCk",
+    "title": "Pilypills - Grey Cloud (Live In the Pouchett)"
   },
   {
     "slug": "fourth",
-    "url": "https://www.youtube.com/embed/smIJhHNgHh8?si=_GL80cOkUKlovhf0"
+    "url": "https://www.youtube.com/embed/smIJhHNgHh8?si=_GL80cOkUKlovhf0",
+    "title": "Andreea - Deserti (Live In the Pouchett)"
   },
   {
     "slug": "fifth",
-    "url": "https://www.youtube.com/embed/isgvUzDUai8?si=j-5wq77QobildfE5"
+    "url": "https://www.youtube.com/embed/isgvUzDUai8?si=j-5wq77QobildfE5",
+    "title": "Spiral - Incipit (Live In The Pouchett)"
   },
   {
     "slug": "sixth",
-    "url": "https://www.youtube.com/embed/AQdhBzUxgkE?si=poW3mElqXivMNi6R"
+    "url": "https://www.youtube.com/embed/AQdhBzUxgkE?si=poW3mElqXivMNi6R",
+    "title": "Lorenzo Travaglini - Concert in the Pouchett"
   }
 ]

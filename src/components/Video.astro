@@ -1,63 +1,159 @@
 ---
 interface Props {
-  url: string;
+  videoId: string;
+  title: string; // On force le titre car vous le voulez affiché
+  thumb?: string; // Rendu optionnel pour éviter l'erreur si non fourni par index.astro
 }
-const { url } = Astro.props;
+const { videoId, title, thumb } = Astro.props;
+
+// Génération automatique de l'URL de la vignette YouTube si 'thumb' est vide
+const thumbUrl = thumb || `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
 ---
 
-<style>
-  /* Responsive video item for the videos flex grid
-     - On desktop: 3 items per row (account for 2 gaps of 1.5rem = 3rem)
-     - On tablet: 2 items per row
-     - On mobile: 1 item per row
-  */
-  .project-container {
-    box-sizing: border-box;
-    flex: 0 0 calc((100% - 3rem) / 3);
-    max-width: calc((100% - 3rem) / 3);
-    padding: 0; /* laisse le gap gérer l'espacement */
-  }
-
-  /* tablette: 2 colonnes */
-  @media (max-width: 1024px) {
-    .project-container {
-      flex: 0 0 calc((100% - 1.5rem) / 2);
-      max-width: calc((100% - 1.5rem) / 2);
-    }
-  }
-
-  /* mobile: 1 colonne */
-  @media (max-width: 768px) {
-    .project-container {
-      flex: 0 0 100%;
-      max-width: 100%;
-    }
-  }
-
-  .video-embed {
-    width: 100%;
-    aspect-ratio: 16/9;
-    overflow: hidden;
-    background: #000;
-    border-radius: 6px;
-  }
-
-  .video-embed iframe {
-    width: 100%;
-    height: 100%;
-    border: 0;
-    display: block;
-  }
-</style>
-
 <div class="project-container">
-  <div class="video-embed">
-    <iframe
-      src={url}
-      title="YouTube video player"
-      frameborder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      referrerpolicy="strict-origin-when-cross-origin"
-      allowfullscreen></iframe>
+
+  <style>
+    /* --------------------------------------------------------------------------------------------------
+       Styles du Layout (RE-INTEGRÉS pour corriger la perte d'organisation spatiale)
+       Ceci gère le layout sur 3, 2 ou 1 colonne (réponse à votre problème de layout) 
+       -------------------------------------------------------------------------------------------------- */
+    .project-container {
+      box-sizing: border-box;
+      flex: 0 0 calc((100% - 3rem) / 3);
+      max-width: calc((100% - 3rem) / 3);
+      padding: 0; 
+    }
+
+    /* tablette: 2 colonnes */
+    @media (max-width: 1024px) {
+      .project-container {
+        flex: 0 0 calc((100% - 1.5rem) / 2);
+        max-width: calc((100% - 1.5rem) / 2);
+      }
+    }
+
+    /* mobile: 1 colonne */
+    @media (max-width: 768px) {
+      .project-container {
+        flex: 0 0 100%;
+        max-width: 100%;
+      }
+    }
+
+
+    /* --------------------------------------------------------------------------------------------------
+       Styles du Facade (prévisualisateur + Bouton Play + Titre)
+       -------------------------------------------------------------------------------------------------- */
+    .video-facade-wrapper {
+      position: relative;
+      cursor: pointer;
+      width: 100%;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      background: #000;
+      border-radius: 6px;
+      margin-bottom: 0.5rem; 
+    }
+
+    .video-facade-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity 0.3s;
+      display: block;
+    }
+    
+    .video-facade-wrapper:hover img {
+      opacity: 0.9;
+    }
+
+    /* Bouton Play (réponse à votre demande) */
+    .play-btn {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 70px; height: 50px;
+      background: rgba(255, 0, 0, 0.85);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .play-btn::after {
+      content: "";
+      border-style: solid;
+      border-width: 12px 0 12px 22px;
+      border-color: transparent transparent transparent white;
+      margin-left: 5px; 
+    }
+    .video-facade-wrapper:hover .play-btn { background: red; }
+
+    /* Titre de la vidéo (réponse à votre demande) */
+    .video-title {
+      font-size: 0.6rem;
+      font-weight: 600;
+      color: #FFFFFF; 
+      margin-top: 0.25rem;
+      text-align: center;
+      line-height: 1.2;
+    }
+    .video-title a {
+      text-decoration: none;
+      color: inherit;
+      display: block; 
+    }
+    .video-title a:hover {
+      text-decoration: underline;
+    }
+
+    /* L'iframe doit prendre toute la place une fois injectée */
+    .video-facade-wrapper iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+        display: block;
+    }
+  </style>
+
+  <div class="video-facade-wrapper" data-video-id={videoId}>
+    <img src={thumbUrl} alt={`Vignette de la session ${title}`} loading="lazy" />
+    <div class="play-btn" aria-label={`Lire la session : ${title}`}></div>
   </div>
+
+  <p class="video-title">
+    <a href={`https://youtu.be/${videoId}`} target="_blank" rel="noopener noreferrer">
+      {title}
+    </a>
+  </p>
 </div>
+
+<script is:inline>
+  document.addEventListener('click', (event) => {
+    const target = event.target;
+    // On cherche l'élément parent le plus proche avec la classe 'video-facade-wrapper'
+    const facade = target.closest('.video-facade-wrapper');
+    
+    // Si ce n'est pas une facade ou si l'iframe est déjà là, on s'arrête
+    if (!facade || facade.querySelector('iframe')) return;
+
+    // On empêche toute action par défaut (comme suivre un lien si l'image est un lien)
+    event.stopPropagation();
+    event.preventDefault();
+
+    // @ts-ignore
+    const videoId = facade.dataset.videoId;
+
+    const iframe = document.createElement('iframe');
+    // On utilise l'URL sans-cookie pour un peu plus de vie privée
+    iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1`;
+    iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+    iframe.setAttribute('allowfullscreen', 'true');
+    iframe.setAttribute('title', 'Lecteur YouTube'); 
+    
+    iframe.style.width = '100%';
+    iframe.style.height = '100%';
+    iframe.style.border = 'none';
+    
+    facade.innerHTML = ''; // On vide l'image et le bouton
+    facade.appendChild(iframe);
+  }, { once: false });
+</script>

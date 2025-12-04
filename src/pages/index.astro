@@ -4,6 +4,7 @@ import Video from "../components/Video.astro";
 import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 import { Picture } from "astro:assets"; // ⬅️ NOUVEL IMPORT
+import videosData from "../content/video/videos.json";
 
 // --- IMPORTS DES IMAGES (Doivent pointer vers /src/assets) ---
 // Note: Le composant Picture se chargera de générer le WebP et le responsive
@@ -34,8 +35,6 @@ import guitareAcoustique from "../assets/guitare_acoustique.jpg";
 
 // --- FIN DES IMPORTS ---
 
-
-const data = await getCollection("videos");
 
 function ensureTrailing(href: string) {
   if (!href) return href;
@@ -133,7 +132,7 @@ function ensureTrailing(href: string) {
   }
 </style>
 
-<Layout title="In the Pouchett — Enregistrement, Mixage, Mastering Live Sessions" description="In the Pouchett: studio d'enregistrement à Paris spécialisé dans les Live Sessions. Captation audio/vidéo, mixage et mastering.">
+<Layout title="In the Pouchett - Studio d'enregistrement & Live Sessions" description="In the Pouchett: studio d'enregistrement à Paris spécialisé dans les Live Sessions. Captation audio/vidéo, mixage et mastering, accompagnement artistique, contactez nous !" canonical="/">
   <Navbar slot="navbar" />
 
   <div class="hero cover-image">
@@ -469,7 +468,20 @@ function ensureTrailing(href: string) {
     <div class="container">
       <div class="videos-wrapper">
         <div class="videos">
-          {data.map((i) => <Video url={i.data.url} />)}
+          {videosData.map((videoData) => {
+            const youtubeId = videoData.url.split('/').pop()?.split('?')[0] || '';
+            const videoTitle = videoData.title || videoData.slug
+              .split('-')
+              .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+              .join(' ');
+            
+            return (
+              <Video 
+                videoId={youtubeId} 
+                title={videoTitle}
+              />
+            )
+          })}
         </div>
 
         <button class="toggle-videos" style="display:none;" aria-hidden="true">
