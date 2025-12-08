@@ -25,10 +25,30 @@ import Louis from "../assets/louis_jaumaux.jpg";
     /* background: rgba(255, 255, 255, 0.5); */
     /* text-align: justify; */
   }
+
+  /* Réduire les marges pour Clément et Louis */
+  #clement,
+  #louis {
+    padding: 0 2rem 1rem 2rem !important;
+  }
+
+  /* Padding normal pour la première section filled */
+  section.filled:first-of-type {
+    padding: 2rem 2rem 2rem 2rem !important;
+  }
+
+  /* Mobile: réduire les marges des H2 */
+  @media (max-width: 768px) {
+    h2.pattern {
+      margin: 0 0 1rem 0 !important;
+    }
+  }
 </style>
 
 <Layout title="Qui sommes-nous — In the Pouchett" description="Clément Maniette et Louis Jaumaux — équipe du studio In the Pouchett, ingénierie sonore, réalisation vidéo, et Live Sessions à Paris." canonical="/qui-sommes-nous/">
   <Navbar slot="navbar" />
+
+  <h1 style="position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden;">Qui sommes-nous - Clément Maniette Ingénieur du Son Louis Jaumaux Réalisateur Vidéo</h1>
 
   <section class="filled">
     <div class="container">
@@ -42,8 +62,8 @@ import Louis from "../assets/louis_jaumaux.jpg";
     </div>
   </section>
 
-  <section class="pattern">
-    <h1>Clément Maniette</h1>
+  <section class="pattern" id="clement">
+    <h2 class="pattern">Clément Maniette</h2>
     <div class="container people">
       <Picture
         src={Clem}
@@ -64,8 +84,8 @@ import Louis from "../assets/louis_jaumaux.jpg";
     </div>
   </section>
 
-  <section class="filled">
-    <h1>Louis Jaumaux</h1>
+  <section class="filled" id="louis">
+    <h2 class="pattern">Louis Jaumaux</h2>
     <div class="people container">
       <p>
         Louis est pianiste de jazz et de hip-hop, diplômé du conservatoire. Sa

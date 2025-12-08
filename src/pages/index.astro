@@ -66,6 +66,27 @@ function ensureTrailing(href: string) {
       color: white;
     }
   }
+
+  /* Les styles h2.pattern sont définis dans Layout.astro */
+  #reference h2 {
+    /* H2 en section filled (style comme un H1 section) */
+    font-size: 2rem;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    margin: 0.5rem 0 2rem 0;
+    color: white;
+  }
+
+  /* Mobile: assurer que tous les H2 .pattern ont la même taille */
+  @media (max-width: 768px) {
+    h2.pattern,
+    #reference h2 {
+      font-size: clamp(1.25rem, 6vw, 1.75rem);
+    }
+  }
+
   a {
     color: inherit;
     text-decoration: underline;
@@ -75,6 +96,11 @@ function ensureTrailing(href: string) {
     color: inherit;
     text-decoration-thickness: 2px;
     /* optionnel, pour un soulignement plus visible */
+  }
+
+  /* Augmenter le padding bottom de la première section .pattern */
+  section.pattern:first-of-type {
+    padding: 2rem 2rem 2rem 2rem !important;
   }
 
   /* SUPPRESSION DU BLOC @supports ICI */
@@ -144,7 +170,8 @@ function ensureTrailing(href: string) {
       class="cover-background-img"
     />
     <div class="container hero-body">
-      <h1 class="title">IN THE POUCHETT</h1>
+      <h1 style="position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden;">Studio d'enregistrement Paris - Live Sessions, Captation Vidéo, Mixage, Mastering</h1>
+      <h2 class="title">IN THE POUCHETT</h2>
       <h2 class="subtitle">Enregistrement, Mixage, Mastering, Live Sessions</h2>
     </div>
   </div>
@@ -464,7 +491,7 @@ function ensureTrailing(href: string) {
   </section>
 
   <section class="filled" id="reference">
-    <h1>Références</h1>
+    <h2>Références</h2>
     <div class="container">
       <div class="videos-wrapper">
         <div class="videos">
@@ -492,7 +519,7 @@ function ensureTrailing(href: string) {
     </div>
   </section>
 
-  <h1 class="pattern" id="studio">Le studio</h1>
+  <h2 class="pattern" id="studio">Le studio</h2>
   <section class="filled studio-section">
     <div class="container">
 
@@ -620,12 +647,12 @@ function ensureTrailing(href: string) {
   </div>
 
 
-<h1 class="pattern" id="materiel">Le matériel</h1>
+<h2 class="pattern" id="materiel">Le matériel</h2>
 <section class="filled materiel-section">
   <div class="container">
     <div class="materiel-grid">
       <div class="materiel-category">
-        <h2>Monitoring / AD-DA / DAW</h2>
+        <h3>Monitoring / AD-DA / DAW</h3>
         <ul>
           <li>RME Fireface UFXIII</li>
           <li>Trinnov Nova</li>
@@ -635,7 +662,7 @@ function ensureTrailing(href: string) {
       </div>
 
       <div class="materiel-category">
-        <h2>Headphones</h2>
+        <h3>Headphones</h3>
         <ul>
           <li>Neumann NDH30</li>
           <li>Beyerdynamic DT 990 Pro</li>
@@ -647,7 +674,7 @@ function ensureTrailing(href: string) {
       </div>
 
       <div class="materiel-category">
-        <h2>Préamplifieurs / DYN</h2>
+        <h3>Préamplifieurs / DYN</h3>
         <ul>
           <li>Focusrite ISA Two</li>
           <li>Audient ASP800/880</li>
@@ -657,7 +684,7 @@ function ensureTrailing(href: string) {
       </div>
 
       <div class="materiel-category">
-        <h2>Microphones</h2>
+        <h3>Microphones</h3>
         <ul>
           <li>AEA R84</li>
           <li>AKG D190C</li>
@@ -671,7 +698,7 @@ function ensureTrailing(href: string) {
       </div>
 
       <div class="materiel-category">
-        <h2>Direct Boxes</h2>
+        <h3>Direct Boxes</h3>
         <ul>
           <li>Radial JDI, J48, Pro D2</li>
           <li>Samson S-direct</li>
@@ -701,7 +728,7 @@ function ensureTrailing(href: string) {
       </div>
 
       <div class="materiel-category instruments">
-        <h2>Instruments</h2>
+        <h3>Instruments</h3>
         <div class="instrument-group">
           <h3>Guitars / Basses</h3>
           <ul>
@@ -748,7 +775,7 @@ function ensureTrailing(href: string) {
       </div>
 
       <div class="materiel-category">
-        <h2>Plugins</h2>
+        <h3>Plugins</h3>
         <ul>
           <li>FabFilter</li>
           <li>Waves</li>
@@ -799,7 +826,7 @@ function ensureTrailing(href: string) {
     }
 
     .materiel-category {
-      h2 {
+      h3 {
         font-size: 1rem;
         font-weight: 700;
         text-transform: uppercase;
@@ -809,7 +836,7 @@ function ensureTrailing(href: string) {
         padding-bottom: 0.25rem;
       }
 
-      h3 {
+      h4 {
         font-size: 0.9rem;
         font-weight: 600;
         margin-top: 1rem;
@@ -839,7 +866,7 @@ function ensureTrailing(href: string) {
       /* vertical | horizontal */
       gap: 0.75rem 3rem; /* 👈 réduit l'espace vertical */
       align-items: start;
-      h2 {
+      h3 {
         grid-column: 1 / -1;
         border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         margin-bottom: 1rem;

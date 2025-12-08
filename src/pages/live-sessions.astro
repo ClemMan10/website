@@ -62,6 +62,32 @@ function ensureTrailing(href: string) {
     min-width: 0;
   }
 
+  /* Réduire les marges des sections avec titres H2 */
+  #formats,
+  #tarifs,
+  #diffusion {
+    padding: 0 2rem 2rem 2rem !important;
+  }
+
+  /* Réduire la marge bottom du titre dans ces sections */
+  #formats h2,
+  #tarifs h2,
+  #diffusion h2 {
+    margin-bottom: 0.5rem !important;
+  }
+
+  /* Padding normal pour toutes les sections filled */
+  section.filled {
+    padding: 2rem 2rem 2rem 2rem !important;
+  }
+
+  /* Mobile: réduire les marges des H2 */
+  @media (max-width: 768px) {
+    h2.pattern {
+      margin: 0 0 1rem 0 !important;
+    }
+  }
+
   .diffusion-video-wrapper {
     flex: 0 0 36%;
     max-width: 420px;
@@ -227,6 +253,8 @@ function ensureTrailing(href: string) {
 <Layout title="Live Sessions — In the Pouchett" description="Live Sessions au studio In the Pouchett — captation, mixage, mastering et production vidéo à Paris." canonical="/live-sessions/">
   <Navbar slot="navbar" />
   
+  <h1 style="position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden;">Live Sessions Paris - Formats Classic, Concert, Custom - Captation, Mixage, Mastering, Vidéo</h1>
+  
   <div class="hero is-medium cover-image">
     <Picture
       src={liveSessCover}
@@ -236,7 +264,7 @@ function ensureTrailing(href: string) {
       class="cover-background-img"
     />
     <div class="container hero-body">
-      <h1 class="title">LIVE SESSIONS</h1>
+      <h2 class="title">LIVE SESSIONS</h2>
       <h2 class="subtitle">Captation, Mixage, Mastering, Edition, Colorimétrie</h2>
     </div>
   </div>
@@ -263,7 +291,7 @@ function ensureTrailing(href: string) {
   </section>
 
   <section class="filled" id="formats">
-    <h1>Formats</h1>
+    <h2 class="pattern">Formats</h2>
     <div class="container">
       <div class="formats-grid">
         
@@ -328,7 +356,7 @@ function ensureTrailing(href: string) {
   </section>
 
   <section class="pattern" id="diffusion">
-    <h1>Diffusion</h1>
+    <h2 class="pattern">Diffusion</h2>
     <div class="container">
       <div class="diffusion-inner">
         <div class="diffusion-text">
@@ -366,7 +394,7 @@ function ensureTrailing(href: string) {
   </section>
 
   <section class="filled" id="tarifs">
-    <h1>Tarifs</h1>
+    <h2 class="pattern">Tarifs</h2>
     <div class="container">
       <p>
         Nos tarifs sont adaptés en fonction du format choisi et des services inclus. 

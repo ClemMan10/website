@@ -208,7 +208,7 @@ const canonicalAbsolute = canonical ? toAbsoluteWithTrailing(canonical) : canoni
   nav { font-size: var(--navbar-font); }
 
   /* --- Sections --- */
-  .filled, .pattern { padding: 2rem; }
+  .filled, .pattern { padding: 2rem 2rem 1rem 2rem; }
 
   .filled {
     background-color: rgb(8, 15, 37);
@@ -227,7 +227,30 @@ const canonicalAbsolute = canonical ? toAbsoluteWithTrailing(canonical) : canoni
   /* --- Titres --- */
   h1 { font-size: var(--font-h1); text-transform: uppercase; text-align: center; }
   h1.filled, h1.pattern { font-size: var(--font-h1-section); } /* sections */
-  h2 { font-size: var(--font-h2); }
+  
+  /* H2 .pattern reprend le style des H1 (titres de section) */
+  h2.pattern {
+    font-size: var(--font-h1-section);
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    margin: 0 0 1rem 0;
+  }
+  
+  /* H2 simples dans sections filled (pour Clément, Louis, Formats...) */
+  .filled h2 {
+    font-size: var(--font-h1-section);
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    margin: 0 0 1rem 0;
+    color: white;
+  }
+  
+  /* H2 standard pour contenu (listes, texte) */
+  h2:not(.pattern):not(.title):not(.subtitle) { font-size: var(--font-h2); font-weight: 700; }
   h3 { font-size: var(--font-h3); }
 
   .filled p, .filled li, .pattern p, .pattern li {
