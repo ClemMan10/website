@@ -2,8 +2,7 @@
 import Navbar from "../components/Navbar.astro";
 import Video from "../components/Video.astro";
 import Layout from "../layouts/Layout.astro";
-import { getCollection } from "astro:content";
-import { Picture } from "astro:assets"; // ⬅️ NOUVEL IMPORT
+import { Picture } from "astro:assets";
 import videosData from "../content/video/videos.json";
 
 // --- IMPORTS DES IMAGES (Doivent pointer vers /src/assets) ---
@@ -34,7 +33,6 @@ import deepmindClose from "../assets/deepmind_close.jpg";
 import guitareAcoustique from "../assets/guitare_acoustique.jpg";
 
 // --- FIN DES IMPORTS ---
-
 
 function ensureTrailing(href: string) {
   if (!href) return href;
@@ -164,8 +162,50 @@ function ensureTrailing(href: string) {
   }
 </style>
 
-<Layout title="In the Pouchett - Studio d'enregistrement & Live Sessions" description="Studio d'enregistrement à Paris spécialisé dans les Live Sessions. Captation audio/vidéo, mixage et mastering, accompagnement artistique, contactez nous !" canonical="/">
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "MusicOrganization",
+  "name": "In the Pouchett",
+  "url": "https://inthepouchett.com/",
+  "logo": "https://inthepouchett.com/favicon/web-app-manifest-512x512.png",
+  "image": "https://inthepouchett.com/og-default.jpg",
+  "description": "In the Pouchett — studio d'enregistrement et Live Sessions à Paris : captation, mixage, mastering et production vidéo.",
+  "foundingLocation": {
+    "@type": "Place",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Paris",
+      "addressCountry": "FR"
+    }
+  },
+  "sameAs": [
+    "https://www.youtube.com/@inthepouchett",
+    "https://www.instagram.com/inthepouchett",
+    "https://www.tiktok.com/@inthepouchett"
+  ]
+})}></script>
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "url": "https://inthepouchett.com/",
+  "name": "In the Pouchett",
+  "description": "Studio d'enregistrement et Live Sessions à Paris",
+  "publisher": {
+    "@type": "MusicOrganization",
+    "name": "In the Pouchett"
+  }
+})}></script>
+
+
+<Layout 
+  title="In the Pouchett - Studio d'enregistrement & Live Sessions" 
+  description="Studio d'enregistrement à Paris spécialisé dans les Live Sessions. Captation audio/vidéo, mixage et mastering, accompagnement artistique, contactez nous !" 
+  canonical="/"
+  image={coverImage.src}
+>
   <Navbar slot="navbar" />
+
 
   <div class="hero cover-image">
     <Picture
@@ -174,6 +214,9 @@ function ensureTrailing(href: string) {
       widths={[600, 1200, 1800]} 
       sizes="100vw" 
       class="cover-background-img"
+      loading="eager"
+      fetchpriority="high"
+      decoding="sync"
     />
     <div class="container hero-body">
       <h1 style="position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden;">Studio d'enregistrement Paris - Live Sessions, Captation Vidéo, Mixage, Mastering</h1>
@@ -193,12 +236,11 @@ function ensureTrailing(href: string) {
       object-fit: cover; /* Equivalent de background-size: cover */
       z-index: -1; /* Place l'image derrière le contenu */
       filter: brightness(0.9); /* Optionnel : pour assombrir légèrement l'image */
+      background-color: #1a1a1a;
     }
 
     .cover-image {
-      background: linear-gradient(0deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 1) 100%); 
-      /* Supprime l'image du background CSS, ne garde que le dégradé */
-      
+      background: linear-gradient(0deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 1) 100%);       
       text-align: center;
       font-weight: 700;
 
