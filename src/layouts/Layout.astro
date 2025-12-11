@@ -1,6 +1,9 @@
 ---
 import Contact from "../components/Contact.astro";
 
+import '@fontsource-variable/open-sans';
+import '@fortawesome/fontawesome-free/css/all.min.css'
+
 const DEFAULT_TITLE = "In the Pouchett (Recording studio, Live session, Mixing, Mastering)";
 const DEFAULT_DESC = "In the Pouchett — studio d'enregistrement et Live Sessions à Paris : captation, mixage, mastering et production vidéo.";
 const SITE_URL = "https://inthepouchett.com";
@@ -48,15 +51,6 @@ const canonicalAbsolute = canonical ? toAbsoluteWithTrailing(canonical) : canoni
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
-      rel="stylesheet"
-    />
-
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
-    />
 
     <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
@@ -68,23 +62,25 @@ const canonicalAbsolute = canonical ? toAbsoluteWithTrailing(canonical) : canoni
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-  <title>{title}</title>
-  <meta name="description" content={description} />
-  {canonical ? <link rel="canonical" href={canonicalAbsolute} /> : null}
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {canonical && <link rel="canonical" href={canonicalAbsolute} />}
+    <meta name="robots" content="index, follow" />
 
     <!-- Open Graph -->
     <meta property="og:site_name" content={SITE_NAME} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-  <meta property="og:url" content={canonicalAbsolute} />
-    {image ? <meta property="og:image" content={image} /> : null}
+    <meta property="og:url" content={canonicalAbsolute} />
+    {image && <meta property="og:image" content={image} />}
+    {image && <meta property="og:image:alt" content={title} />}
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content={image ? "summary_large_image" : "summary"} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    {image ? <meta name="twitter:image" content={image} /> : null}
+    {image && <meta name="twitter:image" content={image} />}
 
     <!-- JSON-LD Organization (basic) -->
     <script
