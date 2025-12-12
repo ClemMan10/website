@@ -98,6 +98,17 @@ const canonicalAbsolute = canonical ? toAbsoluteWithTrailing(canonical) : canoni
         "@context": "https://schema.org",
         "@type": "MusicOrganization",
         "name": SITE_NAME,
+        "alternateName": [
+            "In the Pouchet", // Omission d'un 't'
+            "In the Pouchette", // Ajout d'un 'e'
+            "ITP", // Acronyme
+            "ITP Studio", // Acronyme + Thème
+            "Studio pouchet", // Thème + Typo courante
+            "Studio pouchett", // Thème
+            "Studio pouchette", // Thème + Typo courante
+            "inthepouchett", // Recherche sans espace
+            "inthepochett" // Recherche sans espace + Typo
+        ],      
         "url": SITE_URL,
         "description": DEFAULT_DESC,
         "logo": `${SITE_URL}/favicon/web-app-manifest-512x512.png`,
