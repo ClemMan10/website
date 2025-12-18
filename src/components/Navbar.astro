@@ -60,10 +60,18 @@ function ensureTrailing(href: string) {
       </a>
 
       <div class="navbar-item">
-        <a class="button is-info" href="mailto:inthepouchett.studio@gmail.com">
+        <a class="button is-info" id="nav-contact-btn" href="#" data-user="inthepouchett.studio" data-domain="gmail.com">
           <i class="fa-solid fa-envelope"></i> Contact
         </a>
       </div>
+
+      <script is:inline>
+        // Protection de l'email dans la navbar
+        const navBtn = document.getElementById('nav-contact-btn');
+        if (navBtn) {
+          navBtn.href = 'mailto:' + navBtn.dataset.user + '@' + navBtn.dataset.domain;
+        }
+      </script>
 
     </div>
   </div>
