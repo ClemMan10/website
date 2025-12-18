@@ -165,7 +165,11 @@ import Layout from "../layouts/Layout.astro";
         <p><strong>Raison sociale :</strong> IN THE POUCHETT (ITP)</p>
         <p><strong>Forme juridique :</strong> Association Loi 1901</p>
         <p><strong>Adresse :</strong> 17eme Arrondissement, Paris, France</p>
-        <p><strong>Email :</strong> <a href="mailto:inthepouchett.studio@gmail.com"> inthepouchett.studio@gmail.com</a> • <strong>Tél :</strong> <a href="tel:+33695065809"> 0695065809</a></p>
+        <p>
+          <strong>Email : </strong> 
+          <a href="#" class="e-pouchett" data-user="inthepouchett.studio" data-domain="gmail.com">Chargement...</a> 
+          • <strong>Tél :</strong> <a href="tel:+33695065809"> 0695065809</a>
+        </p>
         <p><strong>RNA :</strong> W751278739</p>
         <p><strong>SIRET :</strong> 98904608100018</p>
         <p><strong>Directeur de publication :</strong> Gauthier Thierry, Président de l'association</p>
@@ -207,7 +211,7 @@ import Layout from "../layouts/Layout.astro";
       <div class="highlight-box">
         <p><strong>Pour exercer vos droits :</strong></p>
         <ul>
-          <li>Email : <strong><a href="mailto:inthepouchett.studio@gmail.com"> inthepouchett.studio@gmail.com</a></strong></li>
+          <li>Email : <strong><a href="#" class="e-pouchett" data-user="inthepouchett.studio" data-domain="gmail.com">Chargement...</a></strong></li>
         </ul>
       </div>
 
@@ -248,4 +252,12 @@ import Layout from "../layouts/Layout.astro";
 
     </div>
   </section>
+  <script is:inline>
+  // Script pour protéger l'email
+  document.querySelectorAll('.e-pouchett').forEach(el => {
+    const email = el.dataset.user + '@' + el.dataset.domain;
+    el.href = 'mailto:' + email;
+    el.textContent = email;
+  });
+</script>
 </Layout>

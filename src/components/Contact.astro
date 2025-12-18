@@ -198,8 +198,25 @@ function ensureTrailing(href: string) {
       </div>
       <div class="contact-line">
         <i class="fa-solid fa-envelope"></i>
-        <a href="mailto:inthepouchett.studio@gmail.com">inthepouchett.studio@gmail.com</a>
+        <a 
+          href="#" 
+          id="e-pouchett" 
+          data-user="inthepouchett.studio" 
+          data-domain="gmail.com"
+        >
+          Chargement...
+        </a>
       </div>
+
+      <script is:inline>
+        // Ce script s'exécute sur le navigateur et reconstruit l'adresse
+        const el = document.getElementById('e-pouchett');
+        if (el) {
+          const email = el.dataset.user + '@' + el.dataset.domain;
+          el.href = 'mailto:' + email;
+          el.textContent = email;
+        }
+      </script>
       <div class="contact-line">
         <i class="fa-solid fa-phone"></i>
         <a href="tel:+33695065809">06 95 06 58 09</a>
@@ -214,7 +231,7 @@ function ensureTrailing(href: string) {
     <div class="column has-text-centered is-narrow">
       <a class="social-icon youtube"
          href="https://www.youtube.com/@InthePouchett"
-         target="_blank" aria-label="YouTube">
+         target="_blank" aria-label="YouTube" rel="noopener noreferrer">
         <i class="fa-brands fa-youtube" aria-hidden="true"></i>
       </a>
     </div>
@@ -222,7 +239,7 @@ function ensureTrailing(href: string) {
     <div class="column has-text-centered is-narrow">
       <a class="social-icon instagram"
          href="https://www.instagram.com/inthepouchett/"
-         target="_blank" aria-label="Instagram">
+         target="_blank" aria-label="Instagram" rel="noopener noreferrer">
         <i class="fa-brands fa-instagram icon-layer icon-solid" aria-hidden="true"></i>
         <i class="fa-brands fa-instagram icon-layer icon-grad" aria-hidden="true"></i>
       </a>
@@ -231,7 +248,7 @@ function ensureTrailing(href: string) {
     <div class="column has-text-centered is-narrow">
       <a class="social-icon tiktok"
          href="https://www.tiktok.com/@inthepouchett"
-         target="_blank" aria-label="TikTok">
+         target="_blank" aria-label="TikTok" rel="noopener noreferrer">
         <i class="fa-brands fa-tiktok icon-layer icon-solid" aria-hidden="true"></i>
         <i class="fa-brands fa-tiktok icon-layer icon-grad" aria-hidden="true"></i>
       </a>
